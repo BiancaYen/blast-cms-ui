@@ -1,0 +1,54 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: cellc-nofunds-dashboard
+  name: cellc-nofunds-dashboard
+  namespace: nofunds-staging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cellc-nofunds-dashboard
+  template:
+    metadata:
+      labels:
+        app: cellc-nofunds-dashboard
+    spec:
+      volumes:
+        - name: app-data
+          emptyDir: {}
+        - name: nginx-config
+          configMap:
+            name: nginx-config
+      initContainers:
+        - name: ondash-fe
+          image: 376181236267.dkr.ecr.eu-west-1.amazonaws.com/nofunds/cellc-dashboard:latest
+          imagePullPolicy: Always
+          command: ["/bin/sh", "-c", "cp -r /srv/. /var/www/html"]
+          volumeMounts:
+            - name: app-data
+              mountPath: /var/www/html
+      containers:
+        - image: nginx:alpine
+          name: app
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PUBLIC_URL
+              value: 'http://staging.dashboard.nofunds.cellc.mobi'
+            - name: REACT_APP_API_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: cellc-nofunds-dashboard.config
+                  key: REACT_APP_API_HOST
+          ports:
+            - name: ondash-fe-www
+              containerPort: 80
+#           - name: ondash-fe-ssl
+#             containerPort: 443
+          volumeMounts:
+            - name: app-data
+              mountPath: /var/www/html
+            - name: nginx-config
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf

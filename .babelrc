@@ -1,0 +1,13 @@
+{
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    ["emotion", { "sourceMap": false, "autoLabel": true }],
+    ["@babel/plugin-syntax-dynamic-import"],
+    ["@babel/transform-arrow-functions"],
+    ["@babel/plugin-proposal-class-properties"],
+    ["@babel/plugin-transform-runtime"]
+  ]
+}

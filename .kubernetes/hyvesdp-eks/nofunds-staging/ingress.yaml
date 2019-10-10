@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cellc-nofunds-dashboard
+  namespace: nofunds-staging
+  annotations:
+    kubernetes.io/ingress.class: nginx-pvt
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+#   kubernetes.io/tls-scheme: "true"
+spec:
+# tls:
+#    - hosts:
+#        - staging.dashboard.nofunds.cellc.mobi
+#      secretName: hyvesdp.com.tls
+  rules:
+    - host: staging.dashboard.nofunds.cellc.mobi
+      http:
+        paths:
+          - backend:
+              serviceName: cellc-nofunds-dashboard
+              servicePort: 80
+            path: /

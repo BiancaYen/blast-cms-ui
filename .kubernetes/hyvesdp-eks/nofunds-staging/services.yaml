@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: cellc-nofunds-dashboard
+  namespace: nofunds-staging
+spec:
+  type: NodePort
+  selector:
+    app: cellc-nofunds-dashboard
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
