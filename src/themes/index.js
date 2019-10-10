@@ -57,8 +57,8 @@ const theme = {
     },
     arrowToggle: {
         color: variables.primaryGreyTint2,
-        activeColor: variables.primaryColor,
-        activeColorDisabled: variables.primaryGreyTint4
+        colorActive: variables.primaryColor,
+        colorDisabled: variables.primaryGreyTint4
     },
     avatar: {
         border: variables.secondaryGreyTint2,

@@ -43,7 +43,7 @@ const propTypes = {
     onDelete: PropTypes.func.isRequired
 };
 
-class BannersTable extends Component {
+class EntitiesTable extends Component {
     state = {
         checked: []
     };
@@ -177,7 +177,7 @@ class BannersTable extends Component {
     }
 }
 
-BannersTable.defaultProps = defaultProps;
-BannersTable.propTypes = propTypes;
+EntitiesTable.defaultProps = defaultProps;
+EntitiesTable.propTypes = propTypes;
 
-export default BannersTable;
+export default EntitiesTable;

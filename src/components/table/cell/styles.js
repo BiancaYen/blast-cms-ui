@@ -15,6 +15,7 @@ const Cell = styled.td`
     text-align: ${({ isAlignedCentre, isActionCell }) => (isAlignedCentre || isActionCell ? 'center' : 'left')};
     border-bottom: 2px solid  ${getProperty('cellBorderBottomColor')};
     color: ${getProperty('cellColor')};
+    width: ${({ isIdCell, isActionCell }) => (isIdCell || isActionCell ? '100px' : 'auto')};
     
     &:first-of-type {
         padding: 13px 0 13px 40px;
