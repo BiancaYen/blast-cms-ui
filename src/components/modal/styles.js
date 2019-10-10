@@ -50,7 +50,7 @@ const InnerWrapper = styled.div`
     width: 600px;
     min-height: 200px;
     position: relative;
-    border-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.1);
     

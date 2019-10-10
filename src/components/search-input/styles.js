@@ -28,7 +28,8 @@ const SearchWrapper = styled.div`
     padding-right: 10px;
     flex-direction: row;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.1);
     transition: border .2s ease;
     
     width: ${({ size }) => (size === small ? '300px' : '100%')};

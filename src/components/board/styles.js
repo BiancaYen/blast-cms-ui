@@ -11,7 +11,7 @@ const Wrapper = styled.div`
     background-color: ${getProperty('background')};
     width: auto;
     min-height: 218px;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.1);
     border: solid 1px ${getProperty('borderColor')};;
     

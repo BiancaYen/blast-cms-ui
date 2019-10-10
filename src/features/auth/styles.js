@@ -11,7 +11,7 @@ const AuthFormWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    border-radius: 10px;
+    border-radius: 5px;
     background: ${getProperty('formBackground')};
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3);
     padding: ${({ spacingContent }) => (spacingContent || '40px 60px 60px')};

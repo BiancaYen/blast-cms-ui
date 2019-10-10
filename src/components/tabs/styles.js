@@ -61,7 +61,7 @@ const TabsWrapper = styled.div`
 
 const TabWrapper = styled.div`
     letter-spacing: 0.7px;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: bold;
     flex-shrink: 1;
     text-align: center;

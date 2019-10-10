@@ -19,7 +19,7 @@ const getBorderProperty = ({ disabled, validation }) => {
 const Content = styled.div`
     position: relative;
     display: flex;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.1);
     padding: 10px;
     min-height: 300px;
@@ -55,7 +55,7 @@ const OptionsListWrapper = styled.div`
     &> div {
         height: 100%;
         overflow: hidden;
-        border-radius: 10px;
+        border-radius: 5px;
         display: flex;
         position: relative;
         margin-top: 10px;
@@ -68,7 +68,7 @@ const OptionsListWrapper = styled.div`
             position: absolute;
             width: 100%;
             height: 100%;
-            border-radius: 10px;
+            border-radius: 5px;
             pointer-events: none;
             z-index: 2;
             box-shadow: inset 0 0 4px 0 rgba(0, 0, 0, 0.25);
@@ -108,7 +108,7 @@ const Overlay = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    border-radius: 5px;
     z-index: 6;
 `;
 

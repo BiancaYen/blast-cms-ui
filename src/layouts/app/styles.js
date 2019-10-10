@@ -7,7 +7,7 @@ import getTheme from '../../utils/getTheme';
 injectGlobal([`
     * {
       box-sizing: border-box;
-      font-family: 'Montserrat', sans-serif;
+      font-family: opensans-semibold, HelveticaNeue Bold, Helvetica Neue, Helvetica, Arial, sans-serif;;
     }
     
     html, body {

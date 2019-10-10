@@ -57,7 +57,7 @@ const ButtonWrapper = styled.button`
     height: 45px;
     margin: ${({ spacing }) => spacing || '0'};
     border: ${getBorder};
-    border-radius: 22.5px;
+    border-radius: 5px;
     text-transform: uppercase;
     cursor: ${({ isDisabled, isLoading }) => (isDisabled || isLoading ? 'normal' : 'pointer')};
     background-color: ${getBackground};

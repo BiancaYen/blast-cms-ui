@@ -199,9 +199,9 @@ const theme = {
     },
     navigation: {
         activeLinkLineColor: variables.primaryColor,
-        background: lighten(0.1, '#000'),
+        background: lighten(0.09, '#000'),
         linkColor: variables.primaryGrey,
-        linkActiveColor: variables.primaryColorShade1,
+        linkActiveColor: variables.white,
         linkBackgroundHover: lighten(0.08, '#000'),
         logoBackground: '#000',
         logoPipeColor: '#252a31',

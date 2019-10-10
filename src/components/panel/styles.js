@@ -40,7 +40,7 @@ const PanelWrapper = styled.div`
     align-items: center;
     height: 60px;
     padding: 0 30px;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.1);
     cursor: pointer;
     transition: border-color .3s ease;

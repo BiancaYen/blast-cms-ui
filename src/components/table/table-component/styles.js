@@ -12,7 +12,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     
-    margin: ${({ spacing }) => spacing || '20px 0 10px 0'};
+    margin: ${({ spacing }) => spacing || '20px 0 5px 0'};
 `;
 
 const ControlsWrapper = styled.div`
@@ -32,7 +32,7 @@ const TableWrapper = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.1);
     
     min-height: ${({ minHeight }) => minHeight || 'none'}px;
@@ -48,11 +48,11 @@ const TableWrapper = styled.div`
             border: none;
             
             &:first-of-type {
-                border-top-left-radius: 10px;
+                border-top-left-radius: 5px;
             }
             
             &:last-of-type {
-                border-top-right-radius: 10px;
+                border-top-right-radius: 5px;
             }
         }
         
@@ -61,11 +61,11 @@ const TableWrapper = styled.div`
                 border: none;
                 
                 &:first-of-type {
-                    border-bottom-left-radius: 10px;
+                    border-bottom-left-radius: 5px;
                 }
                 
                 &:last-of-type {
-                    border-bottom-right-radius: 10px;
+                    border-bottom-right-radius: 5px;
                 }
             }
         }
@@ -79,7 +79,7 @@ const SpinnerWrapper = styled.div`
     top: 0;
     right: 0;
     bottom: 0;
-    border-radius: 10px;
+    border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;

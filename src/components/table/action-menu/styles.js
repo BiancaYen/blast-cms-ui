@@ -45,7 +45,7 @@ const ActionMenu = styled.ul`
     padding: 0;
     margin: 0;
     width: 157px;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 2px 5px 0 rgba(214, 213, 213, 0.5);
     z-index: 5;
     

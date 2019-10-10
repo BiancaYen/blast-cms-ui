@@ -42,7 +42,7 @@ const DropdownContentWrapper = styled.div`
     width: 100%;
     left: 0;
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 5px;
     
     bottom: ${({ isOpenToTop }) => (isOpenToTop ? '47px' : 'unset')};
     top: ${({ isOpenToTop }) => (isOpenToTop ? 'unset' : '47px')};
@@ -65,7 +65,7 @@ const Dropdown = styled.div`
     padding: 0 20px;
     height: 45px;
     outline: none;
-    border-radius: 10px;
+    border-radius: 5px;
     transition: border .2s ease;
     font-size: 11px;
     letter-spacing: 0.69px;

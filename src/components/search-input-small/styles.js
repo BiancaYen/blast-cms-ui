@@ -17,9 +17,10 @@ const SearchWrapper = styled.div`
     margin-left: auto;
     overflow: hidden;
     background: ${getPropertyDisabled('background')};
-    border-radius: 10px;
+    box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.1);
+    border-radius: 5px;
     transition: border .2s ease;
-    border: 2px solid ${({ focus }) => (focus
+    border: 1px solid ${({ focus }) => (focus
         ? getProperty('borderFocused')
         : getPropertyDisabled('border')
     )};

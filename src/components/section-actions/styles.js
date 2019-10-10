@@ -12,7 +12,7 @@ const getBorderStyles = ({ withoutBorder, ...props }) => {
 const Action = styled.span`
     display: flex;
     align-items: center;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: bold;
     letter-spacing: 0.6px;
     text-align: right;
@@ -53,17 +53,17 @@ const SectionActionsWrapper = styled.div`
         margin-left: 30px;
     }
     
-    &::before {
-        position: absolute;
-        content: "";
-        width: 170px;
-        left: -170px;
-        top: -10px;
-        bottom: 0;
-        pointer-events: none;
-        
-        background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9));
-    }
+    //&::before {
+    //    position: absolute;
+    //    content: "";
+    //    width: 170px;
+    //    left: -170px;
+    //    top: -10px;
+    //    bottom: 0;
+    //    pointer-events: none;
+    //    
+    //    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9));
+    //}
 `;
 
 export {

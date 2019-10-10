@@ -33,7 +33,7 @@ const InputInnerWrapper = styled.div`
     position: relative;
     display: flex;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 5px;
     height: 45px;
     transition: border .2s ease;
     
@@ -49,7 +49,7 @@ const InputInnerWrapper = styled.div`
         padding: 0 0 0 19px;
         resize: none;
         height: 100%;
-        border-radius: 10px;
+        border-radius: 5px;
         flex-grow: 1;
         border: none;
         

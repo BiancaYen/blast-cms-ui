@@ -76,6 +76,11 @@ const ButtonNext = styled.div`
     ${disabledStyles}
 `;
 
+const ButtonWrapper = styled.div`
+    display: flex;
+    box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.1);
+`;
+
 const ButtonPrevious = styled(ButtonNext)`
     transform: rotate(180deg);
     margin-right: -1px;
@@ -116,14 +121,14 @@ const Total = styled.div`
     
     color: ${({ isDisabled }) => getProperty(isDisabled
         ? 'totalPagesColorDisabled'
-        : 'totalPagesColor'
-    )};
+        : 'totalPagesColor')};
 `;
 
 export {
     Current,
     Total,
     PaginationWrapper,
+    ButtonWrapper,
     ButtonNext,
     ButtonPrevious
 };

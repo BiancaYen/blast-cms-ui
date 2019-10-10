@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import {
     ButtonNext,
     ButtonPrevious,
+    ButtonWrapper,
     Current,
     Total,
     PaginationWrapper
@@ -118,18 +119,20 @@ const TablePagination = ({
                 />
             </Current>
             <Total isDisabled={isDisabled}>{`of ${dataCount}`}</Total>
-            <ButtonPrevious
-                onClick={isCanPreviousPageClick ? undefined : onPreviousPageClick}
-                isDisabled={isCanPreviousPageClick || isDisabled}
-            >
-                <ChevronRightIcon />
-            </ButtonPrevious>
-            <ButtonNext
-                onClick={isCanNextPageClick ? undefined : onNextPageClick}
-                isDisabled={isCanNextPageClick || isDisabled}
-            >
-                <ChevronRightIcon />
-            </ButtonNext>
+            <ButtonWrapper>
+                <ButtonPrevious
+                    onClick={isCanPreviousPageClick ? undefined : onPreviousPageClick}
+                    isDisabled={isCanPreviousPageClick || isDisabled}
+                >
+                    <ChevronRightIcon />
+                </ButtonPrevious>
+                <ButtonNext
+                    onClick={isCanNextPageClick ? undefined : onNextPageClick}
+                    isDisabled={isCanNextPageClick || isDisabled}
+                >
+                    <ChevronRightIcon />
+                </ButtonNext>
+            </ButtonWrapper>
         </PaginationWrapper>
     );
 };

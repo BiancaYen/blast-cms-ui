@@ -10,7 +10,7 @@ const ReactColorWrapper = styled.div`
     flex-direction: column;
     width: 239px;
     height: 240px;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 20px;
     box-shadow: 1px 1px 6px 0 rgba(215, 214, 214, 0.71);
     background-color: ${getProperty('popupBackground')};

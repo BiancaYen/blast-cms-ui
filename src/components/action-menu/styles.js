@@ -32,7 +32,7 @@ const ActionMenuWrapper = styled.ul`
     padding: 0;
     margin: 0;
     width: 147px;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 2px 5px 0 rgba(214, 213, 213, 0.5);
     background-color: ${getProperty('background')};
     border: 1px solid ${getProperty('border')};

@@ -40,7 +40,7 @@ const TextAreaWrapper = styled.div`
 const TextAreaInnerWrapper = styled.div`
     position: relative;
     width: 100%;
-    border-radius: 10px;
+    border-radius: 5px;
     transition: border .2s ease;
     
     border: 2px solid ${getBorderProperty};
@@ -52,7 +52,7 @@ const TextAreaInnerWrapper = styled.div`
 `;
 
 const TextAreaInput = styled.textarea`
-        border-radius: 10px;
+        border-radius: 5px;
         display: block;
         font-family: inherit;
         font-size: 11px;
