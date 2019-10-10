@@ -12,7 +12,7 @@ const withDocumentTitle = (ComposedComponent) => {
             const { title } = props;
 
             // Set title
-            document.title = `${process.env.REACT_APP_TITLE} - ${title}`;
+            document.title = `King James CMS - ${title}`;
         }
 
         render() {
