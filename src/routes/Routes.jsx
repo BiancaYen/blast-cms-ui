@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 
 // Actions
-import { getIndex as entitiesGetIndex } from '../redux/actions/entities/entitiesIndexActions';
+import { getIndex as entitiesGetIndex } from '../redux/actions/entities/indexActions';
 
 // Components
 import CustomRoute from './CustomRoute';

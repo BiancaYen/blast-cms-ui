@@ -5,7 +5,7 @@
 import { handleActions } from 'redux-actions';
 
 // Actions
-import * as actions from '../../actions/entities/entitiesIndexActions';
+import * as actions from '../../actions/entities/indexActions';
 
 // State update
 import {

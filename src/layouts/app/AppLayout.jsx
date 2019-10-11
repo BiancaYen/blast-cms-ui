@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import withDocumentTitle from '../../utils/withDocumentTitle';
-
-// Actions
-import { getIndex as entitiesGetIndex } from '../../redux/actions/entities/entitiesIndexActions';
 
 // Styles
 import { Container, Content } from './styles';

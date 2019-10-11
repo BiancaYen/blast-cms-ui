@@ -1,12 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 
 // Actions
-import { postCreateHeroBanner } from '../../redux/actions/hero-banners/createActions';
+import { postCreate } from '../../redux/actions/entities/createActions';
 
 // Components
 import {
@@ -19,8 +18,8 @@ import CreateEditForm from './CreateEditForm';
 // HOC
 import withForm from '../../utils/withForm';
 
-// State
-const mapStateToProps = ({ heroBanners: { create } }) => {
+// Aplication State
+const mapStateToProps = ({ entities: { create } }) => {
     const { data, submit, validationSchema } = create;
 
     return {
@@ -29,14 +28,6 @@ const mapStateToProps = ({ heroBanners: { create } }) => {
         validationSchema
     };
 };
-
-// Actions
-const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators({
-        postCreateHeroBanner
-    },
-    dispatch)
-});
 
 // Default props
 const defaultProps = {
@@ -55,12 +46,8 @@ const propTypes = {
     isValid: PropTypes.bool,
     validation: PropTypes.instanceOf(Object).isRequired,
     values: PropTypes.shape({
-        bannerName: PropTypes.string.isRequired,
-        bannerText: PropTypes.string.isRequired,
-        bannerCtaTitle: PropTypes.string.isRequired,
-        redirectUrl: PropTypes.string.isRequired,
-        bannerFile: PropTypes.any.isRequired,
-        templates: PropTypes.instanceOf(Array).isRequired
+        name: PropTypes.string.isRequired,
+        fields: PropTypes.instanceOf(Array).isRequired
     }).isRequired,
     onBlur: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
@@ -69,7 +56,6 @@ const propTypes = {
 
 
 const EntitiesCreate = ({
-    actions,
     history,
     submit,
     touched,
@@ -80,18 +66,13 @@ const EntitiesCreate = ({
     onChange,
     onSubmit
 }) => {
-    const onSubmitActive = (formValues, setErrors) => {
-        actions.postCreateHeroBanner(
-            { ...formValues, active: 1 },
-            { setErrors }
-        );
-    };
+    const dispatch = useDispatch();
 
-    const onSubmitInactive = (formValues, setErrors) => {
-        actions.postCreateHeroBanner(
-            { ...formValues, active: 0 },
+    const onSubmitActive = (formValues, setErrors) => {
+        dispatch(postCreate(
+            formValues,
             { setErrors }
-        );
+        ));
     };
 
     const handleCancel = () => {
@@ -122,15 +103,7 @@ const EntitiesCreate = ({
                 <Button
                     disabled={!isValid}
                     loading={submit}
-                    outlined
-                    spacing="0 40px 0 0"
-                    title="Create Inactive"
-                    onClick={onSubmit(onSubmitInactive)}
-                />
-                <Button
-                    disabled={!isValid}
-                    loading={submit}
-                    title="Create And Activate"
+                    title="Create"
                     onClick={onSubmit(onSubmitActive)}
                 />
             </FormWrapperSubmit>
@@ -141,4 +114,4 @@ const EntitiesCreate = ({
 EntitiesCreate.defaultProps = defaultProps;
 EntitiesCreate.propTypes = propTypes;
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withForm(EntitiesCreate)));
+export default connect(mapStateToProps, null)(withRouter(withForm(EntitiesCreate)));

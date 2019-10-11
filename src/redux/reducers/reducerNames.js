@@ -6,6 +6,7 @@ const authResetPassword = 'auth.resetPassword';
 
 // Features
 const entitiesIndex = 'entities.index';
+const entitiesCreate = 'entities.create';
 
 // Not used
 const heroBannersIndexActive = 'heroBanners.indexActive';
@@ -29,6 +30,7 @@ export {
     authResetPassword,
     // Features
     entitiesIndex,
+    entitiesCreate,
 
     // Not used
     heroBannersIndexActive,
