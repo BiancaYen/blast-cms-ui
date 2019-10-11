@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch } from 'react-router-dom';
 import { withRouter } from 'react-router';
@@ -20,9 +20,12 @@ import RecoverPassword from '../features/auth/RecoverPassword';
 import ResetPassword from '../features/auth/ResetPassword';
 import AcceptInvitation from '../features/auth/AcceptInvitation';
 
-// Entities
+// Features
 import EntitiesIndex from '../features/entities/EntitiesIndex';
 import EntitiesCreate from '../features/entities/EntitiesCreate';
+import DynamicIndex from '../features/dynamic/DynamicIndex';
+import DynamicCreate from '../features/dynamic/DynamicCreate';
+import DynamicEdit from '../features/dynamic/DynamicEdit';
 
 // Other
 import Welcome from '../features/welcome/Welcome';
@@ -88,13 +91,26 @@ const Routes = ({ location }) => {
             {/* Dynamic */}
             {
                 entitiesIndex.data.map(({ id, name }) => (
-                    <CustomRoute
-                        exact
-                        key={id}
-                        path={`/${name}`}
-                        component={AppLayout(EntitiesIndex)}
-                        title={name}
-                    />
+                    <Fragment key={id}>
+                        <CustomRoute
+                            exact
+                            path={`/${name}`}
+                            component={AppLayout(DynamicIndex)}
+                            title={name}
+                        />
+                        <CustomRoute
+                            exact
+                            path={`/${name}/create`}
+                            component={AppLayout(DynamicCreate)}
+                            title={name}
+                        />
+                        <CustomRoute
+                            exact
+                            path={`/${name}/:id`}
+                            component={AppLayout(DynamicEdit)}
+                            title={name}
+                        />
+                    </Fragment>
                 ))
             }
             <CustomRoute

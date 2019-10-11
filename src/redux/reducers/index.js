@@ -7,6 +7,7 @@ import auth from './auth';
 
 // Features
 import entities from './entities';
+import dynamic from './dynamic';
 
 // Not Used
 import heroBanners from './hero-banners';
@@ -18,6 +19,7 @@ import user from './user';
 const reducer = combineReducers({
     auth,
     entities,
+    dynamic,
 
     // Not used
     heroBanners,

@@ -8,6 +8,9 @@ const authResetPassword = 'auth.resetPassword';
 const entitiesIndex = 'entities.index';
 const entitiesCreate = 'entities.create';
 
+// Dynamic
+const dynamicIndex = 'dynamic.index';
+
 // Not used
 const heroBannersIndexActive = 'heroBanners.indexActive';
 const heroBannersIndexInactive = 'heroBanners.indexInactive';
@@ -31,7 +34,8 @@ export {
     // Features
     entitiesIndex,
     entitiesCreate,
-
+    // Dynamic
+    dynamicIndex,
     // Not used
     heroBannersIndexActive,
     heroBannersIndexInactive,

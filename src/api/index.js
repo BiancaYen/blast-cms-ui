@@ -1,5 +1,6 @@
 import AuthApi from './AuthApi';
 import EntitiesApi from './EntitiesApi';
+import DynamicApi from './DynamicApi';
 
 // Not used
 import BannersApi from './BannersApi';
@@ -9,6 +10,7 @@ import UserApi from './UserApi';
 
 export {
     AuthApi,
+    DynamicApi,
     EntitiesApi,
     BannersApi,
     SettingsApi,
