@@ -1,20 +1,18 @@
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-
-// Utils
 import withDocumentTitle from '../../utils/withDocumentTitle';
+
+// Actions
+import { getIndex as entitiesGetIndex } from '../../redux/actions/entities/entitiesIndexActions';
 
 // Styles
 import { Container, Content } from './styles';
 
 // Icons
 import Glyph from '../../components/icons/Glyph';
-import Logo from '../../components/icons/Logo';
-import BannersIcon from '../../components/icons/BannersIcon';
-import IconBannersIcon from '../../components/icons/IconBannersIcon';
 import SettingsIcon from '../../components/icons/SettingsIcon';
-import ThemesIcon from '../../components/icons/ThemesIcon';
 
 // Components
 import {
@@ -32,23 +30,35 @@ const propTypes = {
 
 export default (ComposedComponent) => {
     const AppLayout = (props) => {
-        // @Todo Enable
-        // useEffect(() => {
-        //     if (!localStorage.getItem('token')) {
-        //         props.history.push('/');
-        //     }
-        // }, []);
+        // Application State
+        const { index: entitiesIndex } = useSelector(state => state.entities);
+
+        useEffect(() => {
+            // if (!localStorage.getItem('token')) {
+            //     props.history.push('/');
+            // }
+        }, []);
 
         const { title } = props;
 
         return (
             <Container>
-                <Navigation glyph={<Glyph />}>
+                <Navigation glyph={<Glyph />} isLoading={entitiesIndex.loading}>
                     <NavigationLink
                         label="Entities"
                         route="/entities"
                         icon={<SettingsIcon />}
                     />
+                    {
+                        entitiesIndex.data.map(({ id, name }) => (
+                            <NavigationLink
+                                key={id}
+                                label={name}
+                                route={`/${name}`}
+                                icon={<SettingsIcon />}
+                            />
+                        ))
+                    }
                 </Navigation>
                 <Content>
                     <Header title={title} actions={[<AccountSettingsMenu />]} />

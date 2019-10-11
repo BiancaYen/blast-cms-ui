@@ -11,7 +11,7 @@ import Loader from './Loader';
 const defaultProps = {
     isLoading: false,
     logo: null,
-    version: false
+    version: ''
 };
 
 // Prop types

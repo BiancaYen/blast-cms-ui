@@ -1,7 +1,13 @@
+// Auth
 const authAcceptInvitation = 'auth.acceptInvitation';
 const authLogin = 'auth.login';
 const authRecoverPassword = 'auth.recoverPassword';
 const authResetPassword = 'auth.resetPassword';
+
+// Features
+const entitiesIndex = 'entities.index';
+
+// Not used
 const heroBannersIndexActive = 'heroBanners.indexActive';
 const heroBannersIndexInactive = 'heroBanners.indexInactive';
 const heroBannersCreate = 'heroBanners.create';
@@ -16,10 +22,15 @@ const themes = 'themes';
 const user = 'user';
 
 export {
+    // Auth
     authAcceptInvitation,
     authLogin,
     authRecoverPassword,
     authResetPassword,
+    // Features
+    entitiesIndex,
+
+    // Not used
     heroBannersIndexActive,
     heroBannersIndexInactive,
     heroBannersCreate,
