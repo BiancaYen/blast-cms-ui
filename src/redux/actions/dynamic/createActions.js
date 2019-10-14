@@ -26,11 +26,11 @@ const postCreate = ({ data, setErrors: setFormErrors, url }) => (dispatch) => {
         requestType: 'create',
         setFormErrors,
         dispatchFromPayload: () => {
-            dispatch(getIndex());
+            dispatch(getIndex(url));
 
             browserHistory.push(`/${url}`);
             return {
-                notificationDetail: data.name || data.title || 'The Entity'
+                notificationDetail: `"${data.name || data.title || 'The Entity'}"`
             };
         }
     });

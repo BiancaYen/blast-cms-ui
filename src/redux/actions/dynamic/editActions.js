@@ -28,27 +28,14 @@ const getEdit = ({ id: singleId, url }) => (dispatch) => {
         callApiClient: () => DynamicApi.getSingle(url, singleId),
         reducerName,
         requestType: 'get',
-        // dispatchFromPayload: ({
-        //     id,
-        //     attributes: {
-        //         bannerName = '',
-        //         bannerText = '',
-        //         bannerCtaTitle = '',
-        //         redirectUrl = '',
-        //         bannerImageUrl = '',
-        //         templates = []
-        //     }
-        // }) => ({
-        //     id,
-        //     bannerFile: bannerImageUrl,
-        //     bannerName,
-        //     bannerText,
-        //     bannerCtaTitle,
-        //     redirectUrl,
-        //     templates: templates.map(({ id: templateId }) => templateId)
-        // })
-        dispatchFromPayload: (data) => {
-            console.log(data);
+        dispatchFromPayload: ({ id, attributes }) => {
+            const object = {
+                id
+            };
+            Object.entries(attributes).forEach(([key, value]) => {
+                object[key] = value;
+            });
+            return object;
         }
     });
 };
@@ -56,7 +43,7 @@ const getEdit = ({ id: singleId, url }) => (dispatch) => {
 const postEdit = ({
     data,
     id,
-    setErrors: setFormErrors,
+    setFormErrors,
     url
 }) => (dispatch) => {
     dispatch({
@@ -65,11 +52,11 @@ const postEdit = ({
         requestType: 'edit',
         setFormErrors,
         dispatchFromPayload: () => {
-            dispatch(getIndex());
+            dispatch(getIndex(url));
 
             browserHistory.push(`/${url}`);
             return {
-                notificationDetail: data.name || data.title || 'The Entity'
+                notificationDetail: `"${data.name || data.title || 'The Entity'}"`
             };
         }
     });

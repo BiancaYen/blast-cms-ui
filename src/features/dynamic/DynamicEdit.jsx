@@ -44,10 +44,7 @@ const propTypes = {
     touched: PropTypes.instanceOf(Object).isRequired,
     isValid: PropTypes.bool,
     validation: PropTypes.instanceOf(Object).isRequired,
-    values: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        fields: PropTypes.instanceOf(Array).isRequired
-    }).isRequired,
+    values: PropTypes.instanceOf(Object).isRequired,
     onBlur: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired
@@ -73,8 +70,13 @@ const DynamicEdit = ({
     const { path, params: { id } } = match;
     const [, url] = path.split('/');
 
-    const handleEditSubmit = (formValues, setErrors) => {
-        dispatch(postEdit(match.params.id, formValues, { setErrors }));
+    const handleEditSubmit = (formValues, setFormErrors) => {
+        dispatch(postEdit({
+            data: formValues,
+            id,
+            setFormErrors,
+            url
+        }));
     };
 
     const handleCancel = () => {
@@ -87,7 +89,6 @@ const DynamicEdit = ({
             url
         }));
     }, []);
-
 
     return (
         <React.Fragment>

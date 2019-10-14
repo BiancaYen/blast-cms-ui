@@ -20,10 +20,8 @@ const withForm = (ComposedComponent, joiOptions) => {
     const WithForm = (props) => {
         const { validationSchema, data = {}, dataTypes } = props;
 
-        console.log(data);
-
         let formattedData = {};
-        if (dataTypes.length && !!Object.values(data).length) {
+        if (dataTypes.length && !Object.values(data).length) {
             dataTypes.map(({ columnName }) => {
                 formattedData[columnName] = '';
                 return null;
