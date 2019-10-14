@@ -49,7 +49,7 @@ const DynamicDeleteModal = ({
                 <p>
                     {
                         isSingle
-                            ? `Are you sure you want to delete "${data.name}" banner?`
+                            ? `Are you sure you want to delete "${data.name}"?`
                             : `Are you sure you want to delete ${data.count} items permanently?`
                     }
                 </p>
