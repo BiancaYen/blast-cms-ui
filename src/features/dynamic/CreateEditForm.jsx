@@ -1,18 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 // Components
 import {
-    Checkbox,
     Form,
     FormRow,
     FormSection,
     Input,
-    Label
+    TextArea
 } from '../../components';
+
+const defaultProps = {
+    dataTypes: []
+};
 
 // Prop types
 const propTypes = {
+    dataTypes: PropTypes.instanceOf(Array),
     touched: PropTypes.instanceOf(Object).isRequired,
     validation: PropTypes.instanceOf(Object).isRequired,
     values: PropTypes.instanceOf(Object).isRequired,
@@ -20,39 +24,50 @@ const propTypes = {
     onChange: PropTypes.func.isRequired
 };
 const CreateEditForm = ({
+    dataTypes,
     touched,
     validation,
     values,
     onBlur,
     onChange
-}) => (
-    <Form>
-        <FormRow>
-            <FormSection title="General" withoutBorder>
-                <Input
-                    id="name"
-                    label="Name"
-                    placeholder="Type Name"
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    validation={touched.name && validation.name}
-                    value={values.name}
-                />
-                <Label spacing="30px 0 0">Show in Menu</Label>
-                <Checkbox
-                    id="showInMenu"
-                    onChange={onChange}
-                    value={values.showInMenu}
-                    spacing="16px 0 0"
-                />
-            </FormSection>
-            <FormSection title="Database" withoutBorder>
-                ...
-            </FormSection>
-        </FormRow>
-    </Form>
-);
+}) => {
+    const getInput = (datatype) => {
+        switch (datatype) {
+            case 'Input':
+                return Input;
+            case 'RichTextArea':
+                return TextArea;
+            default: return Input;
+        }
+    };
 
+    return (
+        <Form>
+            <FormRow>
+                <FormSection title="General" withoutBorder>
+                    {
+                        dataTypes.map(({ columnName, component }) => {
+                            const DynamicInput = getInput(component);
+                            return (
+                                <DynamicInput
+                                    id={columnName}
+                                    key={columnName}
+                                    onBlur={onBlur}
+                                    onChange={onChange}
+                                    touched={touched[columnName] && validation[columnName]}
+                                    value={values[columnName]}
+                                    label={columnName}
+                                />
+                            );
+                        })
+                    }
+                </FormSection>
+            </FormRow>
+        </Form>
+    );
+};
+
+CreateEditForm.defaultProps = defaultProps;
 CreateEditForm.propTypes = propTypes;
 
 export default CreateEditForm;

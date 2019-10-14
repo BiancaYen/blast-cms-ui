@@ -14,19 +14,11 @@ import {
     submitToggleFalse
 } from '../../utils/stateUpdate';
 
-// Initial Data
-const initialData = {
-    name: '',
-    fields: []
-};
-
 // Initial State
 const initialState = {
-    data: initialData,
+    data: {},
     submit: false,
     validationSchema: {
-        name: Joi.string().required().label('Name'),
-        fields: Joi.array().min(1).label('Fields')
     }
 };
 

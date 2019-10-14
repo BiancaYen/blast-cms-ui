@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 
 // Default props
 const defaultProps = {
+    dataTypes: [],
     title: ''
 };
 
 // Prop types
 const propTypes = {
+    dataTypes: PropTypes.instanceOf(Array),
     title: PropTypes.string,
     component: PropTypes.oneOfType([
         PropTypes.func,
@@ -16,13 +18,22 @@ const propTypes = {
     ]).isRequired
 };
 
-const CustomRoute = ({ component: ComposedComponent, title, ...props }) => {
+const CustomRoute = ({
+    component: ComposedComponent,
+    dataTypes,
+    title,
+    ...props
+}) => {
     return (
         <Route
             {...props}
             render={(rest) => {
                 return (
-                    <ComposedComponent {...rest} title={title} />
+                    <ComposedComponent
+                        {...rest}
+                        dataTypes={dataTypes}
+                        title={title}
+                    />
                 );
             }}
         />

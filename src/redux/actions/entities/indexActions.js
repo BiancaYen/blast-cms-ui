@@ -24,10 +24,22 @@ const getIndex = () => (dispatch) => {
                 id,
                 attributes: {
                     name = ''
-                } = {}
+                } = {},
+                data_types: dataTypes
             }) => ({
                 id,
-                name
+                name,
+                dataTypes: dataTypes.map(({
+                    attributes: {
+                        component = 'Input'
+                    },
+                    pivot_attributes: {
+                        column_name: columnName
+                    }
+                }) => ({
+                    component,
+                    columnName
+                }))
             }))
         })
     });

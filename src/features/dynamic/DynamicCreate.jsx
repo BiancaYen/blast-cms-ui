@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 // Actions
 import { postCreate } from '../../redux/actions/entities/createActions';
+import { getIndex as entitiesGetIndex } from '../../redux/actions/entities/indexActions';
 
 // Components
 import {
@@ -19,10 +20,11 @@ import CreateEditForm from './CreateEditForm';
 import withForm from '../../utils/withForm';
 
 // Aplication State
-const mapStateToProps = ({ entities: { create } }) => {
+const mapStateToProps = ({ dynamic: { create }, entities }) => {
     const { data, submit, validationSchema } = create;
 
     return {
+        entitiesIndexData: entities.index.data,
         data,
         submit,
         validationSchema
@@ -43,16 +45,14 @@ const propTypes = {
     touched: PropTypes.instanceOf(Object).isRequired,
     isValid: PropTypes.bool,
     validation: PropTypes.instanceOf(Object).isRequired,
-    values: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        fields: PropTypes.instanceOf(Array).isRequired
-    }).isRequired,
+    values: PropTypes.instanceOf(Object).isRequired,
     onBlur: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired
 };
 
 const DynamicCreate = ({
+    dataTypes,
     history,
     match,
     submit,
@@ -89,6 +89,7 @@ const DynamicCreate = ({
                 title="Create new"
             />
             <CreateEditForm
+                dataTypes={dataTypes}
                 touched={touched}
                 validation={validation}
                 values={values}

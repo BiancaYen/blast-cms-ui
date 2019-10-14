@@ -48,6 +48,12 @@ const Routes = ({ location }) => {
         }
     }, []);
 
+    if (entitiesIndex.loading) {
+        return (
+            <div>Loading</div>
+        );
+    }
+
     return (
         <Switch key={location.key}>
             {/* Auth */}
@@ -89,28 +95,41 @@ const Routes = ({ location }) => {
                 title="Entities"
             />
             {/* Dynamic */}
+            {/* Need to map out each CRUD route separately, since placing routes within the <Fragment /> component causes problematic remount */}
             {
-                entitiesIndex.data.map(({ id, name }) => (
-                    <Fragment key={id}>
-                        <CustomRoute
-                            exact
-                            path={`/${name}`}
-                            component={AppLayout(DynamicIndex)}
-                            title={name}
-                        />
-                        <CustomRoute
-                            exact
-                            path={`/${name}/create`}
-                            component={AppLayout(DynamicCreate)}
-                            title={name}
-                        />
-                        <CustomRoute
-                            exact
-                            path={`/${name}/:id`}
-                            component={AppLayout(DynamicEdit)}
-                            title={name}
-                        />
-                    </Fragment>
+                entitiesIndex.data.map(({ id, name, dataTypes }) => (
+                    <CustomRoute
+                        dataTypes={dataTypes}
+                        exact
+                        key={id}
+                        path={`/${name}`}
+                        component={AppLayout(DynamicIndex)}
+                        title={name}
+                    />
+                ))
+            }
+            {
+                entitiesIndex.data.map(({ id, name, dataTypes }) => (
+                    <CustomRoute
+                        dataTypes={dataTypes}
+                        exact
+                        key={id}
+                        path={`/${name}/create`}
+                        component={AppLayout(DynamicCreate)}
+                        title={name}
+                    />
+                ))
+            }
+            {
+                entitiesIndex.data.map(({ id, name, dataTypes }) => (
+                    <CustomRoute
+                        dataTypes={dataTypes}
+                        exact
+                        key={id}
+                        path={`/${name}/:id`}
+                        component={AppLayout(DynamicEdit)}
+                        title={name}
+                    />
                 ))
             }
             <CustomRoute

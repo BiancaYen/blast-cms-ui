@@ -6,7 +6,18 @@ import useForm from './useForm';
 
 const withForm = (ComposedComponent, joiOptions) => {
     const WithForm = (props) => {
-        const { validationSchema, data = {} } = props;
+        console.log(props);
+        const { validationSchema, data = {}, dataTypes } = props;
+
+        let formattedData = {};
+        if (dataTypes.length) {
+            dataTypes.map(({ columnName }) => {
+                formattedData[columnName] = '';
+                return null;
+            });
+        } else {
+            formattedData = data;
+        }
 
         const {
             touched,
@@ -18,7 +29,7 @@ const withForm = (ComposedComponent, joiOptions) => {
             onInputReset,
             onFormReset,
             onSubmit
-        } = useForm(data, validationSchema, joiOptions);
+        } = useForm(formattedData, validationSchema, joiOptions);
 
         return (
             <ComposedComponent
