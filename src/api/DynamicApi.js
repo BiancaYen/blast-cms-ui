@@ -7,7 +7,7 @@ class DynamicApi {
 
     postCreate = (url, data) => ApiClient.post(`${url}/`, data);
 
-    postDelete = (url, ids) => ApiClient.post(`${url}/delete`, { ids });
+    postDelete = (url, id) => ApiClient.post(`${url}/${id}/delete`);
 
     postEdit = (url, id, data) => ApiClient.post(`${url}/${id}`, data);
 }

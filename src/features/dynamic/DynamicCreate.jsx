@@ -99,7 +99,7 @@ const DynamicCreate = ({
             />
             <FormWrapperSubmit>
                 <Button
-                    outlined
+                    isOutlined
                     spacing="0 auto 0 0"
                     title="Cancel"
                     onClick={handleCancel}

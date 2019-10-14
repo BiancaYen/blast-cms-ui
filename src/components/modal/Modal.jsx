@@ -23,13 +23,13 @@ const propTypes = {
     onClose: PropTypes.func
 };
 
-
 class Modal extends Component {
     state = {
         animationEnd: true
     };
 
     outerWrapper = React.createRef();
+
     innerWrapper = React.createRef();
 
     // Key method

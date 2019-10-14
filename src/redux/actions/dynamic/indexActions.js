@@ -32,16 +32,16 @@ const getIndex = url => (dispatch) => {
     });
 };
 
-const postDelete = ({ id, name }) => (dispatch) => {
+const postDelete = ({ data: { id, name }, url }) => (dispatch) => {
     dispatch({
-        callApiClient: () => DynamicApi.postDelete([id]),
+        callApiClient: () => DynamicApi.postDelete(url, id),
         reducerName,
         requestType: 'delete',
         dispatchFromPayload: () => {
-            dispatch(getIndex());
+            dispatch(getIndex(url));
 
             return {
-                notificationDetail: name
+                notificationDetail: `"${name || 'The Entity'}"`
             };
         }
     });

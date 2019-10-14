@@ -44,19 +44,19 @@ const DynamicDeleteModal = ({
     };
 
     return (
-        <Modal active={isActive} onCloseClick={onClose}>
+        <Modal isActive={isActive} onCloseClick={onClose}>
             <ModalContent title="Delete" icon={<DeleteIcon width="27" height="27" />}>
                 <p>
                     {
                         isSingle
-                            ? `Are you sure you want to remove "${data.name}" banner?`
-                            : `Are you sure you want to remove ${data.count} items permanently?`
+                            ? `Are you sure you want to delete "${data.name}" banner?`
+                            : `Are you sure you want to delete ${data.count} items permanently?`
                     }
                 </p>
             </ModalContent>
             <ModalActions>
-                <Button small outlined spacing="0" onClick={onClose} title="Cancel" />
-                <Button small spacing="0" onClick={handleDelete} title="Delete" />
+                <Button size={Button.sizes.small} isOutlined spacing="0" onClick={onClose} title="Cancel" />
+                <Button size={Button.sizes.small} spacing="0" onClick={handleDelete} title="Delete" />
             </ModalActions>
         </Modal>
     );

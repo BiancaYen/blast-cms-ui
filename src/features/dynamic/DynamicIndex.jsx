@@ -59,7 +59,10 @@ const DynamicIndex = ({
     };
 
     const handleDelete = (data) => {
-        dispatch(postDelete(data));
+        dispatch(postDelete({
+            data,
+            url
+        }));
     };
 
     const handleCreateRedirect = () => history.push(`/${url}/create`);
