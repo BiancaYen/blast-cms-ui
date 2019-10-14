@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 
 // Actions
-import { postCreate } from '../../redux/actions/entities/createActions';
+import { getEdit, postEdit } from '../../redux/actions/dynamic/editActions';
 
 // Components
 import {
@@ -19,8 +19,8 @@ import CreateEditForm from './CreateEditForm';
 import withForm from '../../utils/withForm';
 
 // Aplication State
-const mapStateToProps = ({ entities: { create } }) => {
-    const { data, submit, validationSchema } = create;
+const mapStateToProps = ({ dynamic: { edit } }) => {
+    const { data, submit, validationSchema } = edit;
 
     return {
         data,
@@ -37,6 +37,7 @@ const defaultProps = {
 
 // Prop types
 const propTypes = {
+    dataTypes: PropTypes.instanceOf(Object).isRequired,
     match: PropTypes.instanceOf(Object).isRequired,
     history: PropTypes.instanceOf(Object).isRequired,
     submit: PropTypes.bool,
@@ -54,11 +55,12 @@ const propTypes = {
 
 
 const DynamicEdit = ({
+    dataTypes,
     history,
+    isValid,
     match,
     submit,
     touched,
-    isValid,
     validation,
     values,
     onBlur,
@@ -68,19 +70,24 @@ const DynamicEdit = ({
     const dispatch = useDispatch();
 
     // Url
-    const { path } = match;
+    const { path, params: { id } } = match;
     const [, url] = path.split('/');
 
-    const onSubmitActive = (formValues, setErrors) => {
-        dispatch(postCreate(
-            formValues,
-            { setErrors }
-        ));
+    const handleEditSubmit = (formValues, setErrors) => {
+        dispatch(postEdit(match.params.id, formValues, { setErrors }));
     };
 
     const handleCancel = () => {
         history.push(`/${url}`);
     };
+
+    useEffect(() => {
+        dispatch(getEdit({
+            id,
+            url
+        }));
+    }, []);
+
 
     return (
         <React.Fragment>
@@ -90,6 +97,7 @@ const DynamicEdit = ({
                 title="Edit"
             />
             <CreateEditForm
+                dataTypes={dataTypes}
                 touched={touched}
                 validation={validation}
                 values={values}
@@ -107,7 +115,7 @@ const DynamicEdit = ({
                     disabled={!isValid}
                     loading={submit}
                     title="Save"
-                    onClick={onSubmit(onSubmitActive)}
+                    onClick={onSubmit(handleEditSubmit)}
                 />
             </FormWrapperSubmit>
         </React.Fragment>

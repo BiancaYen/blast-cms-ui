@@ -10,6 +10,8 @@ const entitiesCreate = 'entities.create';
 
 // Dynamic
 const dynamicIndex = 'dynamic.index';
+const dynamicCreate = 'dynamic.create';
+const dynamicEdit = 'dynamic.edit';
 
 // Not used
 const heroBannersIndexActive = 'heroBanners.indexActive';
@@ -36,6 +38,8 @@ export {
     entitiesCreate,
     // Dynamic
     dynamicIndex,
+    dynamicCreate,
+    dynamicEdit,
     // Not used
     heroBannersIndexActive,
     heroBannersIndexInactive,

@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 
 // Actions
-import { postCreate } from '../../redux/actions/entities/createActions';
+import { postCreate } from '../../redux/actions/dynamic/createActions';
 
 // Components
 import {
@@ -70,7 +70,7 @@ const DynamicCreate = ({
     const { path } = match;
     const [, url] = path.split('/');
 
-    const onSubmitActive = (formValues, setErrors) => {
+    const handleSubmit = (formValues, setErrors) => {
         dispatch(postCreate({
             data: formValues,
             setErrors,
@@ -108,7 +108,7 @@ const DynamicCreate = ({
                     disabled={!isValid}
                     loading={submit}
                     title="Create"
-                    onClick={onSubmit(onSubmitActive)}
+                    onClick={onSubmit(handleSubmit)}
                 />
             </FormWrapperSubmit>
         </React.Fragment>

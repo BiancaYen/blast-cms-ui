@@ -1,12 +1,11 @@
-// Settings Edit Reducer
+// Dynamic Edit Reducer
 
-// State used by: Settings
+// State used by: DynamicEdit
 
-import Joi from 'joi';
 import { handleActions } from 'redux-actions';
 
 // Actions
-import * as actions from '../../actions/settings/settingsEditActions';
+import * as actions from '../../actions/dynamic/editActions';
 
 // State update
 import {
@@ -20,12 +19,8 @@ import {
 // Initial State
 const initialState = {
     loading: true,
-    data: {
-        campaignId: ''
-    },
-    validationSchema: {
-        campaignId: Joi.string().required().label('Campaign Id')
-    }
+    data: {},
+    validationSchema: {}
 };
 
 const userReducer = handleActions(

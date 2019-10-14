@@ -1,12 +1,11 @@
-// Entity Create
+// Dynamic Create
 
-// State used by: EntitiesCreate
+// State used by: DynamicCreate
 
 import { handleActions } from 'redux-actions';
-import Joi from 'joi';
 
 // Actions
-import * as actions from '../../actions/entities/createActions';
+import * as actions from '../../actions/dynamic/createActions';
 
 // State update
 import {
