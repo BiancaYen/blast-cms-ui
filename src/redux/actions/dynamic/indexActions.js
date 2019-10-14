@@ -19,9 +19,11 @@ const getIndex = url => (dispatch) => {
         reducerName,
         requestType: 'get',
         dispatchFromPayload: data => ({
-            data: data.map((item) => {
-                const object = {};
-                Object.entries(item).forEach(([key, value]) => {
+            data: data.map(({ id, attributes }) => {
+                const object = {
+                    id
+                };
+                Object.entries(attributes).forEach(([key, value]) => {
                     object[key] = value;
                 });
                 return object;
