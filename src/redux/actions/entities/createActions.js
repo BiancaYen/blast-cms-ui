@@ -1,10 +1,10 @@
 import { createAction } from 'redux-actions';
 
 import actionTypes from '../actionTypes';
-import { heroBannersCreate as reducerName } from '../../reducers/reducerNames';
+import { entitiesCreate as reducerName } from '../../reducers/reducerNames';
 
 // Api
-import { DynamicApi } from '../../../api';
+import { EntitiesApi } from '../../../api';
 
 // Utils
 import browserHistory from '../../../utils/browserHistory';
@@ -19,18 +19,36 @@ const postFailed = createAction(types.postFailed);
 const postSubmitting = createAction(types.postSubmitting);
 const postSuccess = createAction(types.postSuccess);
 
-const postCreate = ({ data, setErrors: setFormErrors, url }) => (dispatch) => {
+const postCreate = ({ data, setFormErrors }) => (dispatch) => {
+    const {
+        name,
+        fields,
+        tableName
+    } = data;
+
+    const formattedFields = fields.map(({ name: fieldName, dataTypeId }) => {
+        const formattedField = {
+            name: fieldName,
+            data_type_id: dataTypeId
+        };
+        return JSON.stringify(formattedField);
+    });
+
     dispatch({
-        callApiClient: () => DynamicApi.postCreate(url, data),
+        callApiClient: () => EntitiesApi.postCreate({
+            name,
+            fields: formattedFields,
+            table_name: tableName
+        }),
         reducerName,
         requestType: 'create',
         setFormErrors,
         dispatchFromPayload: () => {
             dispatch(getIndex());
 
-            browserHistory.push(`/${url}`);
+            browserHistory.push('/entities');
             return {
-                notificationDetail: data.name || data.title || 'The Entity'
+                notificationDetail: `${data.name || data.title || 'The Entity'}`
             };
         }
     });

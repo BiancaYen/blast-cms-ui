@@ -17,8 +17,7 @@ import {
 // Initial Data
 const initialData = {
     name: '',
-    fields: [],
-    tableName: ''
+    dataTypeId: []
 };
 
 // Initial State
@@ -27,12 +26,11 @@ const initialState = {
     submit: false,
     validationSchema: {
         name: Joi.string().required().label('Name'),
-        fields: Joi.array().min(1).label('Fields'),
-        tableName: Joi.string().required().label('Table Name')
+        dataTypeId: Joi.number().required().label('Data Type Id')
     }
 };
 
-const userReducer = handleActions(
+const fieldsReducer = handleActions(
     {
         [actions.postSubmitting]: submitToggleTrue,
         [actions.postFailed]: submitToggleFalse,
@@ -41,4 +39,4 @@ const userReducer = handleActions(
     initialState
 );
 
-export default userReducer;
+export default fieldsReducer;

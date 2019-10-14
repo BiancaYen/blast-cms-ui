@@ -17,7 +17,7 @@ const defaultProps = {
     isOutlined: false,
     size: sizes.normal,
     spacing: '',
-    type: '',
+    type: 'button',
     onClick: () => {}
 };
 

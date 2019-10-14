@@ -121,6 +121,7 @@ class Select extends Component {
     }
 
     dropdownRef = React.createRef();
+
     dropdownContentRef = React.createRef();
 
     handleClickOutside = ({ target }) => {
@@ -401,7 +402,7 @@ class Select extends Component {
                                     </SelectAllRow>
                                 }
                                 {
-                                    data.map(({ id, title, ...props }) => (
+                                    data.map(({ id, [dataDisplayKey]: title, ...props }) => (
                                         <RowComponent
                                             {...props}
                                             id={id}
@@ -419,7 +420,7 @@ class Select extends Component {
                             <HiddenContent isHidden={!searchValue}>
                                 {searchResult.length ?
                                     [
-                                        ...searchResult.map(({ id, title, ...props }) => (
+                                        ...searchResult.map(({ id, [dataDisplayKey]: title, ...props }) => (
                                             <RowComponent
                                                 {...props}
                                                 id={id}

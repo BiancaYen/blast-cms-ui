@@ -68,11 +68,11 @@ const EntitiesCreate = ({
 }) => {
     const dispatch = useDispatch();
 
-    const onSubmitActive = (formValues, setErrors) => {
-        dispatch(postCreate(
-            formValues,
-            { setErrors }
-        ));
+    const handleSubmit = (formValues, setFormErrors) => {
+        dispatch(postCreate({
+            data: formValues,
+            setFormErrors
+        }));
     };
 
     const handleCancel = () => {
@@ -104,7 +104,7 @@ const EntitiesCreate = ({
                     disabled={!isValid}
                     loading={submit}
                     title="Create"
-                    onClick={onSubmit(onSubmitActive)}
+                    onClick={onSubmit(handleSubmit)}
                 />
             </FormWrapperSubmit>
         </React.Fragment>

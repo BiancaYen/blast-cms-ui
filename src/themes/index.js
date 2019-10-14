@@ -53,7 +53,7 @@ const theme = {
         itemBackgroundHover: '#f8f8f8',
     },
     actionsGroup: {
-        dividerColor: '#e0e0e0'
+        dividerColor: variables.primaryGrey
     },
     arrowToggle: {
         color: variables.primaryGreyTint2,
@@ -187,15 +187,14 @@ const theme = {
         actionIconColor: variables.primaryColor
     },
     modal: {
-        errorColor: variables.errorColor,
-        successColor: variables.successColor,
-        defaultColor: variables.primaryColor,
-        border: '#e0e0e0',
+        actionDivider: variables.primaryGreyTint4,
         background: variables.white,
-        closeButtonColor: variables.primaryColor,
+        border: variables.primaryGreyTint4,
         contentColor: variables.primaryGreyDark,
-        actionDivider: '#e0e0e0',
-        linkColor: variables.primaryColor
+        defaultColor: variables.primaryColor,
+        errorColor: variables.errorColor,
+        linkColor: variables.primaryColor,
+        successColor: variables.successColor
     },
     navigation: {
         activeLinkLineColor: variables.primaryColor,
@@ -241,6 +240,27 @@ const theme = {
         actionDividerColor: variables.primaryGreyTint4,
         actionIconColor: variables.primaryColor,
         borderColor: variables.primaryGreyTint6
+    },
+    select: {
+        background: variables.primaryGreyTint8,
+        backgroundReadOnly: variables.primaryGreyTint7,
+        border: variables.primaryGreyTint7,
+        borderActive: variables.primaryColorTint2,
+        color: variables.primaryGrey,
+        colorDisabled: variables.primaryGreyTint5,
+        counterColor: variables.primaryColor,
+        counterBackground: variables.white,
+        counterBorderColor: variables.primaryGreyTint6,
+        dropdownBackground: variables.white,
+        placeholder: variables.primaryGreyTint3
+    },
+    selectRow: {
+        backgroundFocused: variables.primaryGreyTint8,
+        backgroundHover: variables.primaryGreyTint8,
+        border: variables.primaryGreyTint7,
+        color: variables.primaryGreyDark,
+        colorActive: variables.primaryColor,
+        colorDisabled: variables.primaryGreyTint3
     },
     spinnerLoader: {
         color: variables.secondaryGreyTint1,

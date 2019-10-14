@@ -116,7 +116,7 @@ const Content = styled.div`
     flex-direction: column;
     flex-grow: 1;
     
-    span {
+    > span {
         margin: 17px 0 0 0;
         font-size: 11px;
         line-height: 1.82;
