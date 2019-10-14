@@ -7,9 +7,20 @@ import {
     Form,
     FormRow,
     FormSection,
+    Grid,
     Input,
-    Label
+    Label,
+    TableAction,
+    TableStatic,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeadCell,
+    TableRow
 } from '../../components';
+
+// Icons
+import CreateIcon from '../../components/icons/CreateIcon';
 
 // Prop types
 const propTypes = {
@@ -27,8 +38,8 @@ const CreateEditForm = ({
     onChange
 }) => (
     <Form>
-        <FormRow>
-            <FormSection title="General" withoutBorder>
+        <FormSection title="General" withoutBorder>
+            <Grid alignItems="start" grid={Grid.grid.twoColumns}>
                 <Input
                     id="name"
                     label="Name"
@@ -38,18 +49,42 @@ const CreateEditForm = ({
                     validation={touched.name && validation.name}
                     value={values.name}
                 />
-                <Label spacing="30px 0 0">Show in Menu</Label>
-                <Checkbox
-                    id="showInMenu"
-                    onChange={onChange}
-                    value={values.showInMenu}
-                    spacing="16px 0 0"
-                />
-            </FormSection>
-            <FormSection title="Database" withoutBorder>
-                ...
-            </FormSection>
-        </FormRow>
+                <div>
+                    <Label spacing="30px 0 0">Show in Menu</Label>
+                    <Checkbox
+                        id="showInMenu"
+                        onChange={onChange}
+                        value={values.showInMenu}
+                        spacing="16px 0 0"
+                    />
+                </div>
+            </Grid>
+        </FormSection>
+        <FormSection
+            title="Database"
+            actions={[
+                ['Create Field', () => {}, <CreateIcon />]
+            ]}
+        >
+            <TableStatic>
+                <TableHead>
+                    <TableHeadCell isIdCell>Column Name</TableHeadCell>
+                    <TableHeadCell isActionCell>Actions</TableHeadCell>
+                </TableHead>
+                <TableBody>
+                    {
+                        values.fields.map(({ id, subId, service }, index) => (
+                            <TableRow key={id}>
+                                <TableCell>{id}</TableCell>
+                                <TableCell>{subId}</TableCell>
+                                <TableCell>{service}</TableCell>
+                                <TableAction actions={[]} rowIndex={index} />
+                            </TableRow>
+                        ))
+                    }
+                </TableBody>
+            </TableStatic>
+        </FormSection>
     </Form>
 );
 
