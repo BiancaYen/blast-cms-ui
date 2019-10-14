@@ -78,6 +78,7 @@ const ButtonNext = styled.div`
 
 const ButtonWrapper = styled.div`
     display: flex;
+    border-radius: 6px;
     box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.1);
 `;
 
