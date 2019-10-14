@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 
 // Actions
 import { postCreate } from '../../redux/actions/entities/createActions';
-import { getIndex as entitiesGetIndex } from '../../redux/actions/entities/indexActions';
 
 // Components
 import {
@@ -39,6 +38,7 @@ const defaultProps = {
 
 // Prop types
 const propTypes = {
+    dataTypes: PropTypes.instanceOf(Object).isRequired,
     match: PropTypes.instanceOf(Object).isRequired,
     history: PropTypes.instanceOf(Object).isRequired,
     submit: PropTypes.bool,
@@ -71,10 +71,11 @@ const DynamicCreate = ({
     const [, url] = path.split('/');
 
     const onSubmitActive = (formValues, setErrors) => {
-        dispatch(postCreate(
-            formValues,
-            { setErrors }
-        ));
+        dispatch(postCreate({
+            data: formValues,
+            setErrors,
+            url
+        }));
     };
 
     const handleCancel = () => {

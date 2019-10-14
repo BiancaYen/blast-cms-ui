@@ -4,9 +4,20 @@ import PropTypes from 'prop-types';
 // Utils
 import useForm from './useForm';
 
+// Default Props
+const defaultProps = {
+    dataTypes: []
+};
+
+// Prop Types
+const propTypes = {
+    data: PropTypes.instanceOf(Object).isRequired,
+    dataTypes: PropTypes.instanceOf(Object),
+    validationSchema: PropTypes.instanceOf(Object).isRequired
+};
+
 const withForm = (ComposedComponent, joiOptions) => {
     const WithForm = (props) => {
-        console.log(props);
         const { validationSchema, data = {}, dataTypes } = props;
 
         let formattedData = {};
@@ -47,10 +58,8 @@ const withForm = (ComposedComponent, joiOptions) => {
         );
     };
 
-    WithForm.propTypes = {
-        data: PropTypes.instanceOf(Object).isRequired,
-        validationSchema: PropTypes.instanceOf(Object).isRequired
-    };
+    WithForm.defaultProps = defaultProps;
+    WithForm.propTypes = propTypes;
 
     return WithForm;
 };

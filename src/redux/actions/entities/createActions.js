@@ -4,7 +4,7 @@ import actionTypes from '../actionTypes';
 import { heroBannersCreate as reducerName } from '../../reducers/reducerNames';
 
 // Api
-import { EntitiesApi } from '../../../api';
+import { DynamicApi } from '../../../api';
 
 // Utils
 import browserHistory from '../../../utils/browserHistory';
@@ -19,26 +19,18 @@ const postFailed = createAction(types.postFailed);
 const postSubmitting = createAction(types.postSubmitting);
 const postSuccess = createAction(types.postSuccess);
 
-const postCreate = (data, { setErrors: setFormErrors }) => (dispatch) => {
-    const {
-        name,
-        fields
-    } = data;
-
+const postCreate = ({ data, setErrors: setFormErrors, url }) => (dispatch) => {
     dispatch({
-        callApiClient: () => EntitiesApi.createHeroBanner({
-            name,
-            fields
-        }),
+        callApiClient: () => DynamicApi.postCreate(url, data),
         reducerName,
         requestType: 'create',
         setFormErrors,
         dispatchFromPayload: () => {
             dispatch(getIndex());
 
-            browserHistory.push('/entity');
+            browserHistory.push(`/${url}`);
             return {
-                notificationDetail: name || 'The Entity'
+                notificationDetail: data.name || data.title || 'The Entity'
             };
         }
     });
