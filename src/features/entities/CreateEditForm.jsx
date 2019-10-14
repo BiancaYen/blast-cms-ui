@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import {
     Checkbox,
     Form,
-    FormRow,
     FormSection,
     Grid,
     Input,
@@ -66,18 +65,20 @@ const CreateEditForm = ({
                 ['Create Field', () => {}, <CreateIcon />]
             ]}
         >
-            <TableStatic>
+            <TableStatic spacing="0">
                 <TableHead>
-                    <TableHeadCell isIdCell>Column Name</TableHeadCell>
+                    <TableHeadCell isIdCell>ID</TableHeadCell>
+                    <TableHeadCell>Column Name</TableHeadCell>
+                    <TableHeadCell>Data Type</TableHeadCell>
                     <TableHeadCell isActionCell>Actions</TableHeadCell>
                 </TableHead>
                 <TableBody>
                     {
-                        values.fields.map(({ id, subId, service }, index) => (
+                        values.fields.map(({ id, columnName, dataType }, index) => (
                             <TableRow key={id}>
                                 <TableCell>{id}</TableCell>
-                                <TableCell>{subId}</TableCell>
-                                <TableCell>{service}</TableCell>
+                                <TableCell>{columnName}</TableCell>
+                                <TableCell>{dataType}</TableCell>
                                 <TableAction actions={[]} rowIndex={index} />
                             </TableRow>
                         ))
