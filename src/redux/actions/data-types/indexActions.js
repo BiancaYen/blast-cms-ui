@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions';
 
 import actionTypes from '../actionTypes';
-import { entitiesIndex as reducerName } from '../../reducers/reducerNames';
+import { settingsIndex as reducerName } from '../../reducers/reducerNames';
 
 // Api
 import { EntitiesApi } from '../../../api';

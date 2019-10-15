@@ -1,10 +1,10 @@
 import { createAction } from 'redux-actions';
 
 import actionTypes from '../actionTypes';
-import { settingsEdit as reducerName } from '../../reducers/reducerNames';
+import { entitiesEdit as reducerName } from '../../reducers/reducerNames';
 
 // Api
-import { SettingsApi } from '../../../api';
+import { EntitiesApi } from '../../../api';
 
 // Utils
 import formatSettingsResponseData from '../utils/formatSettingsResponseData';
@@ -22,7 +22,7 @@ const getSuccess = createAction(types.getSuccess);
 
 const getSettings = () => (dispatch) => {
     dispatch({
-        callApiClient: () => SettingsApi.getSettings(),
+        callApiClient: () => EntitiesApi.getSettings(),
         reducerName,
         requestType: 'get',
         dispatchFromPayload: data => formatSettingsResponseData(data)
@@ -33,7 +33,7 @@ const postUpdateSettings = ({ campaignId }, { setErrors: setFormErrors }) => (di
     const formattedData = [{ name: 'campaign_id', value: campaignId }];
 
     dispatch({
-        callApiClient: () => SettingsApi.postUpdateSettings({ settings: JSON.stringify(formattedData) }),
+        callApiClient: () => EntitiesApi.postUpdateSettings({ settings: JSON.stringify(formattedData) }),
         reducerName,
         requestType: 'edit',
         setFormErrors,

@@ -6,7 +6,7 @@ import Joi from 'joi';
 import { handleActions } from 'redux-actions';
 
 // Actions
-import * as actions from '../../actions/settings/settingsEditActions';
+import * as actions from '../../actions/entities/editActions';
 
 // State update
 import {

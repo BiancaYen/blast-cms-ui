@@ -9,24 +9,14 @@ import auth from './auth';
 import entities from './entities';
 import dynamic from './dynamic';
 
-// Not Used
-import heroBanners from './hero-banners';
-import iconBanners from './icon-banners';
-import settings from './settings';
-import themes from './themes';
+// User
 import user from './user';
 
 const reducer = combineReducers({
     auth,
     entities,
     dynamic,
-
-    // Not used
-    heroBanners,
-    iconBanners,
     notificationReducer,
-    settings,
-    themes,
     user
 });
 
