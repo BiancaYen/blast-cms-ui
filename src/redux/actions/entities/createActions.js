@@ -26,10 +26,11 @@ const postCreate = ({ data, setFormErrors }) => (dispatch) => {
         tableName
     } = data;
 
-    const formattedFields = fields.map(({ name: fieldName, dataTypeId }) => {
+    const formattedFields = fields.map(({ name: fieldName, dataTypeId, isNullable }) => {
         const formattedField = {
-            name: fieldName,
-            data_type_id: dataTypeId
+            data_type_id: dataTypeId,
+            is_nullable: isNullable,
+            name: fieldName
         };
         return JSON.stringify(formattedField);
     });

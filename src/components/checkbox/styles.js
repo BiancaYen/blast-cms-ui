@@ -58,10 +58,6 @@ const CheckboxWrapper = styled.label`
     margin: ${({ spacing }) => spacing || '0'};
     width: max-content;
     
-    &> div > div > div span { // Label
-        text-transform: unset;
-    }
-    
     [class*="LabelMain"] {
         padding-bottom: 0;
     }

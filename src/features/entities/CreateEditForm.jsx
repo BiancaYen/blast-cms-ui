@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 
 // Components
 import {
-    Checkbox,
     Form,
     FormSection,
     Grid,
     Input,
-    Label,
     TableAction,
     TableBody,
     TableCell,
@@ -53,6 +51,11 @@ const CreateEditForm = ({
         });
     };
 
+    const getDataTypeName = (dataTypeId) => {
+        const { name = '' } = meta.dataTypesIndex.data.find(dataType => dataType.id === dataTypeId);
+        return name;
+    };
+
     return (
         <Form>
             <FormSection title="General" withoutBorder>
@@ -78,17 +81,6 @@ const CreateEditForm = ({
                         value={values.tableName}
                     />
                 </Grid>
-                <Grid>
-                    <div>
-                        <Label spacing="30px 0 0">Show in Menu</Label>
-                        <Checkbox
-                            id="isActive"
-                            onChange={onChange}
-                            value={values.isActive}
-                            spacing="16px 0 0"
-                        />
-                    </div>
-                </Grid>
             </FormSection>
             <FormSection
                 title="Database"
@@ -107,14 +99,16 @@ const CreateEditForm = ({
                     <TableHead>
                         <TableHeadCell>Column Name</TableHeadCell>
                         <TableHeadCell>Data Type</TableHeadCell>
+                        <TableHeadCell>Nullable</TableHeadCell>
                         <TableHeadCell isActionCell>Actions</TableHeadCell>
                     </TableHead>
                     <TableBody>
                         {
-                            rowData => rowData.map(({ name, dataTypeId }, index) => (
+                            rowData => rowData.map(({ dataTypeId, isNullable, name }, index) => (
                                 <TableRow key={name}>
                                     <TableCell>{name}</TableCell>
-                                    <TableCell>{dataTypeId}</TableCell>
+                                    <TableCell>{getDataTypeName(dataTypeId)}</TableCell>
+                                    <TableCell>{isNullable ? 'Is Nullable' : 'Not Nullable'}</TableCell>
                                     <TableAction actions={[]} rowIndex={index} />
                                 </TableRow>
                             ))

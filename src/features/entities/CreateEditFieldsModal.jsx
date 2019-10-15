@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 // Components
 import {
     Button,
+    Checkbox,
     Input,
     ModalContent,
     ModalActions,
@@ -32,6 +33,7 @@ const mapStateToProps = ({ entities: { createEditFields } }) => {
 // Prop types
 const propTypes = {
     isActive: PropTypes.bool.isRequired,
+    isValid: PropTypes.bool.isRequired,
     meta: PropTypes.instanceOf(Object).isRequired,
     touched: PropTypes.instanceOf(Object).isRequired,
     validation: PropTypes.instanceOf(Object).isRequired,
@@ -44,6 +46,7 @@ const propTypes = {
 
 const DynamicDeleteModal = ({
     isActive,
+    isValid,
     meta,
     touched,
     validation,
@@ -80,10 +83,29 @@ const DynamicDeleteModal = ({
                     validation={touched.dataTypeId && validation.dataTypeId}
                     value={values.dataTypeId}
                 />
+                <Checkbox
+                    id="isNullable"
+                    label="Is Nullable"
+                    onChange={onChange}
+                    value={values.isNullable}
+                    spacing="16px 0 0"
+                />
             </ModalContent>
             <ModalActions>
-                <Button size={Button.sizes.small} isOutlined spacing="0" onClick={onClose} title="Cancel" />
-                <Button size={Button.sizes.small} spacing="0" onClick={handleCreate} title="Add" />
+                <Button
+                    isOutlined
+                    size={Button.sizes.small}
+                    spacing="0"
+                    onClick={onClose}
+                    title="Cancel"
+                />
+                <Button
+                    isDisabled={!isValid}
+                    size={Button.sizes.small}
+                    spacing="0"
+                    title="Add"
+                    onClick={handleCreate}
+                />
             </ModalActions>
         </Modal>
     );

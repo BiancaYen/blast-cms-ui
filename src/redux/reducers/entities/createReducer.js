@@ -16,7 +16,6 @@ import {
 
 // Initial Data
 const initialData = {
-    isActive: false,
     name: '',
     fields: [],
     tableName: ''
@@ -27,7 +26,6 @@ const initialState = {
     data: initialData,
     submit: false,
     validationSchema: {
-        isActive: Joi.bool().required().label('Is Active'),
         name: Joi.string().required().label('Name'),
         fields: Joi.array().min(1).label('Fields'),
         tableName: Joi.string().required().label('Table Name')
