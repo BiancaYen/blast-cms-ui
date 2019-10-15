@@ -10,8 +10,6 @@ import {
     TableAction,
     TableBody,
     TableCell,
-    TableCellBannerImage,
-    TableCellVertical,
     TableHead,
     TableHeadCell,
     TableHeadCellSort,
@@ -20,9 +18,6 @@ import {
 
 // Styles
 import TableWrapper from './styles';
-
-// Icons
-import HeroBannerPlaceholder from '../../../components/icons/HeroBannerPlaceholder';
 
 // Default props
 const defaultProps = {
