@@ -26,7 +26,7 @@ const propTypes = {
     onDelete: PropTypes.func.isRequired
 };
 
-const DynamicDeleteModal = ({
+const EntitiesActiveChangeModal = ({
     isActive,
     isSingle,
     data,
@@ -62,7 +62,7 @@ const DynamicDeleteModal = ({
     );
 };
 
-DynamicDeleteModal.defaultProps = defaultProps;
-DynamicDeleteModal.propTypes = propTypes;
+EntitiesActiveChangeModal.defaultProps = defaultProps;
+EntitiesActiveChangeModal.propTypes = propTypes;
 
-export default DynamicDeleteModal;
+export default EntitiesActiveChangeModal;
