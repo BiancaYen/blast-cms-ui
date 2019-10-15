@@ -15,7 +15,7 @@ import {
     TableHead,
     TableHeadCell,
     TableRow,
-    TableStatic
+    Table
 } from '../../components';
 
 // Feature Components
@@ -80,9 +80,9 @@ const CreateEditForm = ({
                     <div>
                         <Label spacing="30px 0 0">Show in Menu</Label>
                         <Checkbox
-                            id="showInMenu"
+                            id="isActive"
                             onChange={onChange}
-                            value={values.showInMenu}
+                            value={values.isActive}
                             spacing="16px 0 0"
                         />
                     </div>
@@ -91,29 +91,34 @@ const CreateEditForm = ({
             <FormSection
                 title="Database"
                 actions={[
-                    ['Create Field', () => openModalCreateField(), <CreateIcon />]
+                    ['Add Field', () => openModalCreateField(), <CreateIcon />]
                 ]}
             >
-                <TableStatic spacing="0">
+                <Table
+                    data={values.fields}
+                    id="fields"
+                    limit={5}
+                    messageNoData="No fields added yet"
+                    withSearch={false}
+                    withPagination={false}
+                >
                     <TableHead>
-                        <TableHeadCell isIdCell>ID</TableHeadCell>
                         <TableHeadCell>Column Name</TableHeadCell>
                         <TableHeadCell>Data Type</TableHeadCell>
                         <TableHeadCell isActionCell>Actions</TableHeadCell>
                     </TableHead>
                     <TableBody>
                         {
-                            values.fields.map(({ id, name, dataType }, index) => (
-                                <TableRow key={id}>
-                                    <TableCell>{id}</TableCell>
+                            rowData => rowData.map(({ name, dataTypeId }, index) => (
+                                <TableRow key={name}>
                                     <TableCell>{name}</TableCell>
-                                    <TableCell>{dataType}</TableCell>
+                                    <TableCell>{dataTypeId}</TableCell>
                                     <TableAction actions={[]} rowIndex={index} />
                                 </TableRow>
                             ))
                         }
                     </TableBody>
-                </TableStatic>
+                </Table>
             </FormSection>
 
             <CreateEditFieldsModal

@@ -121,7 +121,7 @@ class EntitiesTable extends Component {
                     data={data}
                     id={tableId}
                     loading={loading}
-                    limit={5}
+                    limit={10}
                     sortableColumns={['id', 'name']}
                     spacing="40px 40px 0"
                 >

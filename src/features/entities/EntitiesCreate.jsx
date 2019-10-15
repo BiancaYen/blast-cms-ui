@@ -37,9 +37,6 @@ const defaultProps = {
 
 // Prop types
 const propTypes = {
-    actions: PropTypes.shape({
-        postCreateHeroBanner: PropTypes.func.isRequired
-    }).isRequired,
     history: PropTypes.instanceOf(Object).isRequired,
     submit: PropTypes.bool,
     touched: PropTypes.instanceOf(Object).isRequired,
@@ -95,7 +92,7 @@ const EntitiesCreate = ({
             />
             <FormWrapperSubmit>
                 <Button
-                    outlined
+                    isOutlined
                     spacing="0 auto 0 0"
                     title="Cancel"
                     onClick={handleCancel}

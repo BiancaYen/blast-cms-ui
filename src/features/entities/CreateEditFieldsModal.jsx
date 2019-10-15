@@ -87,7 +87,7 @@ const DynamicDeleteModal = ({
             </ModalContent>
             <ModalActions>
                 <Button size={Button.sizes.small} isOutlined spacing="0" onClick={onClose} title="Cancel" />
-                <Button size={Button.sizes.small} spacing="0" onClick={handleCreate} title="Create" />
+                <Button size={Button.sizes.small} spacing="0" onClick={handleCreate} title="Add" />
             </ModalActions>
         </Modal>
     );
