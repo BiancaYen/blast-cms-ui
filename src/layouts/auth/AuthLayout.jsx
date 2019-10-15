@@ -6,13 +6,8 @@ import withDocumentTitle from '../../utils/withDocumentTitle';
 // Styles
 import {
     AuthWrapper,
-    FormWrapper,
-    GlyphBlur,
-    SideImageWrapper
+    FormWrapper
 } from './styles';
-
-// Icons
-import Glyph from '../../components/icons/Glyph';
 
 export default (ComposedComponent) => {
     const AuthLayout = (props) => {

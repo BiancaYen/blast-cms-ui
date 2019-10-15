@@ -9,8 +9,8 @@ import {
 } from './styles';
 
 // Components
-import Label from '../../components/label/Label';
-import Input from '../../components/input/Input';
+import Label from '../label/Label';
+import Input from '../input/Input';
 import Range from './Range';
 
 // Default Props

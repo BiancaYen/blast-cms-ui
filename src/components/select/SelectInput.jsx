@@ -9,7 +9,7 @@ import {
 } from './styles';
 
 // Components
-import HiddenContent from '../../components/hidden-content/HiddenContent';
+import HiddenContent from '../hidden-content/HiddenContent';
 
 // Default props
 const defaultProps = {
@@ -42,6 +42,7 @@ class SelectInput extends Component {
     };
 
     inputWrapperRef = React.createRef();
+
     scrollableWrapperRef = React.createRef();
 
     getNumTags = () => {

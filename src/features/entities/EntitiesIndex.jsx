@@ -10,8 +10,8 @@ import {
     Tabs
 } from '../../components';
 import Table from './table/Table';
-import BannerDeleteModal from '../banners-modals/BannerDeleteModal';
-import BannerActiveChangeModal from '../banners-modals/BannerActiveChangeModal';
+import EntitiesDeleteModal from './EntitiesDeleteModal';
+import EntittiesActiveChangeModal from './EntittiesActiveChangeModal';
 
 // Icons
 import ActivateIcon from '../../components/icons/ActivateIcon';
@@ -108,26 +108,26 @@ const EntitiesIndex = ({
                     />
                 </TabItem>
             </Tabs>
-            <BannerDeleteModal
+            <EntitiesDeleteModal
                 isSingle
                 isActive={modalIsActiveDelete}
                 onDelete={handleDelete}
                 onClose={closeModalDelete}
                 data={modalDataDelete}
             />
-            <BannerDeleteModal
+            <EntitiesDeleteModal
                 isActive={modalIsActiveDeleteBulk}
                 onDelete={handleDeleteBulk}
                 onClose={closeModalDeleteBulk}
                 data={modalDataDeleteBulk}
             />
-            <BannerActiveChangeModal
+            <EntittiesActiveChangeModal
                 isActive={modalIsActiveActivate}
                 data={modalDataActivate}
                 onDelete={handleActivate}
                 onClose={closeModalActivate}
             />
-            <BannerActiveChangeModal
+            <EntittiesActiveChangeModal
                 isActive={modalIsActiveDeactivate}
                 data={modalDataDeactivate}
                 type="deactivate"

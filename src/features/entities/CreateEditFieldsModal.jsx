@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch, connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 // Components
 import {
@@ -27,11 +27,6 @@ const mapStateToProps = ({ entities: { createEditFields } }) => {
         submit,
         validationSchema
     };
-};
-
-// Default props
-const defaultProps = {
-    data: {}
 };
 
 // Prop types
@@ -94,7 +89,6 @@ const DynamicDeleteModal = ({
     );
 };
 
-DynamicDeleteModal.defaultProps = defaultProps;
 DynamicDeleteModal.propTypes = propTypes;
 
 export default connect(mapStateToProps, null)(withForm(DynamicDeleteModal));
