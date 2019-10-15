@@ -37,22 +37,26 @@ const defaultProps = {
 // Prop types
 const propTypes = {
     isActive: PropTypes.bool.isRequired,
-    data: PropTypes.instanceOf(Object),
+    meta: PropTypes.instanceOf(Object).isRequired,
+    touched: PropTypes.instanceOf(Object).isRequired,
+    validation: PropTypes.instanceOf(Object).isRequired,
+    values: PropTypes.instanceOf(Object).isRequired,
+    onBlur: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired
+    onCreateFields: PropTypes.func.isRequired
 };
 
 const DynamicDeleteModal = ({
     isActive,
-    data,
+    meta,
     touched,
     validation,
     values,
     onBlur,
     onChange,
     onClose,
-    onCreateFields,
-    onSubmit
+    onCreateFields
 }) => {
     const handleCreate = () => {
         onCreateFields(values);
@@ -73,10 +77,7 @@ const DynamicDeleteModal = ({
                 />
                 <Select
                     id="dataTypeId"
-                    data={[
-                        { id: 1, name: 'String' },
-                        { id: 3, name: 'Long Text' }
-                    ]}
+                    data={meta.dataTypesIndex.data}
                     label="Data Type"
                     placeholder="Select Data Type"
                     onBlur={onBlur}

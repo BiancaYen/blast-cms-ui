@@ -5,14 +5,13 @@ const authRecoverPassword = 'auth.recoverPassword';
 const authResetPassword = 'auth.resetPassword';
 
 // Features
-const entitiesIndex = 'entities.index';
-const entitiesCreate = 'entities.create';
-const entitiesEdit = 'entities.edit';
-
-// Dynamic
+const dataTypesIndex = 'dataTypes.index';
 const dynamicIndex = 'dynamic.index';
 const dynamicCreate = 'dynamic.create';
 const dynamicEdit = 'dynamic.edit';
+const entitiesIndex = 'entities.index';
+const entitiesCreate = 'entities.create';
+const entitiesEdit = 'entities.edit';
 
 // User
 const user = 'user';
@@ -24,6 +23,7 @@ export {
     authRecoverPassword,
     authResetPassword,
     // Features
+    dataTypesIndex,
     entitiesIndex,
     entitiesCreate,
     entitiesEdit,

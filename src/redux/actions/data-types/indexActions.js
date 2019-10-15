@@ -1,10 +1,10 @@
 import { createAction } from 'redux-actions';
 
 import actionTypes from '../actionTypes';
-import { settingsIndex as reducerName } from '../../reducers/reducerNames';
+import { dataTypesIndex as reducerName } from '../../reducers/reducerNames';
 
 // Api
-import { EntitiesApi } from '../../../api';
+import { DataTypesApi } from '../../../api';
 
 // Action Types
 const types = actionTypes(reducerName);
@@ -13,33 +13,21 @@ const getFailed = createAction(types.getFailed);
 const getLoading = createAction(types.getLoading);
 const getSuccess = createAction(types.getSuccess);
 
-
 const getIndex = () => (dispatch) => {
     dispatch({
-        callApiClient: () => EntitiesApi.getIndex(),
+        callApiClient: () => DataTypesApi.getIndex(),
         reducerName,
         requestType: 'get',
         dispatchFromPayload: data => ({
             data: data.map(({
                 id,
                 attributes: {
-                    name = ''
-                } = {},
-                data_types: dataTypes
+                    name = '',
+                    component = ''
+                } = {}
             }) => ({
                 id,
-                name,
-                dataTypes: dataTypes.map(({
-                    attributes: {
-                        component = 'Input'
-                    },
-                    pivot_attributes: {
-                        column_name: columnName
-                    }
-                }) => ({
-                    component,
-                    columnName
-                }))
+                name: `${name} (${component})`
             }))
         })
     });

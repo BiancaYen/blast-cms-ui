@@ -29,6 +29,7 @@ import useModal from '../../utils/useModal';
 
 // Prop types
 const propTypes = {
+    meta: PropTypes.instanceOf(Object).isRequired,
     touched: PropTypes.instanceOf(Object).isRequired,
     validation: PropTypes.instanceOf(Object).isRequired,
     values: PropTypes.instanceOf(Object).isRequired,
@@ -36,6 +37,7 @@ const propTypes = {
     onChange: PropTypes.func.isRequired
 };
 const CreateEditForm = ({
+    meta,
     touched,
     validation,
     values,
@@ -124,6 +126,7 @@ const CreateEditForm = ({
             <CreateEditFieldsModal
                 data={modalDataCreateField}
                 isActive={modalIsActiveCreateField}
+                meta={meta}
                 onChange={onChange}
                 onClose={closeModalCreateField}
                 onCreateFields={handleFieldsCreate}

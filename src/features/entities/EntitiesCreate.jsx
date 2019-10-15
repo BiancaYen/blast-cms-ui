@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 
 // Actions
+import { getIndex } from '../../redux/actions/data-types/indexActions';
 import { postCreate } from '../../redux/actions/entities/createActions';
 
 // Components
@@ -19,11 +20,12 @@ import CreateEditForm from './CreateEditForm';
 import withForm from '../../utils/withForm';
 
 // Aplication State
-const mapStateToProps = ({ entities: { create } }) => {
+const mapStateToProps = ({ dataTypes: { index: dataTypesIndex }, entities: { create } }) => {
     const { data, submit, validationSchema } = create;
 
     return {
         data,
+        dataTypesIndex,
         submit,
         validationSchema
     };
@@ -37,6 +39,10 @@ const defaultProps = {
 
 // Prop types
 const propTypes = {
+    dataTypesIndex: PropTypes.shape({
+        data: PropTypes.instanceOf(Array).isRequired,
+        loading: PropTypes.bool.isRequired
+    }).isRequired,
     history: PropTypes.instanceOf(Object).isRequired,
     submit: PropTypes.bool,
     touched: PropTypes.instanceOf(Object).isRequired,
@@ -51,8 +57,8 @@ const propTypes = {
     onSubmit: PropTypes.func.isRequired
 };
 
-
 const EntitiesCreate = ({
+    dataTypesIndex,
     history,
     submit,
     touched,
@@ -76,6 +82,12 @@ const EntitiesCreate = ({
         history.push('/entities');
     };
 
+    useEffect(() => {
+        if (!dataTypesIndex.data.length) {
+            dispatch(getIndex());
+        }
+    }, []);
+
     return (
         <React.Fragment>
             <Breadcrumb
@@ -84,6 +96,9 @@ const EntitiesCreate = ({
                 title="Create new entity"
             />
             <CreateEditForm
+                meta={{
+                    dataTypesIndex
+                }}
                 touched={touched}
                 validation={validation}
                 values={values}

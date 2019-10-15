@@ -6,16 +6,18 @@ import { notificationReducer } from 'hyvejs-features';
 import auth from './auth';
 
 // Features
-import entities from './entities';
+import dataTypes from './data-types'
 import dynamic from './dynamic';
+import entities from './entities';
 
 // User
 import user from './user';
 
 const reducer = combineReducers({
     auth,
-    entities,
+    dataTypes,
     dynamic,
+    entities,
     notificationReducer,
     user
 });
