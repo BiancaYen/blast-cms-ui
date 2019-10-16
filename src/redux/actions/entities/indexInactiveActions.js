@@ -49,26 +49,11 @@ const getIndex = () => (dispatch) => {
     });
 };
 
-const postDelete = ({ id, modelName }) => (dispatch) => {
+const postActivate = ({ id, modelName }) => (dispatch) => {
     dispatch({
-        callApiClient: () => EntitiesApi.postDelete(id),
+        callApiClient: () => EntitiesApi.postActivate(id),
         reducerName,
-        requestType: 'delete',
-        dispatchFromPayload: () => {
-            dispatch(getIndex());
-
-            return {
-                notificationDetail: `"${modelName || 'The Entity'}"`
-            };
-        }
-    });
-};
-
-const postDeactivate = ({ id, modelName }) => (dispatch) => {
-    dispatch({
-        callApiClient: () => EntitiesApi.postDeactivate(id),
-        reducerName,
-        requestType: 'deactivate',
+        requestType: 'activate',
         dispatchFromPayload: () => {
             dispatch(getIndex());
 
@@ -89,6 +74,5 @@ export {
     postSuccess,
     // Action
     getIndex,
-    postDeactivate,
-    postDelete
+    postActivate
 };

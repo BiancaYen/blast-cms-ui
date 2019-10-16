@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 
 // Actions
-import { postDelete } from '../../redux/actions/entities/indexActions';
+import { postDeactivate, postDelete } from '../../redux/actions/entities/indexActions';
+import { postActivate } from '../../redux/actions/entities/indexInactiveActions';
 
 // Components
 import {
@@ -56,31 +57,30 @@ const EntitiesIndex = ({
 
     const getActiveTableActions = ({ id, modelName }) => ([
         ['Edit', () => history.push(`/entities/${id}`), <EditIcon />],
-        ['Deactivate', () => actions.deactivateBanner({ id, modelName }), <DeactivateIcon />],
+        ['Deactivate', () => dispatch(postDeactivate({ id, modelName })), <DeactivateIcon />],
         ['Delete', () => openModalDelete({ id, modelName }), <DeleteIcon />]
     ]);
 
     const getInactiveTableActions = ({ id, modelName }) => ([
         ['Edit', () => history.push(`/entities/${id}`), <EditIcon />],
-        ['Activate', () => actions.activateBanner({ id, modelName }), <ActivateIcon />],
+        ['Activate', () => dispatch(postActivate({ id, modelName })), <ActivateIcon />],
         ['Delete', () => openModalDelete({ id, modelName }), <DeleteIcon />]
     ]);
 
-    const handleDeleteBulk = (bannersId) => {
-        dispatch(postDelete(bannersId));
-        actions.deleteBanners(bannersId);
+    const handleDeleteBulk = (ids) => {
+        console.log(ids);
     };
 
     const handleDelete = (data) => {
         dispatch(postDelete(data));
     };
 
-    const handleActivate = (bannersId) => {
-        actions.activateBanners(bannersId);
+    const handleActivateBulk = (ids) => {
+        console.log(ids);
     };
 
-    const handleDeactivate = (bannersId) => {
-        actions.deactivateBanners(bannersId);
+    const handleDeactivateBulk = (ids) => {
+        console.log(ids);
     };
 
     const handleCreateRedirect = () => history.push('/entities/create');
@@ -132,14 +132,14 @@ const EntitiesIndex = ({
             <EntittiesActiveChangeModal
                 isActive={modalIsActiveActivate}
                 data={modalDataActivate}
-                onDelete={handleActivate}
+                onDelete={handleActivateBulk}
                 onClose={closeModalActivate}
             />
             <EntittiesActiveChangeModal
                 isActive={modalIsActiveDeactivate}
                 data={modalDataDeactivate}
                 type="deactivate"
-                onDelete={handleDeactivate}
+                onDelete={handleDeactivateBulk}
                 onClose={closeModalDeactivate}
             />
         </React.Fragment>
