@@ -5,7 +5,8 @@ import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 
 // Actions
-import { getIndex } from '../../redux/actions/data-types/indexActions';
+import { getIndex as dataTypesGetIndex } from '../../redux/actions/data-types/indexActions';
+import { getIndex as relationshipTypesGetIndex } from '../../redux/actions/relationship-types/indexActions';
 import { postCreate } from '../../redux/actions/entities/createActions';
 
 // Components
@@ -41,6 +42,9 @@ const EntitiesCreate = ({ history }) => {
                 submit,
                 validationSchema
             }
+        },
+        relationshipTypes: {
+            index: relationshipTypesIndex
         }
     } = useSelector(state => state);
 
@@ -69,7 +73,10 @@ const EntitiesCreate = ({ history }) => {
 
     useEffect(() => {
         if (!dataTypesIndex.data.length) {
-            dispatch(getIndex());
+            dispatch(dataTypesGetIndex());
+        }
+        if (!relationshipTypesIndex.data.length) {
+            dispatch(relationshipTypesGetIndex());
         }
     }, []);
 
@@ -83,7 +90,8 @@ const EntitiesCreate = ({ history }) => {
             <CreateEditForm
                 meta={{
                     dataTypesIndex,
-                    entitiesIndex
+                    entitiesIndex,
+                    relationshipTypesIndex
                 }}
                 touched={touched}
                 validation={validation}

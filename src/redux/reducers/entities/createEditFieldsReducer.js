@@ -3,7 +3,6 @@
 // State used by: EntitiesCreate
 
 import { handleActions } from 'redux-actions';
-import Joi from 'joi';
 
 // Actions
 import * as actions from '../../actions/entities/createActions';
@@ -19,15 +18,15 @@ const initialData = {
     dataTypeId: [],
     isNullable: false,
     name: '',
-    relationshipId: ''
+    relationshipId: '',
+    relationshipTypeId: ''
 };
 
 // Initial State
 const initialState = {
     data: initialData,
     submit: false,
-    validationSchema: {
-    }
+    validationSchema: {}
 };
 
 const fieldsReducer = handleActions(

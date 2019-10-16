@@ -2,8 +2,8 @@ import { combineReducers } from 'redux';
 
 import index from './indexReducer';
 
-const dataTypes = combineReducers({
+const relationshipTypes = combineReducers({
     index
 });
 
-export default dataTypes;
+export default relationshipTypes;

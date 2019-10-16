@@ -6,9 +6,10 @@ import { notificationReducer } from 'hyvejs-features';
 import auth from './auth';
 
 // Features
-import dataTypes from './data-types'
+import dataTypes from './data-types';
 import dynamic from './dynamic';
 import entities from './entities';
+import relationshipTypes from './relationship-types';
 
 // User
 import user from './user';
@@ -19,6 +20,7 @@ const reducer = combineReducers({
     dynamic,
     entities,
     notificationReducer,
+    relationshipTypes,
     user
 });
 

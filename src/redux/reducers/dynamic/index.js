@@ -4,10 +4,10 @@ import create from './createReducer';
 import edit from './editReducer';
 import index from './indexReducer';
 
-const settings = combineReducers({
+const dynamic = combineReducers({
     create,
     edit,
     index
 });
 
-export default settings;
+export default dynamic;

@@ -45,7 +45,7 @@ const propTypes = {
     onCreateFields: PropTypes.func.isRequired
 };
 
-const DynamicDeleteModal = ({
+const CreateEditFieldsModal = ({
     isActive,
     isValid,
     meta,
@@ -80,6 +80,7 @@ const DynamicDeleteModal = ({
                             <Fragment>
                                 <Select
                                     id="relationshipId"
+                                    key="relationshipId"
                                     data={meta.entitiesIndex.data}
                                     dataDisplayKey="tableName"
                                     label="Relationship"
@@ -88,6 +89,17 @@ const DynamicDeleteModal = ({
                                     onChange={onChange}
                                     validation={touched.relationshipId && validation.relationshipId}
                                     value={values.relationshipId}
+                                />
+                                <Select
+                                    id="relationshipTypeId"
+                                    key="relationshipTypeId"
+                                    data={meta.relationshipTypesIndex.data}
+                                    label="Relationship Type"
+                                    placeholder="Select Relationship Type"
+                                    onBlur={onBlur}
+                                    onChange={onChange}
+                                    validation={touched.relationshipTypeId && validation.relationshipTypeId}
+                                    value={values.relationshipTypeId}
                                 />
                             </Fragment>
                         )
@@ -143,6 +155,6 @@ const DynamicDeleteModal = ({
     );
 };
 
-DynamicDeleteModal.propTypes = propTypes;
+CreateEditFieldsModal.propTypes = propTypes;
 
-export default connect(mapStateToProps, null)(withForm(DynamicDeleteModal));
+export default connect(mapStateToProps, null)(withForm(CreateEditFieldsModal));

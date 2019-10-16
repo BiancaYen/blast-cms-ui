@@ -6,12 +6,15 @@ const authResetPassword = 'auth.resetPassword';
 
 // Features
 const dataTypesIndex = 'dataTypes.index';
-const dynamicIndex = 'dynamic.index';
-const dynamicCreate = 'dynamic.create';
-const dynamicEdit = 'dynamic.edit';
 const entitiesIndex = 'entities.index';
 const entitiesCreate = 'entities.create';
 const entitiesEdit = 'entities.edit';
+const relationshipTypesIndex = 'relationshipTypes.index';
+
+// Dynamic
+const dynamicIndex = 'dynamic.index';
+const dynamicCreate = 'dynamic.create';
+const dynamicEdit = 'dynamic.edit';
 
 // User
 const user = 'user';
@@ -27,6 +30,7 @@ export {
     entitiesIndex,
     entitiesCreate,
     entitiesEdit,
+    relationshipTypesIndex,
     // Dynamic
     dynamicIndex,
     dynamicCreate,
