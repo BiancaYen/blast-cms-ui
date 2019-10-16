@@ -25,10 +25,6 @@ const defaultProps = {
 
 // Prop types
 const propTypes = {
-    dataTypesIndex: PropTypes.shape({
-        data: PropTypes.instanceOf(Array).isRequired,
-        loading: PropTypes.bool.isRequired
-    }).isRequired,
     history: PropTypes.instanceOf(Object).isRequired
 };
 
@@ -39,6 +35,7 @@ const EntitiesCreate = ({ history }) => {
             index: dataTypesIndex
         },
         entities: {
+            index: entitiesIndex,
             create: {
                 data,
                 submit,
@@ -85,7 +82,8 @@ const EntitiesCreate = ({ history }) => {
             />
             <CreateEditForm
                 meta={{
-                    dataTypesIndex
+                    dataTypesIndex,
+                    entitiesIndex
                 }}
                 touched={touched}
                 validation={validation}

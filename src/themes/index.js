@@ -174,18 +174,6 @@ const theme = {
     linearLoader: {
         color: variables.primaryColor
     },
-    tabs: {
-        borderColor: variables.primaryGreyTint6,
-        colorActive: variables.primaryColor,
-        colorHover: variables.primaryGreyDark,
-        borderActive: variables.primaryColor,
-        color: variables.primaryGreyTint3,
-        actionBackground: 'transparent',
-        actionColor: variables.primaryColor,
-        actionDividerColor: variables.primaryGreyTint4,
-        actionColorHover: variables.primaryColorShade1,
-        actionIconColor: variables.primaryColor
-    },
     modal: {
         actionDivider: variables.primaryGreyTint4,
         background: variables.white,
@@ -266,6 +254,18 @@ const theme = {
         color: variables.secondaryGreyTint1,
         colorAccent: variables.primaryColor
     },
+    tabs: {
+        borderColor: variables.primaryGreyTint6,
+        colorActive: variables.primaryColor,
+        colorHover: variables.primaryGreyDark,
+        borderActive: variables.primaryColor,
+        color: variables.primaryGreyTint3,
+        actionBackground: 'transparent',
+        actionColor: variables.primaryColor,
+        actionDividerColor: variables.primaryGreyTint4,
+        actionColorHover: variables.primaryColorShade1,
+        actionIconColor: variables.primaryColor
+    },
     table: {
         background: variables.white,
         borderColor: variables.primaryGreyTint6,
@@ -296,7 +296,7 @@ const theme = {
         itemColorHover: variables.primaryColor,
         itemIconColor: variables.primaryGreyDark,
         menuBackground: variables.white,
-        menuBorderColor: variables.primaryGreyTint6,
+        menuBorderColor: variables.primaryGreyTint6
     },
     tablePagination: {
         buttonBackground: variables.white,
@@ -323,6 +323,13 @@ const theme = {
         placeholderDisabled: variables.primaryGreyTint5,
         displayButton: variables.primaryColor,
         displayButtonDisabled: variables.primaryColorTint1
+    },
+    toggle: {
+        background: variables.primaryGreyTint3,
+        backgroundActive: variables.primaryColor,
+        backgroundActiveDisabled: variables.primaryColorTint1,
+        backgroundDisabled: variables.primaryGreyTint5,
+        handleColor: variables.white
     },
     validationError: {
         color: variables.errorColor

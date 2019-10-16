@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -10,7 +10,8 @@ import {
     ModalContent,
     ModalActions,
     Modal,
-    Select
+    Select,
+    Toggle
 } from '../../components';
 
 // Icons
@@ -56,6 +57,8 @@ const DynamicDeleteModal = ({
     onClose,
     onCreateFields
 }) => {
+    const [isRelationship, setIsRelationship] = useState(false);
+
     const handleCreate = () => {
         onCreateFields(values);
         onClose();
@@ -64,32 +67,61 @@ const DynamicDeleteModal = ({
     return (
         <Modal isActive={isActive} onCloseClick={onClose}>
             <ModalContent title="Create Field" icon={<CreateIcon width="27" height="27" />}>
-                <Input
-                    id="name"
-                    label="Name"
-                    placeholder="Type Name"
+                <Toggle
+                    id="isRelationship"
+                    label="Relationship / Foreign Key"
                     onBlur={onBlur}
-                    onChange={onChange}
-                    validation={touched.name && validation.name}
-                    value={values.name}
+                    onChange={() => setIsRelationship(!isRelationship)}
+                    value={isRelationship}
                 />
-                <Select
-                    id="dataTypeId"
-                    data={meta.dataTypesIndex.data}
-                    label="Data Type"
-                    placeholder="Select Data Type"
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    validation={touched.dataTypeId && validation.dataTypeId}
-                    value={values.dataTypeId}
-                />
-                <Checkbox
-                    id="isNullable"
-                    label="Is Nullable"
-                    onChange={onChange}
-                    value={values.isNullable}
-                    spacing="16px 0 0"
-                />
+                {
+                    isRelationship
+                        ? (
+                            <Fragment>
+                                <Select
+                                    id="relationshipId"
+                                    data={meta.entitiesIndex.data}
+                                    dataDisplayKey="tableName"
+                                    label="Relationship"
+                                    placeholder="Select Entity"
+                                    onBlur={onBlur}
+                                    onChange={onChange}
+                                    validation={touched.relationshipId && validation.relationshipId}
+                                    value={values.relationshipId}
+                                />
+                            </Fragment>
+                        )
+                        : (
+                            <Fragment>
+                                <Input
+                                    id="name"
+                                    label="Name"
+                                    placeholder="Type Name"
+                                    onBlur={onBlur}
+                                    onChange={onChange}
+                                    validation={touched.name && validation.name}
+                                    value={values.name}
+                                />
+                                <Select
+                                    id="dataTypeId"
+                                    data={meta.dataTypesIndex.data}
+                                    label="Data Type"
+                                    placeholder="Select Data Type"
+                                    onBlur={onBlur}
+                                    onChange={onChange}
+                                    validation={touched.dataTypeId && validation.dataTypeId}
+                                    value={values.dataTypeId}
+                                />
+                                <Checkbox
+                                    id="isNullable"
+                                    label="Is Nullable"
+                                    onChange={onChange}
+                                    value={values.isNullable}
+                                    spacing="16px 0 0"
+                                />
+                            </Fragment>
+                        )
+                }
             </ModalContent>
             <ModalActions>
                 <Button

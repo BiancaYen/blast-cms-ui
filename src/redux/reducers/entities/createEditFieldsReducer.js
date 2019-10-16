@@ -18,7 +18,8 @@ import {
 const initialData = {
     dataTypeId: [],
     isNullable: false,
-    name: ''
+    name: '',
+    relationshipId: ''
 };
 
 // Initial State
@@ -26,9 +27,6 @@ const initialState = {
     data: initialData,
     submit: false,
     validationSchema: {
-        dataTypeId: Joi.number().required().label('Data Type Id'),
-        isNullable: Joi.bool().required().label('Is Nullable'),
-        name: Joi.string().required().label('Name')
     }
 };
 

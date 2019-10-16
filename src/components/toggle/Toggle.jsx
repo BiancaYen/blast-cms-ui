@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import Label from '../../components/label/Label';
+import Label from '../label/Label';
 
 // Styles
 import ToggleWrapper from './styles';
@@ -58,15 +58,17 @@ const Toggle = ({
                 onChange={handleChange}
             />
             <span />
-            { label &&
-                <Label
-                    isDisabled={isDisabled}
-                    id={id}
-                    labelNote={labelNote}
-                    spacing="0 0 0 11px"
-                >
-                    {label}
-                </Label>
+            { label
+                && (
+                    <Label
+                        isDisabled={isDisabled}
+                        id={id}
+                        labelNote={labelNote}
+                        spacing="0 0 0 11px"
+                    >
+                        {label}
+                    </Label>
+                )
             }
         </ToggleWrapper>
     );

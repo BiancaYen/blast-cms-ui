@@ -21,11 +21,6 @@ const ToggleWrapper = styled.label`
     cursor: ${({ isDisabled }) => (isDisabled ? 'normal' : 'pointer')};
     margin: ${({ spacing }) => spacing || '0'};
     
-    // Label
-    & > div span {
-        text-transform: capitalize;
-    }
-    
     [class*="LabelMain"] {
         padding-bottom: 0;
     }
