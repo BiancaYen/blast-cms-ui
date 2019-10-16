@@ -23,12 +23,14 @@ const getIndex = () => (dispatch) => {
             data: data.map(({
                 id,
                 attributes: {
-                    name = ''
+                    model_name: modelName,
+                    table_name: tableName = ''
                 } = {},
                 data_types: dataTypes
             }) => ({
                 id,
-                name,
+                modelName,
+                tableName,
                 dataTypes: dataTypes.map(({
                     attributes: {
                         component = 'Input'

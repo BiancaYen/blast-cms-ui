@@ -21,7 +21,6 @@ const postSuccess = createAction(types.postSuccess);
 
 const postCreate = ({ data, setFormErrors }) => (dispatch) => {
     const {
-        name,
         fields,
         tableName
     } = data;
@@ -37,7 +36,6 @@ const postCreate = ({ data, setFormErrors }) => (dispatch) => {
 
     dispatch({
         callApiClient: () => EntitiesApi.postCreate({
-            name,
             fields: formattedFields,
             table_name: tableName
         }),

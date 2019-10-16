@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -17,24 +17,10 @@ import {
 import CreateEditForm from './CreateEditForm';
 
 // HOC
-import withForm from '../../utils/withForm';
-
-// Aplication State
-const mapStateToProps = ({ dataTypes: { index: dataTypesIndex }, entities: { create } }) => {
-    const { data, submit, validationSchema } = create;
-
-    return {
-        data,
-        dataTypesIndex,
-        submit,
-        validationSchema
-    };
-};
+import useForm from '../../utils/useForm';
 
 // Default props
 const defaultProps = {
-    submit: false,
-    isValid: false
 };
 
 // Prop types
@@ -43,33 +29,35 @@ const propTypes = {
         data: PropTypes.instanceOf(Array).isRequired,
         loading: PropTypes.bool.isRequired
     }).isRequired,
-    history: PropTypes.instanceOf(Object).isRequired,
-    submit: PropTypes.bool,
-    touched: PropTypes.instanceOf(Object).isRequired,
-    isValid: PropTypes.bool,
-    validation: PropTypes.instanceOf(Object).isRequired,
-    values: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        fields: PropTypes.instanceOf(Array).isRequired
-    }).isRequired,
-    onBlur: PropTypes.func.isRequired,
-    onChange: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired
+    history: PropTypes.instanceOf(Object).isRequired
 };
 
-const EntitiesCreate = ({
-    dataTypesIndex,
-    history,
-    submit,
-    touched,
-    isValid,
-    validation,
-    values,
-    onBlur,
-    onChange,
-    onSubmit
-}) => {
+const EntitiesCreate = ({ history }) => {
+    // Application State
+    const {
+        dataTypes: {
+            index: dataTypesIndex
+        },
+        entities: {
+            create: {
+                data,
+                submit,
+                validationSchema
+            }
+        }
+    } = useSelector(state => state);
+
     const dispatch = useDispatch();
+
+    const {
+        touched,
+        isValid,
+        validation,
+        values,
+        onBlur,
+        onChange,
+        onSubmit
+    } = useForm(data, validationSchema);
 
     const handleSubmit = (formValues, setFormErrors) => {
         dispatch(postCreate({
@@ -113,8 +101,8 @@ const EntitiesCreate = ({
                     onClick={handleCancel}
                 />
                 <Button
-                    disabled={!isValid}
-                    loading={submit}
+                    isDisabled={!isValid}
+                    isLoading={submit}
                     title="Create"
                     onClick={onSubmit(handleSubmit)}
                 />
@@ -126,4 +114,4 @@ const EntitiesCreate = ({
 EntitiesCreate.defaultProps = defaultProps;
 EntitiesCreate.propTypes = propTypes;
 
-export default connect(mapStateToProps, null)(withRouter(withForm(EntitiesCreate)));
+export default withRouter(EntitiesCreate);

@@ -61,16 +61,6 @@ const CreateEditForm = ({
             <FormSection title="General" withoutBorder>
                 <Grid alignItems="start" grid={Grid.grid.twoColumns}>
                     <Input
-                        id="name"
-                        label="Name"
-                        labelNote="(Model Name)"
-                        placeholder="Type Name"
-                        onBlur={onBlur}
-                        onChange={onChange}
-                        validation={touched.name && validation.name}
-                        value={values.name}
-                    />
-                    <Input
                         id="tableName"
                         label="Table"
                         labelNote="(Best practice recommends plural)"

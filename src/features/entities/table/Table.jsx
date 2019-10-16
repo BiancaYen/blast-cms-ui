@@ -10,8 +10,6 @@ import {
     TableAction,
     TableBody,
     TableCell,
-    TableCellBannerImage,
-    TableCellVertical,
     TableHead,
     TableHeadCell,
     TableHeadCellSort,
@@ -20,9 +18,6 @@ import {
 
 // Styles
 import TableWrapper from './styles';
-
-// Icons
-import HeroBannerPlaceholder from '../../../components/icons/HeroBannerPlaceholder';
 
 // Default props
 const defaultProps = {
@@ -141,7 +136,8 @@ class EntitiesTable extends Component {
                             />
                         </TableHeadCell>
                         <TableHeadCellSort sortKey="id" isIdCell>Id</TableHeadCellSort>
-                        <TableHeadCellSort sortKey="name">Name</TableHeadCellSort>
+                        <TableHeadCellSort sortKey="name">Model Name</TableHeadCellSort>
+                        <TableHeadCellSort sortKey="name">Table Name</TableHeadCellSort>
                         <TableHeadCell isActionCell>Actions</TableHeadCell>
                     </TableHead>
                     <TableBody>
@@ -149,7 +145,8 @@ class EntitiesTable extends Component {
                             rowData => rowData.map((row) => {
                                 const {
                                     id,
-                                    name
+                                    modelName,
+                                    tableName
                                 } = row;
 
                                 this.list.add(id);
@@ -164,7 +161,8 @@ class EntitiesTable extends Component {
                                             />
                                         </TableCell>
                                         <TableCell isIdCell>{id}</TableCell>
-                                        <TableCell>{name}</TableCell>
+                                        <TableCell>{modelName}</TableCell>
+                                        <TableCell>{tableName}</TableCell>
                                         <TableAction actions={rowActions(row) || []} />
                                     </TableRow>
                                 );

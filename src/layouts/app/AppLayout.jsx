@@ -47,11 +47,11 @@ export default (ComposedComponent) => {
                         icon={<SettingsIcon />}
                     />
                     {
-                        entitiesIndex.data.map(({ id, name }) => (
+                        entitiesIndex.data.map(({ id, tableName }) => (
                             <NavigationLink
                                 key={id}
-                                label={name}
-                                route={`/${name}`}
+                                label={tableName}
+                                route={`/${tableName}`}
                                 icon={<SettingsIcon />}
                             />
                         ))
