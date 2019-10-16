@@ -12,7 +12,9 @@ const types = actionTypes(reducerName);
 const getFailed = createAction(types.getFailed);
 const getLoading = createAction(types.getLoading);
 const getSuccess = createAction(types.getSuccess);
-
+const postFailed = createAction(types.postFailed);
+const postSubmitting = createAction(types.postSubmitting);
+const postSuccess = createAction(types.postSuccess);
 
 const getIndex = () => (dispatch) => {
     dispatch({
@@ -47,11 +49,30 @@ const getIndex = () => (dispatch) => {
     });
 };
 
+const postDelete = ({ id, modelName }) => (dispatch) => {
+    dispatch({
+        callApiClient: () => EntitiesApi.postDelete(id),
+        reducerName,
+        requestType: 'delete',
+        dispatchFromPayload: () => {
+            dispatch(getIndex());
+
+            return {
+                notificationDetail: `"${modelName || 'The Entity'}"`
+            };
+        }
+    });
+};
+
 export {
     // Action Types
     getFailed,
     getLoading,
     getSuccess,
+    postFailed,
+    postSubmitting,
+    postSuccess,
     // Action
-    getIndex
+    getIndex,
+    postDelete
 };

@@ -1,7 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
+
+// Actions
+import { postDelete } from '../../redux/actions/entities/indexActions';
 
 // Components
 import {
@@ -44,29 +47,32 @@ const EntitiesIndex = ({
     // Application State
     const { index } = useSelector(state => state.entities);
 
+    const dispatch = useDispatch();
+
     const [modalIsActiveDelete, modalDataDelete, openModalDelete, closeModalDelete] = useModal({});
     const [modalIsActiveDeleteBulk, modalDataDeleteBulk, openModalDeleteBulk, closeModalDeleteBulk] = useModal({});
     const [modalIsActiveActivate, modalDataActivate, openModalActivate, closeModalActivate] = useModal([]);
     const [modalIsActiveDeactivate, modalDataDeactivate, openModalDeactivate, closeModalDeactivate] = useModal([]);
 
-    const getActiveTableActions = ({ id, name }) => ([
+    const getActiveTableActions = ({ id, modelName }) => ([
         ['Edit', () => history.push(`/entities/${id}`), <EditIcon />],
-        ['Deactivate', () => actions.deactivateBanner({ id, name }), <DeactivateIcon />],
-        ['Delete', () => openModalDelete({ id, name }), <DeleteIcon />]
+        ['Deactivate', () => actions.deactivateBanner({ id, modelName }), <DeactivateIcon />],
+        ['Delete', () => openModalDelete({ id, modelName }), <DeleteIcon />]
     ]);
 
-    const getInactiveTableActions = ({ id, name }) => ([
+    const getInactiveTableActions = ({ id, modelName }) => ([
         ['Edit', () => history.push(`/entities/${id}`), <EditIcon />],
-        ['Activate', () => actions.activateBanner({ id, name }), <ActivateIcon />],
-        ['Delete', () => openModalDelete({ id, name }), <DeleteIcon />]
+        ['Activate', () => actions.activateBanner({ id, modelName }), <ActivateIcon />],
+        ['Delete', () => openModalDelete({ id, modelName }), <DeleteIcon />]
     ]);
 
     const handleDeleteBulk = (bannersId) => {
+        dispatch(postDelete(bannersId));
         actions.deleteBanners(bannersId);
     };
 
     const handleDelete = (data) => {
-        actions.deleteBanner(data);
+        dispatch(postDelete(data));
     };
 
     const handleActivate = (bannersId) => {
@@ -109,17 +115,19 @@ const EntitiesIndex = ({
                 </TabItem>
             </Tabs>
             <EntitiesDeleteModal
-                isSingle
-                isActive={modalIsActiveDelete}
-                onDelete={handleDelete}
-                onClose={closeModalDelete}
                 data={modalDataDelete}
+                isActive={modalIsActiveDelete}
+                isSingle
+                isSubmitting={index.submit}
+                onClose={closeModalDelete}
+                onDelete={handleDelete}
             />
             <EntitiesDeleteModal
-                isActive={modalIsActiveDeleteBulk}
-                onDelete={handleDeleteBulk}
-                onClose={closeModalDeleteBulk}
                 data={modalDataDeleteBulk}
+                isActive={modalIsActiveDeleteBulk}
+                isSubmitting={index.submit}
+                onClose={closeModalDeleteBulk}
+                onDelete={handleDeleteBulk}
             />
             <EntittiesActiveChangeModal
                 isActive={modalIsActiveActivate}
