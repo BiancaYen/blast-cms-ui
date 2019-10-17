@@ -38,11 +38,13 @@ const getIndex = () => (dispatch) => {
                         component = 'Input'
                     },
                     pivot_attributes: {
-                        column_name: columnName
+                        column_name: columnName,
+                        label
                     }
                 }) => ({
                     component,
-                    columnName
+                    columnName,
+                    label
                 }))
             }))
         })
