@@ -42,7 +42,8 @@ const propTypes = {
     onBlur: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
-    onCreateFields: PropTypes.func.isRequired
+    onCreateFields: PropTypes.func.isRequired,
+    onFormReset: PropTypes.func.isRequired
 };
 
 const CreateEditFieldsModal = ({
@@ -55,13 +56,20 @@ const CreateEditFieldsModal = ({
     onBlur,
     onChange,
     onClose,
-    onCreateFields
+    onCreateFields,
+    onFormReset
 }) => {
     const [isRelationship, setIsRelationship] = useState(false);
 
     const handleCreate = () => {
         onCreateFields(values);
+        onFormReset();
         onClose();
+    };
+
+    const handleToggleForm = () => {
+        setIsRelationship(!isRelationship);
+        onFormReset();
     };
 
     return (
@@ -71,7 +79,7 @@ const CreateEditFieldsModal = ({
                     id="isRelationship"
                     label="Relationship / Foreign Key"
                     onBlur={onBlur}
-                    onChange={() => setIsRelationship(!isRelationship)}
+                    onChange={handleToggleForm}
                     value={isRelationship}
                 />
                 {
@@ -79,16 +87,16 @@ const CreateEditFieldsModal = ({
                         ? (
                             <Fragment>
                                 <Select
-                                    id="relationshipId"
-                                    key="relationshipId"
+                                    id="relationshipEntityId"
+                                    key="relationshipEntityId"
                                     data={meta.entitiesIndex.data}
                                     dataDisplayKey="tableName"
                                     label="Relationship Entity"
                                     placeholder="Select Relationship Entity"
                                     onBlur={onBlur}
                                     onChange={onChange}
-                                    validation={touched.relationshipId && validation.relationshipId}
-                                    value={values.relationshipId}
+                                    validation={touched.relationshipEntityId && validation.relationshipEntityId}
+                                    value={values.relationshipEntityId}
                                 />
                                 <Select
                                     id="relationshipTypeId"

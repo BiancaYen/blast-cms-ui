@@ -25,7 +25,7 @@ const postCreate = ({ data, setFormErrors }) => (dispatch) => {
         tableName
     } = data;
 
-    const formattedFields = fields.map(({ name: fieldName, dataTypeId, isNullable }) => {
+    const formattedFields = fields.filter(field => field.name).map(({ name: fieldName, dataTypeId, isNullable }) => {
         const formattedField = {
             data_type_id: dataTypeId,
             is_nullable: isNullable,
@@ -34,9 +34,18 @@ const postCreate = ({ data, setFormErrors }) => (dispatch) => {
         return JSON.stringify(formattedField);
     });
 
+    const formattedRelationships = fields.filter(field => !field.name).map(({ relationshipEntityId, relationshipTypeId }) => {
+        const formattedRelationship = {
+            relationship_entity_id: relationshipEntityId,
+            relationship_type_id: relationshipTypeId
+        };
+        return JSON.stringify(formattedRelationship);
+    });
+
     dispatch({
         callApiClient: () => EntitiesApi.postCreate({
             fields: formattedFields,
+            relationships: formattedRelationships,
             table_name: tableName
         }),
         reducerName,
@@ -47,7 +56,7 @@ const postCreate = ({ data, setFormErrors }) => (dispatch) => {
 
             browserHistory.push('/entities');
             return {
-                notificationDetail: `${data.name || data.title || 'The Entity'}`
+                notificationDetail: `The "${data.modelName || 'Entity'}"`
             };
         }
     });

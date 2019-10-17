@@ -15,7 +15,7 @@ import {
 
 // Initial Data
 const initialData = {
-    dataTypeId: [],
+    dataTypeId: '',
     isNullable: false,
     name: '',
     relationshipId: '',

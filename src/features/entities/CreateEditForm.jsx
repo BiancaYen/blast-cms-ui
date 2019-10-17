@@ -1,4 +1,5 @@
 import React from 'react';
+import pluralize from 'pluralize';
 import PropTypes from 'prop-types';
 
 // Components
@@ -51,9 +52,22 @@ const CreateEditForm = ({
         });
     };
 
-    const getDataTypeName = (dataTypeId) => {
-        const { name = '' } = meta.dataTypesIndex.data.find(dataType => dataType.id === dataTypeId);
-        return name;
+    const getDataTypeName = (dataTypeId, relationshipTypeId) => {
+        if (dataTypeId) {
+            const { name = '' } = meta.dataTypesIndex.data.find(dataType => dataType.id === dataTypeId);
+            return name;
+        }
+
+        const { name = '' } = meta.relationshipTypesIndex.data.find(relationshipType => relationshipType.id === relationshipTypeId);
+        return `Foreign Key (${name})`;
+    };
+
+    const getColumnName = (name, relationshipEntityId) => {
+        if (name) {
+            return name;
+        }
+        const { tableName = '' } = meta.entitiesIndex.data.find(entity => entity.id === relationshipEntityId);
+        return `${pluralize.singular(tableName)}_id`;
     };
 
     return (
@@ -94,11 +108,17 @@ const CreateEditForm = ({
                     </TableHead>
                     <TableBody>
                         {
-                            rowData => rowData.map(({ dataTypeId, isNullable, name }, index) => (
+                            rowData => rowData.map(({
+                                dataTypeId,
+                                isNullable,
+                                name,
+                                relationshipEntityId,
+                                relationshipTypeId
+                            }, index) => (
                                 <TableRow key={name}>
-                                    <TableCell>{name}</TableCell>
-                                    <TableCell>{getDataTypeName(dataTypeId)}</TableCell>
-                                    <TableCell>{isNullable ? 'Is Nullable' : 'Not Nullable'}</TableCell>
+                                    <TableCell>{getColumnName(name, relationshipEntityId)}</TableCell>
+                                    <TableCell>{getDataTypeName(dataTypeId, relationshipTypeId)}</TableCell>
+                                    <TableCell>{isNullable ? 'Yes' : 'No'}</TableCell>
                                     <TableAction actions={[]} rowIndex={index} />
                                 </TableRow>
                             ))
