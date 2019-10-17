@@ -417,6 +417,14 @@ class Select extends Component {
                                     ))
                                 }
                             </HiddenContent>
+                            <HiddenContent isHidden={!!data.length}>
+                                <NotFoundContent
+                                    numRows={0}
+                                    rowComponent={RowComponent}
+                                >
+                                    No options
+                                </NotFoundContent>
+                            </HiddenContent>
                             <HiddenContent isHidden={!searchValue}>
                                 {searchResult.length ?
                                     [
@@ -443,12 +451,14 @@ class Select extends Component {
                                             </RowComponent>
                                         ))
                                     ]
-                                    : <NotFoundContent
-                                        numRows={this.getNumEmptyRows(data.length, withSelectAll)}
-                                        rowComponent={RowComponent}
-                                    >
-                                        No results found
-                                    </NotFoundContent>
+                                    : (
+                                        <NotFoundContent
+                                            numRows={this.getNumEmptyRows(data.length, withSelectAll)}
+                                            rowComponent={RowComponent}
+                                        >
+                                            No results found
+                                        </NotFoundContent>
+                                    )
                                 }
                             </HiddenContent>
                         </DropdownContent>
