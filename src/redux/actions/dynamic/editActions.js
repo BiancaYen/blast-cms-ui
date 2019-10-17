@@ -11,6 +11,7 @@ import browserHistory from '../../../utils/browserHistory';
 
 // Actions
 import { getIndex } from './indexActions';
+import { getIndex as getMetaIndex } from './metaActions';
 
 // Action Types
 const types = actionTypes(reducerName);
@@ -53,6 +54,7 @@ const postEdit = ({
         setFormErrors,
         dispatchFromPayload: () => {
             dispatch(getIndex(url));
+            dispatch(getMetaIndex(url));
 
             browserHistory.push(`/${url}`);
             return {

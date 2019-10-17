@@ -6,6 +6,9 @@ import { dynamicIndex as reducerName } from '../../reducers/reducerNames';
 // Api
 import { DynamicApi } from '../../../api';
 
+// Actions
+import { getIndex as getMetaIndex } from './metaActions';
+
 // Action Types
 const types = actionTypes(reducerName);
 
@@ -39,6 +42,7 @@ const postDelete = ({ data: { id, name }, url }) => (dispatch) => {
         requestType: 'delete',
         dispatchFromPayload: () => {
             dispatch(getIndex(url));
+            dispatch(getMetaIndex(url));
 
             return {
                 notificationDetail: `"${name || 'The Entity'}"`
@@ -47,13 +51,14 @@ const postDelete = ({ data: { id, name }, url }) => (dispatch) => {
     });
 };
 
-const postDeletes = ids => (dispatch) => {
+const postDeletes = (ids, url) => (dispatch) => {
     dispatch({
         callApiClient: () => DynamicApi.postDelete(ids),
         reducerName,
         requestType: 'delete',
         dispatchFromPayload: () => {
-            dispatch(getIndex());
+            dispatch(getIndex(url));
+            dispatch(getMetaIndex(url));
 
             return {
                 notificationDetail: `${ids.length} Entities`
