@@ -18,7 +18,7 @@ const initialData = {
     dataTypeId: '',
     isNullable: false,
     name: '',
-    relationshipId: '',
+    relationshipEntityId: '',
     relationshipTypeId: ''
 };
 
