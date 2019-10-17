@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import pluralize from 'pluralize';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Actions
-import { getIndex } from '../../redux/actions/dynamic/indexActions';
+import { getIndex } from '../../redux/actions/dynamic/metaActions';
 
 // Components
 import {
@@ -43,10 +43,15 @@ const CreateEditForm = ({
     onBlur,
     onChange
 }) => {
+    // Application State
+    const { data } = useSelector(state => state.dynamic.meta);
+
+    // Dispatch
     const dispatch = useDispatch();
 
-    const getInput = (datatype) => {
-        switch (datatype) {
+    // Helpers
+    const getInput = (component) => {
+        switch (component) {
             case INPUT:
                 return Input;
             case SELECT:
@@ -57,13 +62,34 @@ const CreateEditForm = ({
         }
     };
 
-    const getSelectData = (columnName) => {
-        const url = pluralize.plural(columnName.replace('_id', ''));
-        console.log(url);
-        return [
-            { id: 1, name: 'test' }
-        ];
+    const getPlaceholder = (component, label) => {
+        switch (component) {
+            case SELECT:
+                return `Select ${label}`;
+            default: return `Type ${label} here`;
+        }
     };
+
+    const getMetaRequestUrl = (columnName) => {
+        return pluralize.plural(columnName.replace('_id', ''));
+    };
+
+    const getMetaData = (columnName) => {
+        const url = getMetaRequestUrl(columnName);
+
+        return data[url] || [];
+    };
+
+    useEffect(() => {
+        dataTypes.map(({ columnName, component }) => {
+            const url = pluralize.plural(columnName.replace('_id', ''));
+
+            if (component === SELECT && !data[url]) {
+                dispatch(getIndex(url));
+            }
+            return null;
+        });
+    }, []);
 
     return (
         <Form>
@@ -75,9 +101,10 @@ const CreateEditForm = ({
                             return (
                                 <DynamicInput
                                     id={columnName}
-                                    data={getSelectData(columnName)}
+                                    data={getMetaData(columnName)}
                                     key={columnName}
                                     label={label}
+                                    placeholder={getPlaceholder(component, label)}
                                     onBlur={onBlur}
                                     onChange={onChange}
                                     touched={touched[columnName] && validation[columnName]}

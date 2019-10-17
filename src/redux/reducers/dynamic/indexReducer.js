@@ -20,7 +20,7 @@ const initialState = {
     data: []
 };
 
-const userReducer = handleActions(
+const indexReducer = handleActions(
     {
         [actions.getFailed]: loadingToggleFalse,
         [actions.getLoading]: loadingToggleTrue,
@@ -29,4 +29,4 @@ const userReducer = handleActions(
     initialState
 );
 
-export default userReducer;
+export default indexReducer;

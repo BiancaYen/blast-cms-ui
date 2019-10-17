@@ -15,6 +15,7 @@ const relationshipTypesIndex = 'relationshipTypes.index';
 const dynamicIndex = 'dynamic.index';
 const dynamicCreate = 'dynamic.create';
 const dynamicEdit = 'dynamic.edit';
+const dynamicMeta = 'dynamic.meta';
 
 // User
 const user = 'user';
@@ -35,6 +36,7 @@ export {
     dynamicIndex,
     dynamicCreate,
     dynamicEdit,
+    dynamicMeta,
     // User
     user
 };
