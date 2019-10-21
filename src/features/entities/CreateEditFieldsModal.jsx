@@ -73,7 +73,7 @@ const CreateEditFieldsModal = ({
     };
 
     return (
-        <Modal isActive={isActive} onCloseClick={onClose}>
+        <Modal isActive={isActive} onClose={onClose}>
             <ModalContent title="Create Field" icon={<CreateIcon width="27" height="27" />}>
                 <Toggle
                     id="isRelationship"
@@ -132,16 +132,17 @@ const CreateEditFieldsModal = ({
                                     validation={touched.dataTypeId && validation.dataTypeId}
                                     value={values.dataTypeId}
                                 />
-                                <Checkbox
-                                    id="isNullable"
-                                    label="Is Nullable"
-                                    onChange={onChange}
-                                    value={values.isNullable}
-                                    spacing="16px 0 0"
-                                />
                             </Fragment>
                         )
                 }
+
+                <Checkbox
+                    id="isNullable"
+                    label="Is Nullable"
+                    onChange={onChange}
+                    value={values.isNullable}
+                    spacing="16px 0 0"
+                />
             </ModalContent>
             <ModalActions>
                 <Button

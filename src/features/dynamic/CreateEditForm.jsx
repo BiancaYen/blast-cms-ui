@@ -12,6 +12,7 @@ import {
     FormRow,
     FormSection,
     Input,
+    MultiSelect,
     Select,
     TextArea
 } from '../../components';
@@ -20,6 +21,7 @@ import {
 const INPUT = 'Input';
 const RICH_TEXT_EDITOR = 'RichTextArea';
 const SELECT = 'Select';
+const MULTI_SELECT = 'MultiSelect';
 
 // Default Props
 const defaultProps = {
@@ -54,6 +56,8 @@ const CreateEditForm = ({
         switch (component) {
             case INPUT:
                 return Input;
+            case MULTI_SELECT:
+                return MultiSelect;
             case SELECT:
                 return Select;
             case RICH_TEXT_EDITOR:

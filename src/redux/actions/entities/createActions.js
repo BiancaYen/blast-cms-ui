@@ -34,8 +34,9 @@ const postCreate = ({ data, setFormErrors }) => (dispatch) => {
         return JSON.stringify(formattedField);
     });
 
-    const formattedRelationships = fields.filter(field => !field.name).map(({ relationshipEntityId, relationshipTypeId }) => {
+    const formattedRelationships = fields.filter(field => !field.name).map(({ isNullable, relationshipEntityId, relationshipTypeId }) => {
         const formattedRelationship = {
+            is_nullable: isNullable,
             relationship_entity_id: relationshipEntityId,
             relationship_type_id: relationshipTypeId
         };

@@ -36,6 +36,7 @@ import MultiCrossSelect from './multi-cross-select/MultiCrossSelect';
 import MultiCrossSelectRow from './multi-cross-select/rows/Row';
 import MultiCrossSelectRowFlag from './multi-cross-select/rows/RowFlag';
 import MultiCrossSelectRowAccordion from './multi-cross-select/rows/RowAccordion';
+import MultiSelect from './select/MultiSelect';
 import Navigation from './navigation/Navigation';
 import NavigationLink from './navigation/NavigationLink';
 import Notification from './notifications/Notification';
@@ -138,6 +139,7 @@ export {
     MultiCrossSelectRow,
     MultiCrossSelectRowFlag,
     MultiCrossSelectRowAccordion,
+    MultiSelect,
     Navigation,
     NavigationLink,
     Notification,
