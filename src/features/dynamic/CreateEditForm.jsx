@@ -86,9 +86,9 @@ const CreateEditForm = ({
 
     useEffect(() => {
         dataTypes.map(({ columnName, component }) => {
-            const url = pluralize.plural(columnName.replace('_id', ''));
+            const url = getMetaRequestUrl(columnName);
 
-            if (component === SELECT && !data[url]) {
+            if ((component === SELECT || component === MULTI_SELECT) && !data[url]) {
                 dispatch(getIndex(url));
             }
             return null;
