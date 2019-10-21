@@ -57,7 +57,7 @@ const postCreate = ({ data, setFormErrors }) => (dispatch) => {
 
             browserHistory.push('/entities');
             return {
-                notificationDetail: `The "${data.modelName || 'Entity'}"`
+                notificationDetail: `The "${data.tableName || 'Entity'}"`
             };
         }
     });
