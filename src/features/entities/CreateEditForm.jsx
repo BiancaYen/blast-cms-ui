@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import pluralize from 'pluralize';
 import PropTypes from 'prop-types';
 
@@ -22,8 +22,11 @@ import CreateEditFieldsModal from './CreateEditFieldsModal';
 
 // Icons
 import CreateIcon from '../../components/icons/CreateIcon';
+import DeleteIcon from '../../components/icons/DeleteIcon';
+import EditIcon from '../../components/icons/EditIcon';
 
 // Utils
+import uniqueKey from '../../utils/uniqueKey';
 import useModal from '../../utils/useModal';
 
 // Prop types
@@ -43,8 +46,20 @@ const CreateEditForm = ({
     onBlur,
     onChange
 }) => {
-    const [modalIsActiveCreateField, modalDataCreateField, openModalCreateField, closeModalCreateField] = useModal({});
+    // State
+    const valuesFields = {
+        dataTypeId: '',
+        id: uniqueKey({}),
+        isNullable: false,
+        name: '',
+        relationshipEntityId: '',
+        relationshipTypeId: ''
+    };
 
+    const [modalIsActive, modalData, openModal, closeModal] = useModal(valuesFields);
+    const [fieldsIsEdit, setFieldsIsEdit] = useState(false);
+
+    // Event handlers
     const handleFieldsCreate = (field) => {
         onChange({
             id: 'fields',
@@ -52,7 +67,44 @@ const CreateEditForm = ({
         });
     };
 
-    const getDataTypeName = (dataTypeId, relationshipTypeId) => {
+    const handleFieldsDelete = (field) => {
+        onChange({
+            id: 'fields',
+            value: values.fields.filter(valuesField => (valuesField.id !== field.id))
+        });
+    };
+
+    const handleFieldsEdit = (field) => {
+        onChange({
+            id: 'fields',
+            value: values.fields.map(valuesField => (valuesField.id === field.id ? field : valuesField))
+        });
+    };
+
+    const handleOpenCreateModal = (data) => {
+        openModal({ ...data, id: uniqueKey({}) });
+    };
+
+    const handleOpenEditModal = (data) => {
+        openModal(data);
+        setFieldsIsEdit(true);
+    };
+
+    // Getters
+    const getTableActions = data => ([
+        ['Edit', () => handleOpenEditModal(data), <EditIcon />],
+        ['Delete', () => handleFieldsDelete(data), <DeleteIcon />]
+    ]);
+
+    const getTableColumnName = (name, relationshipEntityId) => {
+        if (name) {
+            return name;
+        }
+        const { tableName = '' } = meta.entitiesIndex.data.find(entity => entity.id === relationshipEntityId);
+        return `${pluralize.singular(tableName)}_id`;
+    };
+
+    const getTableDataTypeName = (dataTypeId, relationshipTypeId) => {
         if (dataTypeId) {
             const { name = '' } = meta.dataTypesIndex.data.find(dataType => dataType.id === dataTypeId);
             return name;
@@ -60,14 +112,6 @@ const CreateEditForm = ({
 
         const { name = '' } = meta.relationshipTypesIndex.data.find(relationshipType => relationshipType.id === relationshipTypeId);
         return `Foreign Key (${name})`;
-    };
-
-    const getColumnName = (name, relationshipEntityId) => {
-        if (name) {
-            return name;
-        }
-        const { tableName = '' } = meta.entitiesIndex.data.find(entity => entity.id === relationshipEntityId);
-        return `${pluralize.singular(tableName)}_id`;
     };
 
     return (
@@ -89,7 +133,7 @@ const CreateEditForm = ({
             <FormSection
                 title="Database"
                 actions={[
-                    ['Add Field', () => openModalCreateField(), <CreateIcon />]
+                    ['Add Field', () => handleOpenCreateModal(valuesFields), <CreateIcon />]
                 ]}
             >
                 <Table
@@ -110,16 +154,27 @@ const CreateEditForm = ({
                         {
                             rowData => rowData.map(({
                                 dataTypeId,
+                                id,
                                 isNullable,
                                 name,
                                 relationshipEntityId,
                                 relationshipTypeId
                             }, index) => (
-                                <TableRow key={name}>
-                                    <TableCell>{getColumnName(name, relationshipEntityId)}</TableCell>
-                                    <TableCell>{getDataTypeName(dataTypeId, relationshipTypeId)}</TableCell>
+                                <TableRow key={id}>
+                                    <TableCell>{getTableColumnName(name, relationshipEntityId)}</TableCell>
+                                    <TableCell>{getTableDataTypeName(dataTypeId, relationshipTypeId)}</TableCell>
                                     <TableCell>{isNullable ? 'Yes' : 'No'}</TableCell>
-                                    <TableAction actions={[]} rowIndex={index} />
+                                    <TableAction
+                                        actions={getTableActions({
+                                            dataTypeId,
+                                            id,
+                                            isNullable,
+                                            name,
+                                            relationshipEntityId,
+                                            relationshipTypeId
+                                        })}
+                                        rowIndex={index}
+                                    />
                                 </TableRow>
                             ))
                         }
@@ -128,12 +183,14 @@ const CreateEditForm = ({
             </FormSection>
 
             <CreateEditFieldsModal
-                data={modalDataCreateField}
-                isActive={modalIsActiveCreateField}
+                data={modalData}
+                isActive={modalIsActive}
+                isEdit={fieldsIsEdit}
                 meta={meta}
                 onChange={onChange}
-                onClose={closeModalCreateField}
-                onCreateFields={handleFieldsCreate}
+                onClose={closeModal}
+                onCreate={handleFieldsCreate}
+                onEdit={handleFieldsEdit}
             />
         </Form>
     );

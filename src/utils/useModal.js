@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-const useModal = () => {
+const useModal = (initialData = {}) => {
     const [active, setActive] = useState(false);
-    const [modalData, setModalData] = useState({});
+    const [modalData, setModalData] = useState(initialData);
 
     const openModal = (data) => {
         setModalData(data);
@@ -10,7 +10,7 @@ const useModal = () => {
     };
 
     const closeModal = () => {
-        setTimeout(() => setModalData({}), 300);
+        setTimeout(() => setModalData(initialData), 300);
         setActive(false);
     };
 

@@ -1,6 +1,5 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 // Components
 import {
@@ -18,51 +17,48 @@ import {
 import CreateIcon from '../../components/icons/CreateIcon';
 
 // HOC
-import withForm from '../../utils/withForm';
-
-// Aplication State
-const mapStateToProps = ({ entities: { createEditFields } }) => {
-    const { data, submit, validationSchema } = createEditFields;
-
-    return {
-        data,
-        submit,
-        validationSchema
-    };
-};
+import useForm from '../../utils/useForm';
 
 // Prop types
 const propTypes = {
     isActive: PropTypes.bool.isRequired,
-    isValid: PropTypes.bool.isRequired,
+    isEdit: PropTypes.bool.isRequired,
+    data: PropTypes.instanceOf(Object).isRequired,
     meta: PropTypes.instanceOf(Object).isRequired,
-    touched: PropTypes.instanceOf(Object).isRequired,
-    validation: PropTypes.instanceOf(Object).isRequired,
-    values: PropTypes.instanceOf(Object).isRequired,
-    onBlur: PropTypes.func.isRequired,
-    onChange: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
-    onCreateFields: PropTypes.func.isRequired,
-    onFormReset: PropTypes.func.isRequired
+    onCreate: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired
 };
 
 const CreateEditFieldsModal = ({
     isActive,
-    isValid,
+    isEdit,
+    data,
     meta,
-    touched,
-    validation,
-    values,
-    onBlur,
-    onChange,
     onClose,
-    onCreateFields,
-    onFormReset
+    onCreate,
+    onEdit
 }) => {
     const [isRelationship, setIsRelationship] = useState(false);
 
+    const {
+        isValid,
+        touched,
+        validation,
+        values,
+        onBlur,
+        onChange,
+        onFormReset
+    } = useForm(data);
+
     const handleCreate = () => {
-        onCreateFields(values);
+        onCreate(values);
+        onFormReset();
+        onClose();
+    };
+
+    const handleEdit = () => {
+        onEdit(values);
         onFormReset();
         onClose();
     };
@@ -156,8 +152,8 @@ const CreateEditFieldsModal = ({
                     isDisabled={!isValid}
                     size={Button.sizes.small}
                     spacing="0"
-                    title="Add"
-                    onClick={handleCreate}
+                    title={isEdit ? 'Edit' : 'Add'}
+                    onClick={isEdit ? handleEdit : handleCreate}
                 />
             </ModalActions>
         </Modal>
@@ -166,4 +162,4 @@ const CreateEditFieldsModal = ({
 
 CreateEditFieldsModal.propTypes = propTypes;
 
-export default connect(mapStateToProps, null)(withForm(CreateEditFieldsModal));
+export default CreateEditFieldsModal;
