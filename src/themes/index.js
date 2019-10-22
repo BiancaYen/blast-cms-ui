@@ -212,15 +212,17 @@ const theme = {
         background: variables.primaryGreyTint8,
         backgroundDisabled: '#f8f8f8',
         border: variables.primaryGreyTint6,
-        caretColor: variables.primaryColor,
         borderDisabled: variables.primaryGreyTint7,
         borderFocused: variables.primaryColorTint1,
+        caretColor: variables.primaryColor,
         color: variables.primaryGreyDark,
-        colorDisabled: variables.primaryGreyTint2,
+        colorDisabled: variables.primaryGreyTint6,
+        colorLoading: variables.primaryGreyTint3,
+        iconColor: variables.primaryColor,
+        iconColorDisabled: variables.primaryColorTint1,
         placeholder: variables.primaryGreyTint3,
         placeholderDisabled: variables.primaryGreyTint6,
-        icon: variables.primaryColor,
-        iconDisabled: variables.primaryColorTint1
+        searchUrlColor: variables.primaryGreyShade3
     },
     sectionAction: {
         actionColor: variables.primaryColor,
