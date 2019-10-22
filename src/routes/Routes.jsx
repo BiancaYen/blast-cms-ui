@@ -97,7 +97,7 @@ const Routes = ({ location }) => {
             />
             <CustomRoute
                 exact
-                path="/images"
+                path="/media"
                 component={AppLayout(MediaIndex)}
                 title="Media"
             />

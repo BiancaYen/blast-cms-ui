@@ -15,6 +15,7 @@ import ColorPicker from './color-picker/ColorPicker';
 import DisplayContent from './display-content/DisplayContent';
 import Dropdown from './dropdown/Dropdown';
 import Else from './else/Else';
+import FilePicker from './file-picker/FilePicker';
 import Form from './form/Form';
 import FormRow from './form-row/FormRow';
 import FormSection from './form-section/FormSection';
@@ -118,6 +119,7 @@ export {
     DisplayContent,
     Dropdown,
     Else,
+    FilePicker,
     Grid,
     Form,
     FormRow,

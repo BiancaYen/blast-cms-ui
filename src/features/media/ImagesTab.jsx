@@ -2,24 +2,26 @@ import React, { useState } from 'react';
 
 // Components
 import {
-    ImagePicker
+    FilePicker
 } from '../../components';
 
 const ImagesTab = () => {
     const [images, setImages] = useState('');
-    const handleChange = ({ value }) => {
-        setImages([...images, value]);
+    const handleChange = ({ values }) => {
+        setImages([...images, ...values]);
     };
 
     return (
         <React.Fragment>
-            <ImagePicker
+            <FilePicker
                 id="images"
                 isMultiple
-                requirements={{}}
+                requirements={{
+                    fileSize: 5000
+                }}
                 onChange={handleChange}
                 spacing="0 40px"
-                value={images}
+                values={images}
             />
         </React.Fragment>
     );

@@ -18,7 +18,9 @@ const MediaIndex = () => {
                 <TabItem id="images" title="Images" spacing="0">
                     <ImagesTab />
                 </TabItem>
-                <TabItem id="documents" title="Documents" spacing="0" />
+                <TabItem id="documents" title="Documents" spacing="0">
+                    <ImagesTab />
+                </TabItem>
             </Tabs>
         </React.Fragment>
     );
