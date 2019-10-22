@@ -8,6 +8,7 @@ import withDocumentTitle from '../../utils/withDocumentTitle';
 import { Container, Content } from './styles';
 
 // Icons
+import ImagesIcon from '../../components/icons/ImagesIcon';
 import Glyph from '../../components/icons/Glyph';
 import SettingsIcon from '../../components/icons/SettingsIcon';
 
@@ -45,6 +46,11 @@ export default (ComposedComponent) => {
                         label="Entities"
                         route="/entities"
                         icon={<SettingsIcon />}
+                    />
+                    <NavigationLink
+                        label="Media"
+                        route="/media"
+                        icon={<ImagesIcon />}
                     />
                     {
                         entitiesIndex.data.map(({ id, tableName }) => (

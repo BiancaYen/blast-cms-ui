@@ -20,7 +20,7 @@ const defaultProps = {
 
 // Prop types
 const propTypes = {
-    links: PropTypes.array,
+    links: PropTypes.instanceOf(Array),
     spacing: PropTypes.string,
     subTitle: PropTypes.string,
     title: PropTypes.string

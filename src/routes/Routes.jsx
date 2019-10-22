@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch } from 'react-router-dom';
 import { withRouter } from 'react-router';
@@ -26,6 +26,7 @@ import EntitiesCreate from '../features/entities/EntitiesCreate';
 import DynamicIndex from '../features/dynamic/DynamicIndex';
 import DynamicCreate from '../features/dynamic/DynamicCreate';
 import DynamicEdit from '../features/dynamic/DynamicEdit';
+import MediaIndex from '../features/media/MediaIndex';
 
 // Other
 import Welcome from '../features/welcome/Welcome';
@@ -93,6 +94,12 @@ const Routes = ({ location }) => {
                 path="/entities/create"
                 component={AppLayout(EntitiesCreate)}
                 title="Entities"
+            />
+            <CustomRoute
+                exact
+                path="/images"
+                component={AppLayout(MediaIndex)}
+                title="Media"
             />
             {/* Dynamic */}
             {/* Need to map out each CRUD route separately, since placing routes within the <Fragment /> component causes problematic remount */}

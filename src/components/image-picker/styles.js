@@ -14,7 +14,7 @@ const ImagePickerWrapper = styled.div`
     min-height: 203px;
     
     margin: ${({ spacing }) => spacing || '20px 0 10px 0'};
-    width: ${({ width }) => width || '100%'};
+    width: ${({ width }) => width || 'auto'};
 `;
 
 const ImagePickerInnerWrapper = styled.div`
