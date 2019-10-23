@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Notifications } from 'hyvejs-features';
 
 // Styles
 import AppWrapper from './styles';
 
 // Components
-import Notifications from '../components/notifications/NotificationsWrapper';
+import NotificationsWrapper from '../components/notifications/NotificationsWrapper';
 
 // Utils
 import renderHeaderLink from '../utils/renderHeaderLink';
@@ -52,6 +53,7 @@ class App extends Component {
         return (
             <AppWrapper>
                 <Notifications />
+                <NotificationsWrapper />
                 {children}
             </AppWrapper>
         );

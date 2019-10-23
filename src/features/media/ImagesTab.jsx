@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+// Actions
+import { postCreate } from '../../redux/actions/images/createActions';
 
 // Components
 import {
@@ -6,9 +10,20 @@ import {
 } from '../../components';
 
 const ImagesTab = () => {
+    // State
     const [images, setImages] = useState('');
+
+    // Dispatch
+    const dispatch = useDispatch();
+
+    // Event Handlers
     const handleChange = ({ values }) => {
         setImages([...images, ...values]);
+
+        values.map(value => dispatch(postCreate({
+            data: { file: value },
+            setFormErrors: false
+        })));
     };
 
     return (

@@ -177,7 +177,10 @@ class FilePicker extends Component {
             return;
         }
 
-        onChange({ id, values: files });
+        // Convert FileList object to array
+        const formattedFiles = [...files];
+
+        onChange({ id, values: formattedFiles });
     };
 
     handleRemove = () => {

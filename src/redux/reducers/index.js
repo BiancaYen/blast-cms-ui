@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { notificationReducer } from 'hyvejs-features';
 
 // Application Data
 // Auth
@@ -21,6 +22,7 @@ const reducer = combineReducers({
     entities,
     images,
     relationshipTypes,
+    notificationReducer,
     user
 });
 
