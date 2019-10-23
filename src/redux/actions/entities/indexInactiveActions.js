@@ -1,3 +1,5 @@
+// Entities Index Inactive Actions
+
 import { createAction } from 'redux-actions';
 
 import actionTypes from '../actionTypes';
@@ -72,7 +74,7 @@ export {
     postFailed,
     postSubmitting,
     postSuccess,
-    // Action
+    // Actions
     getIndex,
     postActivate
 };

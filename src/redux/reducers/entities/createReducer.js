@@ -30,7 +30,7 @@ const initialState = {
     }
 };
 
-const userReducer = handleActions(
+const createReducer = handleActions(
     {
         [actions.postSubmitting]: submitToggleTrue,
         [actions.postFailed]: submitToggleFalse,
@@ -39,4 +39,4 @@ const userReducer = handleActions(
     initialState
 );
 
-export default userReducer;
+export default createReducer;

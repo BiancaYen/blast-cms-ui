@@ -5,6 +5,18 @@ class AuthApi {
 
     logout = () => ApiClient.post('auth/logout');
 
+    acceptInvitation = ({
+        token,
+        email,
+        password,
+        passwordConfirmation
+    }) => ApiClient.post('auth/accept_invite', {
+        token,
+        email,
+        password,
+        password_confirmation: passwordConfirmation
+    });
+
     checkToken = () => ApiClient.post('auth/check_token');
 
     recoverPassword = email => ApiClient.post('auth/recovery', { email });
@@ -15,18 +27,6 @@ class AuthApi {
         password,
         passwordConfirmation
     }) => ApiClient.post('auth/reset', {
-        token,
-        email,
-        password,
-        password_confirmation: passwordConfirmation
-    });
-
-    acceptInvitation = ({
-        token,
-        email,
-        password,
-        passwordConfirmation
-    }) => ApiClient.post('auth/accept_invite', {
         token,
         email,
         password,

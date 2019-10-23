@@ -1,3 +1,5 @@
+// Dynamic Edit Actions
+
 import { createAction } from 'redux-actions';
 
 import actionTypes from '../actionTypes';
@@ -6,12 +8,12 @@ import { dynamicEdit as reducerName } from '../../reducers/reducerNames';
 // Api
 import { DynamicApi } from '../../../api';
 
-// Utils
-import browserHistory from '../../../utils/browserHistory';
-
 // Actions
 import { getIndex } from './indexActions';
 import { getIndex as getMetaIndex } from './metaActions';
+
+// Utils
+import browserHistory from '../../../utils/browserHistory';
 
 // Action Types
 const types = actionTypes(reducerName);
@@ -65,13 +67,14 @@ const postEdit = ({
 };
 
 export {
+    // Action Types
     getFailed,
     getLoading,
     getSuccess,
     postFailed,
     postSubmitting,
     postSuccess,
-    //
+    // Actions
     getEdit,
     postEdit
 };

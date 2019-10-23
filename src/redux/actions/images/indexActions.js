@@ -1,4 +1,4 @@
-// Entities Index Actions
+// Images Index Actions
 
 import { createAction } from 'redux-actions';
 
@@ -6,7 +6,7 @@ import actionTypes from '../actionTypes';
 import { entitiesIndex as reducerName } from '../../reducers/reducerNames';
 
 // Api
-import { EntitiesApi } from '../../../api';
+import { ImagesApi } from '../../../api';
 
 // Action Types
 const types = actionTypes(reducerName);
@@ -21,7 +21,7 @@ const postSuccess = createAction(types.postSuccess);
 
 const getIndex = () => (dispatch) => {
     dispatch({
-        callApiClient: () => EntitiesApi.getIndex(),
+        callApiClient: () => ImagesApi.getIndex(),
         reducerName,
         requestType: 'get',
         dispatchFromPayload: data => ({
@@ -56,7 +56,7 @@ const getIndex = () => (dispatch) => {
 
 const postDelete = ({ id, modelName }) => (dispatch) => {
     dispatch({
-        callApiClient: () => EntitiesApi.postDelete(id),
+        callApiClient: () => ImagesApi.postDelete(id),
         reducerName,
         requestType: 'delete',
         dispatchFromPayload: () => {
@@ -71,7 +71,7 @@ const postDelete = ({ id, modelName }) => (dispatch) => {
 
 const postDeactivate = ({ id, modelName }) => (dispatch) => {
     dispatch({
-        callApiClient: () => EntitiesApi.postDeactivate(id),
+        callApiClient: () => ImagesApi.postDeactivate(id),
         reducerName,
         requestType: 'deactivate',
         dispatchFromPayload: () => {

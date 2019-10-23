@@ -28,7 +28,7 @@ const initialState = {
     }
 };
 
-const userReducer = handleActions(
+const editReducer = handleActions(
     {
         [actions.getFailed]: loadingToggleFalse,
         [actions.getLoading]: loadingToggleTrue,
@@ -40,4 +40,4 @@ const userReducer = handleActions(
     initialState
 );
 
-export default userReducer;
+export default editReducer;

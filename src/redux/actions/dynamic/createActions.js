@@ -1,3 +1,5 @@
+// Dynamic Create Actions
+
 import { createAction } from 'redux-actions';
 
 import actionTypes from '../actionTypes';
@@ -6,12 +8,12 @@ import { dynamicCreate as reducerName } from '../../reducers/reducerNames';
 // Api
 import { DynamicApi } from '../../../api';
 
-// Utils
-import browserHistory from '../../../utils/browserHistory';
-
 // Actions
 import { getIndex } from './indexActions';
 import { getIndex as getMetaIndex } from './metaActions';
+
+// Utils
+import browserHistory from '../../../utils/browserHistory';
 
 // Action Types
 const types = actionTypes(reducerName);
@@ -39,8 +41,10 @@ const postCreate = ({ data, setErrors: setFormErrors, url }) => (dispatch) => {
 };
 
 export {
+    // Action Types
     postFailed,
     postSubmitting,
     postSuccess,
+    // Actions
     postCreate
 };

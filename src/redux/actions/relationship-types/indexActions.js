@@ -1,3 +1,5 @@
+// Relationship Types Index Actions
+
 import { createAction } from 'redux-actions';
 
 import actionTypes from '../actionTypes';
@@ -37,6 +39,6 @@ export {
     getFailed,
     getLoading,
     getSuccess,
-    // Action
+    // Actions
     getIndex
 };

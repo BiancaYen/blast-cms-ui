@@ -1,11 +1,12 @@
-// Dynamic Create
+// Image Create
 
-// State used by: DynamicCreate
+// State used by: MediaIndex > ImagesTab
 
 import { handleActions } from 'redux-actions';
+import Joi from 'joi';
 
 // Actions
-import * as actions from '../../actions/dynamic/createActions';
+import * as actions from '../../actions/images/createActions';
 
 // State update
 import {
@@ -13,11 +14,18 @@ import {
     submitToggleFalse
 } from '../../utils/stateUpdate';
 
+// Initial Data
+const initialData = {
+    fields: [],
+    tableName: ''
+};
+
 // Initial State
 const initialState = {
-    data: {},
+    data: initialData,
     submit: false,
     validationSchema: {
+        file: Joi.any().required().label('File')
     }
 };
 

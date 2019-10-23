@@ -3,10 +3,10 @@
 import { createAction } from 'redux-actions';
 
 import actionTypes from '../actionTypes';
-import { entitiesCreate as reducerName } from '../../reducers/reducerNames';
+import { imagesCreate as reducerName } from '../../reducers/reducerNames';
 
 // Api
-import { EntitiesApi } from '../../../api';
+import { ImagesApi } from '../../../api';
 
 // Actions
 import { getIndex } from './indexActions';
@@ -46,7 +46,7 @@ const postCreate = ({ data, setFormErrors }) => (dispatch) => {
     });
 
     dispatch({
-        callApiClient: () => EntitiesApi.postCreate({
+        callApiClient: () => ImagesApi.postCreate({
             fields: formattedFields,
             relationships: formattedRelationships,
             table_name: tableName
@@ -57,9 +57,9 @@ const postCreate = ({ data, setFormErrors }) => (dispatch) => {
         dispatchFromPayload: () => {
             dispatch(getIndex());
 
-            browserHistory.push('/entities');
+            browserHistory.push('/media');
             return {
-                notificationDetail: `The "${data.tableName || 'Entity'}"`
+                notificationDetail: `The "${data.tableName || 'Image'}"`
             };
         }
     });
