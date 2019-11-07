@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-// Icons
-import ImageNotFoundIcon from '../icons/ImageNotFoundIcon';
+// Components
+import Image from '../image/Image';
+import ImagePlaceholder from '../image-placeholder/ImagePlaceholder';
 
 // Styles
-import {
-    FileWrapper,
-    ImagePlaceholder
-} from './styles';
+import FileWrapper from './styles';
 
 // Utils
 import objectDeepMatches from '../../utils/objectDeepMatches';
@@ -55,15 +53,15 @@ const File = ({ value }) => {
             {
                 file && !isBroken
                 && (
-                    <img
-                        src={file}
-                        alt=""
+                    <Image
+                        source={file}
+                        alternativeText=""
                         onError={handleImageError}
                     />
                 )
             }
             {/* Broken Placeholder */}
-            { isBroken && <ImagePlaceholder><ImageNotFoundIcon /></ImagePlaceholder>}
+            { isBroken && <ImagePlaceholder />}
         </FileWrapper>
     );
 };

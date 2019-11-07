@@ -93,21 +93,6 @@ const Content = styled.label`
     }
 `;
 
-const FileWrapper = styled.div`
-    img {
-        width: 100%;
-        height: auto;
-    }
-`;
-
-const ImagePlaceholder = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-`;
-
 const SpinnerWrapper = styled.div`
     margin: auto;
     display: flex;
@@ -122,8 +107,6 @@ const SpinnerWrapper = styled.div`
 
 export {
     Content,
-    FileWrapper,
-    ImagePlaceholder,
     InnerWrapper,
     SpinnerWrapper,
     Wrapper

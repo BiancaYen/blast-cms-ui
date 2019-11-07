@@ -12,7 +12,7 @@ import {
 import ImageUploadIcon from '../icons/ImageUploadIcon';
 
 // Components
-import File from './File';
+import File from '../file/File';
 import Label from '../label/Label';
 import Grid from '../grid/Grid';
 
@@ -33,7 +33,8 @@ const defaultProps = {
         errors: ''
     },
     width: '',
-    onChange: () => {}
+    onChange: () => {},
+    onEdit: () => {}
 };
 
 // Prop types
@@ -60,7 +61,8 @@ const propTypes = {
         PropTypes.instanceOf(Object)
     ]),
     width: PropTypes.string,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    onEdit: PropTypes.func
 };
 
 const defaultTypes = ['image/jpeg', 'image/png'];
@@ -206,7 +208,8 @@ class FilePicker extends Component {
             },
             spacing,
             values,
-            width
+            width,
+            onEdit
         } = this.props;
 
         const {
@@ -262,6 +265,7 @@ class FilePicker extends Component {
                                 <File
                                     key={uniqueKey({})}
                                     value={value}
+                                    onClick={onEdit}
                                 />
                             ))}
                         </Grid>

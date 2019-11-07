@@ -120,6 +120,10 @@ const theme = {
         color: variables.primaryGreyTint1,
         colorDisabled: variables.primaryGreyTint4
     },
+    file: {
+        borderColor: 'transparent',
+        borderColorHover: variables.primaryColor
+    },
     form: {
         borderColor: variables.primaryGreyTint6,
         sectionHeading: variables.primaryColor
@@ -133,6 +137,9 @@ const theme = {
         color: variables.primaryGreyTint3,
         linkColor: variables.primaryColor,
         linkColorHover: variables.primaryColorShade2
+    },
+    image: {
+        background: variables.primaryGreyTint8
     },
     imagePicker: {
         background: variables.primaryGreyTint8,
