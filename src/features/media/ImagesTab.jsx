@@ -34,7 +34,7 @@ const ImagesTab = () => {
     };
 
     const handleEdit = (value) => {
-        console.log('gets here');
+        console.log(value);
         editModalOnOpen(value);
     };
 
@@ -52,7 +52,8 @@ const ImagesTab = () => {
                 onEdit={handleEdit}
             />
             <ImagesEditModal
-                isActive={editModalIsActive}
+                // isActive={editModalIsActive}
+                isActive
                 data={editModalData}
                 onClose={editModalOnClose}
             />

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 // Components
 import {
     Button,
+    ImageCropper,
     Modal,
     ModalActions,
     ModalContent
@@ -37,12 +38,12 @@ const ImagesEditModal = ({
         onClose();
     };
 
+    console.log(data);
+
     return (
         <Modal isActive={isActive} size={Modal.sizes.large} onClose={onClose}>
             <ModalContent title="Edit" icon={<EditIcon width="27" height="27" />}>
-                <p>
-                    edit here
-                </p>
+                <ImageCropper value={data} />
             </ModalContent>
             <ModalActions>
                 <Button

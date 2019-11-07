@@ -15,6 +15,7 @@ import ColorPicker from './color-picker/ColorPicker';
 import DisplayContent from './display-content/DisplayContent';
 import Dropdown from './dropdown/Dropdown';
 import Else from './else/Else';
+import File from './image/Image';
 import FilePicker from './file-picker/FilePicker';
 import Form from './form/Form';
 import FormRow from './form-row/FormRow';
@@ -24,6 +25,7 @@ import Grid from './grid/Grid';
 import Header from './header/Header';
 import HiddenContent from './hidden-content/HiddenContent';
 import Hint from './hint/Hint';
+import ImageCropper from './image-cropper/ImageCropper';
 import ImagePicker from './image-picker/ImagePicker';
 import Input from './input/Input';
 import IconAction from './icon-action/IconAction';
@@ -119,6 +121,7 @@ export {
     DisplayContent,
     Dropdown,
     Else,
+    File,
     FilePicker,
     Grid,
     Form,
@@ -129,6 +132,7 @@ export {
     Hint,
     HiddenContent,
     IconAction,
+    ImageCropper,
     ImagePicker,
     Input,
     Label,

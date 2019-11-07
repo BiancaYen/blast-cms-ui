@@ -13,6 +13,7 @@ import ImageUploadIcon from '../icons/ImageUploadIcon';
 
 // Components
 import File from '../file/File';
+import Image from '../image/Image';
 import Label from '../label/Label';
 import Grid from '../grid/Grid';
 
@@ -262,11 +263,13 @@ class FilePicker extends Component {
                     && (
                         <Grid grid={Grid.grid.fourColumns}>
                             { values.map(value => (
-                                <File
-                                    key={uniqueKey({})}
-                                    value={value}
-                                    onClick={onEdit}
-                                />
+                                <File>
+                                    <Image
+                                        key={uniqueKey({})}
+                                        value={value}
+                                        onClick={() => onEdit(value)}
+                                    />
+                                </File>
                             ))}
                         </Grid>
                     )
