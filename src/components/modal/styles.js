@@ -1,7 +1,7 @@
-import styled, { keyframes } from 'react-emotion';
+import styled, { css, keyframes } from 'react-emotion';
 
 // Constants
-import types from './constants';
+import { sizes, types } from './constants';
 
 // Utils
 import getTheme from '../../utils/getTheme';
@@ -20,6 +20,10 @@ const getColor = ({ type }) => {
             return getProperty('defaultColor');
     }
 };
+
+const getSize = ({ size }) => css`
+    ${size || sizes.medium}
+`;
 
 const easeInModal = keyframes`
     0% {
@@ -47,8 +51,6 @@ const InnerWrapper = styled.div`
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    width: 600px;
-    min-height: 200px;
     position: relative;
     border-radius: 5px;
     overflow: hidden;
@@ -56,6 +58,8 @@ const InnerWrapper = styled.div`
     
     border: solid 1px ${getProperty('border')};
     background-color: ${getProperty('background')};
+
+    ${getSize}
 `;
 
 const ModalWrapper = styled.div`

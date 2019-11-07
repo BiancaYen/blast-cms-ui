@@ -12,12 +12,18 @@ import FileWrapper from './styles';
 import objectDeepMatches from '../../utils/objectDeepMatches';
 import usePrevious from '../../utils/usePrevious';
 
-// Prop Types
-const propTypes = {
-    value: PropTypes.instanceOf(Object).isRequired
+// Default Props
+const defaultProps = {
+    onClick: () => {}
 };
 
-const File = ({ value }) => {
+// Prop Types
+const propTypes = {
+    value: PropTypes.instanceOf(Object).isRequired,
+    onClick: PropTypes.func
+};
+
+const File = ({ value, onClick }) => {
     // State
     const [file, setFile] = useState('');
     const [isBroken, setIsBroken] = useState(false);
@@ -48,7 +54,7 @@ const File = ({ value }) => {
     }, [value]);
 
     return (
-        <FileWrapper>
+        <FileWrapper onClick={onClick}>
             {/* Image */}
             {
                 file && !isBroken
@@ -66,6 +72,7 @@ const File = ({ value }) => {
     );
 };
 
+File.defaultProps = defaultProps;
 File.propTypes = propTypes;
 
 export default File;

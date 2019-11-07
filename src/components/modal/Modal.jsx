@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+// Constants
+import { sizes } from './constants';
+
 // Styles
 import { CloseButtonWrapper, InnerWrapper, ModalWrapper } from './styles';
 
@@ -13,6 +16,7 @@ import IconAction from '../icon-action/IconAction';
 // Default Props
 const defaultProps = {
     isActive: false,
+    size: sizes.medium,
     onClose: () => {}
 };
 
@@ -20,6 +24,7 @@ const defaultProps = {
 const propTypes = {
     children: PropTypes.node.isRequired,
     isActive: PropTypes.bool,
+    size: PropTypes.string,
     onClose: PropTypes.func
 };
 
@@ -35,7 +40,8 @@ class Modal extends Component {
     // Key method
     handleKeyUp = (event) => {
         if (event.keyCode === 27) {
-            this.props.onClose();
+            const { onClose } = this.props;
+            onClose();
         }
     };
 
@@ -43,7 +49,8 @@ class Modal extends Component {
     handleClose = ({ target }) => {
         this.innerWrapper.current.addEventListener('animationend', this.onAnimationEnd);
         if (target === this.outerWrapper.current) {
-            this.props.onClose();
+            const { onClose } = this.props;
+            onClose();
         }
     };
 
@@ -62,23 +69,30 @@ class Modal extends Component {
     }
 
     componentDidUpdate() {
-        if (this.props.isActive) {
+        const { isActive } = this.props;
+        if (isActive) {
             this.outerWrapper.current.focus();
         }
     }
 
     render() {
-        const { isActive, children, onClose } = this.props;
+        const { animationEnd } = this.state;
+        const {
+            isActive,
+            children,
+            size,
+            onClose
+        } = this.props;
 
         return (
             <ModalWrapper
                 innerRef={this.outerWrapper}
                 isActive={isActive}
-                animationEnd={this.state.animationEnd}
+                animationEnd={animationEnd}
                 onKeyUp={this.handleKeyUp}
                 onClick={this.handleClose}
             >
-                <InnerWrapper innerRef={this.innerWrapper}>
+                <InnerWrapper innerRef={this.innerWrapper} size={size}>
                     {children}
                     <CloseButtonWrapper>
                         <IconAction icon={<CloseIconRounded />} onClick={() => onClose()}>
@@ -93,5 +107,6 @@ class Modal extends Component {
 
 Modal.defaultProps = defaultProps;
 Modal.propTypes = propTypes;
+Modal.sizes = sizes;
 
 export default Modal;

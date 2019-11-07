@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Constants
-import types from './constants';
+import { types } from './constants';
 
 // Styles
 import {
@@ -26,8 +26,8 @@ import ReactivateIcon from '../icons/ReactivateIcon';
 
 // Default props
 const defaultProps = {
-    type: types.default,
-    icon: null
+    icon: null,
+    type: types.default
 };
 
 // Prop types

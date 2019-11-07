@@ -9,9 +9,16 @@ import {
     FilePicker
 } from '../../components';
 
+// Feature Components
+import ImagesEditModal from './ImagesEditModal';
+
+// Utils
+import useModal from '../../utils/useModal';
+
 const ImagesTab = () => {
     // State
     const [images, setImages] = useState('');
+    const [editModalIsActive, editModalData, editModalOnOpen, editModalOnClose] = useModal({});
 
     // Dispatch
     const dispatch = useDispatch();
@@ -26,6 +33,11 @@ const ImagesTab = () => {
         })));
     };
 
+    const handleEdit = (value) => {
+        console.log('gets here');
+        editModalOnOpen(value);
+    };
+
     return (
         <React.Fragment>
             <FilePicker
@@ -34,9 +46,15 @@ const ImagesTab = () => {
                 requirements={{
                     fileSize: 5000
                 }}
-                onChange={handleChange}
                 spacing="0 40px"
                 values={images}
+                onChange={handleChange}
+                onEdit={handleEdit}
+            />
+            <ImagesEditModal
+                isActive={editModalIsActive}
+                data={editModalData}
+                onClose={editModalOnClose}
             />
         </React.Fragment>
     );
