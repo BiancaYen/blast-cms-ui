@@ -13,19 +13,18 @@ import ImageCropperWrapper from './styles';
 const ImageCropper = ({ value }) => {
     const src = 'https://wallpapercave.com/wp/dxXh4Ss.jpg';
 
+    // State
     const [crop, setCrop] = useState({
         unit: '%',
         width: 50,
         aspect: 16 / 9
     });
 
-    const handleChange = ({ id, value: inputValue }) => {
+    const handleInputChange = ({ id, value: inputValue }) => {
         setCrop(
             { ...crop, [id]: inputValue }
         );
     };
-
-    console.log(crop);
 
     return (
         <ImageCropperWrapper>
@@ -42,11 +41,20 @@ const ImageCropper = ({ value }) => {
                 </FormSection>
                 <FormSection title="Meta Data" spacing="0" withoutBorder>
                     <Input
-                        id="aspect"
-                        label="Aspect Ratio"
-                        placeholder="Type Aspect Ratio"
-                        onChange={handleChange}
-                        value={crop.aspect}
+                        id="width"
+                        label="Width"
+                        labelNote={`(In ${crop.unit})`}
+                        placeholder="Type Width"
+                        onChange={handleInputChange}
+                        value={crop.width}
+                    />
+                    <Input
+                        id="height"
+                        label="Height"
+                        labelNote={`(In ${crop.unit})`}
+                        placeholder="Type Height"
+                        onChange={handleInputChange}
+                        value={crop.height}
                     />
                 </FormSection>
             </Grid>

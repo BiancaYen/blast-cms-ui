@@ -54,8 +54,10 @@ const ImagesTab = () => {
             <ImagesEditModal
                 // isActive={editModalIsActive}
                 isActive
+                isSubmitting={false}
                 data={editModalData}
                 onClose={editModalOnClose}
+                onEdit={() => {}}
             />
         </React.Fragment>
     );
