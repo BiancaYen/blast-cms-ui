@@ -49,6 +49,7 @@ import Panel from './panel/Panel';
 import RadioButton from './radio-button/RadioButton';
 import RangeToggle from './range-toggle/RangeToggle';
 import ResetButton from './buttons/reset/ResetButton';
+import RichTextEditor from './rich-text-editor/RichTextEditor';
 import SearchInput from './search-input/SearchInput';
 import SearchInputSmall from './search-input-small/SearchInputSmall';
 import SectionActions from './section-actions/SectionActions';
@@ -155,6 +156,7 @@ export {
     RadioButton,
     RangeToggle,
     ResetButton,
+    RichTextEditor,
     Select,
     SelectRow,
     SearchInput,

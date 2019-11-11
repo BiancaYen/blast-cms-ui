@@ -211,6 +211,19 @@ const theme = {
         successColor: variables.successColor,
         warningColor: variables.warningColor
     },
+    richTextEditor: {
+        background: variables.primaryGreyTint8,
+        backgroundReadOnly: variables.primaryGreyTint7,
+        border: variables.primaryGreyTint7,
+        borderFocused: variables.primaryColorTint2,
+        caretColor: variables.primaryColor,
+        color: variables.primaryGrey,
+        colorDisabled: variables.primaryGreyTint3,
+        iconColor: variables.primaryGreyTint1,
+        iconColorActive: variables.primaryColor,
+        placeholder: variables.primaryGreyTint3,
+        placeholderDisabled: variables.primaryGreyTint5
+    },
     resetButton: {
         background: variables.errorColor,
         backgroundDisabled: variables.primaryColorTint3

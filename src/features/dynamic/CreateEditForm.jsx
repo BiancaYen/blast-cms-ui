@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import pluralize from 'pluralize';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,13 +14,14 @@ import {
     FormSection,
     Input,
     MultiSelect,
+    RichTextEditor,
     Select,
     TextArea
 } from '../../components';
 
 // Constants
 const INPUT = 'Input';
-const RICH_TEXT_EDITOR = 'RichTextArea';
+const RICH_TEXT_INPUT = 'RichTextEditor';
 const SELECT = 'Select';
 const MULTI_SELECT = 'MultiSelect';
 
@@ -52,6 +54,20 @@ const CreateEditForm = ({
     const dispatch = useDispatch();
 
     // Helpers
+    const formatValue = (columnName, component) => {
+        if (component === RICH_TEXT_INPUT && !values[columnName]) {
+            return EditorState.createEmpty();
+        }
+        if (component === RICH_TEXT_INPUT && values[columnName]) {
+            console.log(JSON.stringify(convertToRaw(values[columnName].getCurrentContent())));
+            return values[columnName];
+        }
+
+        // newItemFromSelection(selectedText);
+
+        return values[columnName];
+    };
+
     const getInput = (component) => {
         switch (component) {
             case INPUT:
@@ -60,8 +76,8 @@ const CreateEditForm = ({
                 return MultiSelect;
             case SELECT:
                 return Select;
-            case RICH_TEXT_EDITOR:
-                return TextArea;
+            case RICH_TEXT_INPUT:
+                return RichTextEditor;
             default: return Input;
         }
     };
@@ -109,10 +125,11 @@ const CreateEditForm = ({
                                     key={columnName}
                                     label={label}
                                     placeholder={getPlaceholder(component, label)}
+                                    touched={touched[columnName] && validation[columnName]}
+                                    validation={validation}
+                                    value={formatValue(columnName, component)}
                                     onBlur={onBlur}
                                     onChange={onChange}
-                                    touched={touched[columnName] && validation[columnName]}
-                                    value={values[columnName]}
                                 />
                             );
                         })

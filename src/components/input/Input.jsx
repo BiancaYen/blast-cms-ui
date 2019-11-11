@@ -8,7 +8,6 @@ import Label from '../label/Label';
 import ResetButton from '../buttons/reset/ResetButton';
 import SpinnerLoader from '../spinner-loader/SpinnerLoader';
 
-
 // Styles
 import {
     IconWrapper,
