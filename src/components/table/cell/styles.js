@@ -10,6 +10,7 @@ const Cell = styled.td`
     line-height: 1;
     outline: none;
     letter-spacing: 0.7px;
+    vertical-align: middle;
     
     margin: ${({ spacing }) => spacing || '0'};
     text-align: ${({ isAlignedCentre, isActionCell }) => (isAlignedCentre || isActionCell ? 'center' : 'left')};
