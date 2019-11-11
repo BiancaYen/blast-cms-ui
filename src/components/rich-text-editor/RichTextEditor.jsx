@@ -1,4 +1,4 @@
-import { Editor, value, RichUtils, getDefaultKeyBinding, convertToRaw } from 'draft-js';
+import { Editor, RichUtils, getDefaultKeyBinding } from 'draft-js';
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import StyleControls from './StyleControls';
 
 // Styles
-import { ButtonWrapper, RichTextEditorWrapper } from './styles';
+import { RichTextEditorWrapper } from './styles';
 
 // Default Props
 const defaultProps = {
@@ -96,12 +96,6 @@ const RichTextEditor = ({ id, value, validation, onChange }) => {
             default: return null;
         }
     };
-
-    // save = () => {
-    //     const { onSave } = this.props;
-
-    //     onSave(JSON.stringify(convertToRaw(this.props.value.getCurrentContent())));
-    // }
 
     // If the user changes block type before entering any text, we can
     // either style the placeholder or hide it. Let's just hide it now.

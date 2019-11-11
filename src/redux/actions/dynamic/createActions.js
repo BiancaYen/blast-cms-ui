@@ -14,6 +14,7 @@ import { getIndex as getMetaIndex } from './metaActions';
 
 // Utils
 import browserHistory from '../../../utils/browserHistory';
+import formatPostData from './formatPostData';
 
 // Action Types
 const types = actionTypes(reducerName);
@@ -24,7 +25,7 @@ const postSuccess = createAction(types.postSuccess);
 
 const postCreate = ({ data, setErrors: setFormErrors, url }) => (dispatch) => {
     dispatch({
-        callApiClient: () => DynamicApi.postCreate(url, data),
+        callApiClient: () => DynamicApi.postCreate(url, formatPostData(data)),
         reducerName,
         requestType: 'create',
         setFormErrors,

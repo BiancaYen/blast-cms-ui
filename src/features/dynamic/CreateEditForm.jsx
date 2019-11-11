@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
+import { EditorState, convertFromRaw } from 'draft-js';
 import pluralize from 'pluralize';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,9 +15,11 @@ import {
     Input,
     MultiSelect,
     RichTextEditor,
-    Select,
-    TextArea
+    Select
 } from '../../components';
+
+// Utils
+import isJson from '../../utils/isJson';
 
 // Constants
 const INPUT = 'Input';
@@ -55,15 +57,16 @@ const CreateEditForm = ({
 
     // Helpers
     const formatValue = (columnName, component) => {
-        if (component === RICH_TEXT_INPUT && !values[columnName]) {
-            return EditorState.createEmpty();
+        const value = values[columnName];
+        if (component === RICH_TEXT_INPUT) {
+            if (!value) {
+                return EditorState.createEmpty();
+            }
+            if (isJson(value) && JSON.parse(value).blocks) {
+                return EditorState.createWithContent(convertFromRaw(JSON.parse(value)));
+            }
+            return value;
         }
-        if (component === RICH_TEXT_INPUT && values[columnName]) {
-            console.log(JSON.stringify(convertToRaw(values[columnName].getCurrentContent())));
-            return values[columnName];
-        }
-
-        // newItemFromSelection(selectedText);
 
         return values[columnName];
     };

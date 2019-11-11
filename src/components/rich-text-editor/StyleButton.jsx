@@ -7,7 +7,10 @@ import { StyleButtonWrapper } from './styles';
 // Prop Types
 const propTypes = {
     isActive: PropTypes.bool.isRequired,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.instanceOf(Object)
+    ]).isRequired,
     style: PropTypes.string.isRequired,
     onToggle: PropTypes.func.isRequired
 };
@@ -22,8 +25,6 @@ const StyleButton = ({
         event.preventDefault();
         onToggle(style);
     };
-
-    console.log(isActive);
 
     return (
         <StyleButtonWrapper
