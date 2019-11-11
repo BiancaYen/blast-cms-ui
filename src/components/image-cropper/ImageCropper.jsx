@@ -6,9 +6,16 @@ import 'react-image-crop/dist/ReactCrop.css';
 import FormSection from '../form-section/FormSection';
 import Grid from '../grid/Grid';
 import Input from '../input/Input';
+import Select from '../select/Select';
 
 // Styles
 import ImageCropperWrapper from './styles';
+
+const ASPECT_RATIOS_DATA = [
+    { id: 1, name: '1 / 1', value: 1 / 1 },
+    { id: 2, name: '4 / 3', value: 4 / 3 },
+    { id: 3, name: '16 / 9', value: 16 / 9 }
+];
 
 const ImageCropper = ({ value }) => {
     const src = 'https://wallpapercave.com/wp/dxXh4Ss.jpg';
@@ -40,6 +47,15 @@ const ImageCropper = ({ value }) => {
                     )}
                 </FormSection>
                 <FormSection title="Meta Data" spacing="0" withoutBorder>
+                    <Select
+                        id="aspect"
+                        data={ASPECT_RATIOS_DATA}
+                        label="Aspect Ratio"
+                        labelNote={`(In ${crop.unit})`}
+                        placeholder="Select Aspect Ratio"
+                        onChange={handleInputChange}
+                        value={ASPECT_RATIOS_DATA.filter(aspectRatio => aspectRatio.value === crop.aspect).map(({ id }) => id)}
+                    />
                     <Input
                         id="width"
                         label="Width"
@@ -50,6 +66,7 @@ const ImageCropper = ({ value }) => {
                     />
                     <Input
                         id="height"
+                        isReadOnly={crop.width}
                         label="Height"
                         labelNote={`(In ${crop.unit})`}
                         placeholder="Type Height"

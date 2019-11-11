@@ -38,8 +38,6 @@ const ImagesEditModal = ({
         onClose();
     };
 
-    console.log(data);
-
     return (
         <Modal isActive={isActive} size={Modal.sizes.large} onClose={onClose}>
             <ModalContent title="Edit" icon={<EditIcon width="27" height="27" />}>
