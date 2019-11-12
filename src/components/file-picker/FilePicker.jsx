@@ -263,9 +263,8 @@ class FilePicker extends Component {
                     && (
                         <Grid grid={Grid.grid.fourColumns}>
                             { values.map(value => (
-                                <File>
+                                <File key={uniqueKey({})}>
                                     <Image
-                                        key={uniqueKey({})}
                                         value={value}
                                         onClick={() => onEdit(value)}
                                     />
