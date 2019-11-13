@@ -150,7 +150,6 @@ const ImageCropper = ({ value, onChange }) => {
                             id="aspect"
                             data={aspectRatiosData}
                             label="Aspect Ratio"
-                            labelNote={`(In ${crop.unit})`}
                             placeholder="Select Aspect Ratio"
                             onChange={handleCropChange}
                             value={aspectRatioId}
