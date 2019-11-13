@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 // Components
@@ -7,71 +7,40 @@ import ImagePlaceholder from '../image-placeholder/ImagePlaceholder';
 // Styles
 import ImageWrapper from './styles';
 
-// Utils
-import objectDeepMatches from '../../utils/objectDeepMatches';
-import usePrevious from '../../utils/usePrevious';
-
-// Default Props
-const defaultProps = {
-    onClick: () => {}
-};
-
 // Prop Types
 const propTypes = {
-    value: PropTypes.instanceOf(Object).isRequired,
-    onClick: PropTypes.func
+    alternativeText: PropTypes.string.isRequired,
+    isBroken: PropTypes.bool.isRequired,
+    source: PropTypes.string.isRequired,
+    onError: PropTypes.func.isRequired,
+    onLoad: PropTypes.func.isRequired
 };
 
-const Image = ({ value, onClick }) => {
-    // State
-    const [file, setFile] = useState('');
-    const [isBroken, setIsBroken] = useState(false);
-
-    // Previous Props
-    const previousValue = usePrevious(value) || {};
-
-    // Event Handlers
-    const handleImageError = () => {
-        setIsBroken(true);
-    };
-
-    // Getters
-    const getImage = () => {
-        const reader = new FileReader();
-
-        reader.onloadend = () => {
-            setFile(reader.result);
-        };
-        reader.readAsDataURL(value);
-    };
-
-    // Effects
-    useEffect(() => {
-        if (!objectDeepMatches(value.name, previousValue.name)) {
-            getImage();
+const Image = ({
+    alternativeText,
+    isBroken,
+    source,
+    onError,
+    onLoad
+}) => (
+    <ImageWrapper>
+        {/* Image */}
+        {
+            source && !isBroken
+            && (
+                <img
+                    src={source}
+                    alt={alternativeText}
+                    onError={onError}
+                    onLoad={onLoad}
+                />
+            )
         }
-    }, [value]);
+        {/* Broken Placeholder */}
+        { isBroken && <ImagePlaceholder />}
+    </ImageWrapper>
+);
 
-    return (
-        <ImageWrapper onClick={onClick}>
-            {/* Image */}
-            {
-                file && !isBroken
-                && (
-                    <img
-                        src={file}
-                        alt=""
-                        onError={handleImageError}
-                    />
-                )
-            }
-            {/* Broken Placeholder */}
-            { isBroken && <ImagePlaceholder />}
-        </ImageWrapper>
-    );
-};
-
-Image.defaultProps = defaultProps;
 Image.propTypes = propTypes;
 
 export default Image;

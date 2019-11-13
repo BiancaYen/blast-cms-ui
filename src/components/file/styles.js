@@ -16,4 +16,15 @@ const FileWrapper = styled.div`
     }
 `;
 
-export default FileWrapper;
+const FileWrapperContent = styled.div`
+    background: ${getProperty('background')};
+    color: ${getProperty('color')};
+    font-size: 12px;
+    padding: 10px 0;
+    text-align: center;
+`;
+
+export {
+    FileWrapper,
+    FileWrapperContent
+};

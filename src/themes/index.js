@@ -121,6 +121,8 @@ const theme = {
         colorDisabled: variables.primaryGreyTint4
     },
     file: {
+        background: variables.primaryGreyTint6,
+        color: variables.primaryGrey,
         borderColor: 'transparent',
         borderColorHover: variables.primaryColor
     },
