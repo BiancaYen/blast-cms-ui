@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 // Components
@@ -23,25 +23,30 @@ const propTypes = {
     isActive: PropTypes.bool.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
-    onEdit: PropTypes.func.isRequired
+    onSave: PropTypes.func.isRequired
 };
 
 const ImagesEditModal = ({
-    data,
+    data, // File Object
     isActive,
     isSubmitting,
     onClose,
-    onEdit
+    onSave
 }) => {
-    const handleEdit = () => {
-        onEdit(data.id);
+    const [editedFile, setEditedFile] = useState('');
+
+    const handleSave = () => {
+        onSave(editedFile);
         onClose();
     };
 
     return (
         <Modal isActive={isActive} size={Modal.sizes.large} onClose={onClose}>
             <ModalContent title="Edit" icon={<EditIcon width="27" height="27" />}>
-                <ImageCropper value={data} />
+                <ImageCropper
+                    value={data}
+                    onChange={updatedFile => setEditedFile(updatedFile)}
+                />
             </ModalContent>
             <ModalActions>
                 <Button
@@ -55,8 +60,8 @@ const ImagesEditModal = ({
                     isLoading={isSubmitting}
                     size={Button.sizes.small}
                     spacing="0"
-                    title="Edit"
-                    onClick={handleEdit}
+                    title="Save"
+                    onClick={handleSave}
                 />
             </ModalActions>
         </Modal>

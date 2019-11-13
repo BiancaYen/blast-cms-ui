@@ -17,7 +17,7 @@ import useModal from '../../utils/useModal';
 
 const ImagesTab = () => {
     // State
-    const [images, setImages] = useState('');
+    const [data, setData] = useState('');
     const [editModalIsActive, editModalData, editModalOnOpen, editModalOnClose] = useModal({});
 
     // Dispatch
@@ -25,7 +25,7 @@ const ImagesTab = () => {
 
     // Event Handlers
     const handleChange = ({ values }) => {
-        setImages([...images, ...values]);
+        setData([...data, ...values]);
 
         values.map(value => dispatch(postCreate({
             data: { file: value },
@@ -34,7 +34,10 @@ const ImagesTab = () => {
     };
 
     const handleEdit = (value) => {
-        editModalOnOpen(value);
+        dispatch(postCreate({
+            data: { file: value },
+            setFormErrors: false
+        }));
     };
 
     return (
@@ -46,16 +49,16 @@ const ImagesTab = () => {
                     fileSize: 5000
                 }}
                 spacing="0 40px"
-                values={images}
+                values={data}
                 onChange={handleChange}
-                onEdit={handleEdit}
+                onEdit={value => editModalOnOpen(value)}
             />
             <ImagesEditModal
                 isActive={editModalIsActive}
                 isSubmitting={false}
                 data={editModalData}
                 onClose={editModalOnClose}
-                onEdit={() => {}}
+                onSave={handleEdit}
             />
         </React.Fragment>
     );

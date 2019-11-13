@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 
 // Components
 import FormSection from '../form-section/FormSection';
 import Grid from '../grid/Grid';
+import ImagePlaceholder from '../image-placeholder/ImagePlaceholder';
 import Input from '../input/Input';
 import Select from '../select/Select';
 
@@ -15,16 +17,25 @@ import ImageCropperWrapper from './styles';
 import objectDeepMatches from '../../utils/objectDeepMatches';
 import usePrevious from '../../utils/usePrevious';
 
-const ASPECT_RATIOS_DATA = [
-    { id: 1, name: '1 / 1', value: 1 / 1 },
-    { id: 2, name: '4 / 3', value: 4 / 3 },
-    { id: 3, name: '16 / 9', value: 16 / 9 }
-];
+// Prop Types
+const propTypes = {
+    value: PropTypes.instanceOf(Object).isRequired,
+    onChange: PropTypes.func.isRequired
+};
 
-const ImageCropper = ({ value }) => {
+const ImageCropper = ({ value, onChange }) => {
+    // Data
+    const aspectRatiosData = [
+        { id: 1, name: '1 / 1', value: 1 / 1 },
+        { id: 2, name: '4 / 3', value: 4 / 3 },
+        { id: 3, name: '16 / 9', value: 16 / 9 }
+    ];
+
     // State
+    const [originalImage, setOriginalImage] = useState('');
     const [source, setSource] = useState('');
     const [isBroken, setIsBroken] = useState(false);
+
     const [crop, setCrop] = useState({
         unit: '%',
         width: 50,
@@ -35,66 +46,66 @@ const ImageCropper = ({ value }) => {
     const previousValue = usePrevious(value) || {};
 
     // Helpers
-    // getCroppedImg = (image, crop, fileName) => {
-    //     const canvas = document.createElement('canvas');
-    //     const scaleX = image.naturalWidth / image.width;
-    //     const scaleY = image.naturalHeight / image.height;
-    //     canvas.width = crop.width;
-    //     canvas.height = crop.height;
-    //     const ctx = canvas.getContext('2d');
+    const getCroppedImage = () => {
+        if (originalImage) {
+            const canvas = document.createElement('canvas');
+            const scaleX = originalImage.naturalWidth / originalImage.width;
+            const scaleY = originalImage.naturalHeight / originalImage.height;
+            canvas.width = crop.width;
+            canvas.height = crop.height;
+            const canvasContext = canvas.getContext('2d');
 
-    //     ctx.drawImage(
-    //         image,
-    //         crop.x * scaleX,
-    //         crop.y * scaleY,
-    //         crop.width * scaleX,
-    //         crop.height * scaleY,
-    //         0,
-    //         0,
-    //         crop.width,
-    //         crop.height
-    //     );
+            canvasContext.drawImage(
+                originalImage,
+                crop.x * scaleX,
+                crop.y * scaleY,
+                crop.width * scaleX,
+                crop.height * scaleY,
+                0,
+                0,
+                crop.width,
+                crop.height
+            );
 
-    //     return new Promise((resolve, reject) => {
-    //         canvas.toBlob((blob) => {
-    //             if (!blob) {
-    //                 // reject(new Error('Canvas is empty'));
-    //                 console.error('Canvas is empty');
-    //                 return;
-    //             }
-    //             blob.name = fileName;
-    //             window.URL.revokeObjectURL(this.fileUrl);
-    //             this.fileUrl = window.URL.createObjectURL(blob);
-    //             resolve(this.fileUrl);
-    //         }, 'image/jpeg');
-    //     });
-    // };
+            return new Promise((resolve, reject) => {
+                canvas.toBlob((blob) => {
+                    if (!blob) {
+                        reject(new Error('Canvas is empty'));
+                        return;
+                    }
+                    resolve(blob);
+                }, 'image/jpeg');
+            });
+        }
+        return '';
+    };
+
+    const getCroppedFile = async () => {
+        if (crop.width && crop.height) {
+            const croppedImageBlob = await getCroppedImage();
+            return new File([croppedImageBlob], value.name);
+        }
+        return originalImage;
+    };
 
     // Event Handlers
-    // const makeClientCrop = async (crop) => {
-    //     if (crop.width && crop.height) {
-    //         const croppedImageUrl = await this.getCroppedImg(
-    //             this.imageRef,
-    //             crop,
-    //             'newFile.jpeg'
-    //         );
-    //         this.setState({ croppedImageUrl });
-    //     }
-    // };
+    const handleCropComplete = () => {
+        getCroppedFile().then((croppedFile) => {
+            onChange(croppedFile);
+        }).catch(() => {
+            onChange(value);
+        });
+    };
 
-    // const handleCropComplete = (updatedCrop) => {
-    //     makeClientCrop(updatedCrop);
-    // };
-
-    const handleChange = ({ id, value: inputValue }) => {
+    const handleCropChange = ({ id, value: inputValue }) => {
         setCrop(
             { ...crop, [id]: inputValue }
         );
     };
 
-    // const handleImageError = () => {
-    //     setIsBroken(true);
-    // };
+    const handleImageError = () => {
+        setIsBroken(true);
+    };
 
     // Getters
     const getImage = () => {
@@ -115,50 +126,62 @@ const ImageCropper = ({ value }) => {
         }
     });
 
+    const { id: aspectRatioId } = aspectRatiosData.find(aspectRatio => aspectRatio.value === crop.aspect);
+
     return (
         <ImageCropperWrapper>
-            <Grid alignItems="start" grid={Grid.grid.twoColumns}>
-                <FormSection title="Crop your image" spacing="0" withoutBorder>
-                    {source && (
-                        <ReactCrop
-                            src={source}
-                            crop={crop}
-                            ruleOfThirds
-                            onChange={updatedCrop => setCrop(updatedCrop)}
+            {!isBroken && (
+                <Grid alignItems="start" grid={Grid.grid.twoColumns}>
+                    <FormSection title="Crop your image" spacing="0" withoutBorder>
+                        {source && (
+                            <ReactCrop
+                                src={source}
+                                crop={crop}
+                                ruleOfThirds
+                                onComplete={handleCropComplete}
+                                onChange={updatedCrop => setCrop(updatedCrop)}
+                                onImageError={handleImageError}
+                                onImageLoaded={loadedImage => setOriginalImage(loadedImage)}
+                            />
+                        )}
+                    </FormSection>
+                    <FormSection title="Meta Data" spacing="0" withoutBorder>
+                        <Select
+                            id="aspect"
+                            data={aspectRatiosData}
+                            label="Aspect Ratio"
+                            labelNote={`(In ${crop.unit})`}
+                            placeholder="Select Aspect Ratio"
+                            onChange={handleCropChange}
+                            value={aspectRatioId}
                         />
-                    )}
-                </FormSection>
-                <FormSection title="Meta Data" spacing="0" withoutBorder>
-                    <Select
-                        id="aspect"
-                        data={ASPECT_RATIOS_DATA}
-                        label="Aspect Ratio"
-                        labelNote={`(In ${crop.unit})`}
-                        placeholder="Select Aspect Ratio"
-                        onChange={handleChange}
-                        value={ASPECT_RATIOS_DATA.filter(aspectRatio => aspectRatio.value === crop.aspect).map(({ id }) => id)}
-                    />
-                    <Input
-                        id="width"
-                        label="Width"
-                        labelNote={`(In ${crop.unit})`}
-                        placeholder="Type Width"
-                        onChange={handleChange}
-                        value={crop.width}
-                    />
-                    <Input
-                        id="height"
-                        isReadOnly={!!crop.width}
-                        label="Height"
-                        labelNote={`(In ${crop.unit})`}
-                        placeholder="Type Height"
-                        onChange={handleChange}
-                        value={crop.height}
-                    />
-                </FormSection>
-            </Grid>
+                        <Input
+                            id="width"
+                            label="Width"
+                            labelNote={`(In ${crop.unit})`}
+                            placeholder="Type Width"
+                            onChange={handleCropChange}
+                            value={crop.width}
+                        />
+                        <Input
+                            id="height"
+                            isReadOnly={!!crop.width}
+                            label="Height"
+                            labelNote={`(In ${crop.unit})`}
+                            placeholder="Type Height"
+                            onChange={handleCropChange}
+                            value={crop.height}
+                        />
+                    </FormSection>
+                </Grid>
+            )}
+            {isBroken && (
+                <ImagePlaceholder />
+            )}
         </ImageCropperWrapper>
     );
 };
+
+ImageCropper.propTypes = propTypes;
 
 export default ImageCropper;
