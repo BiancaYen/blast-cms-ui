@@ -20,12 +20,6 @@ const getBackgroundProperty = ({ isReadOnly }) => {
     return getProperty(isReadOnly ? 'backgroundReadOnly' : 'background');
 };
 
-const getPlaceholderColor = ({ isDisabled }) => {
-    return isDisabled ? getProperty('placeholderDisabled') : getProperty('placeholder');
-};
-
-const getIconColor = ({ isActive }) => getProperty(isActive ? 'iconColorActive' : 'iconColor');
-
 const RichTextEditorWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -38,6 +32,32 @@ const RichTextEditorWrapper = styled.div`
     cursor: text;
     font-size: 13px;
     letter-spacing: 0.7px;
+
+    .rdw-editor-main {
+        min-height: 400px;
+        padding: 0 10px;
+    }
+
+    .rdw-editor-toolbar {
+        border: none;
+        border-radius: 5px;
+    }
+
+    .rdw-option-wrapper {
+        border: none;
+    }
+
+    .rdw-dropdown-wrapper {
+        border: none;
+    }
+
+    .rdw-option-wrapper:hover {
+        box-shadow: none;
+    }
+
+    .rdw-dropdown-wrapper:hover {
+        box-shadow: none;
+    }
 `;
 
 export default RichTextEditorWrapper;

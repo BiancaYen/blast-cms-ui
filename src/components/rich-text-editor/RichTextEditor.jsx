@@ -4,13 +4,22 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 import RichTextEditorWrapper from './styles';
 
-const RichTextEditor = ({ value, validation, onChange }) => (
-    <RichTextEditorWrapper validation={validation}>
-        <Editor
-            editorState={value}
-            onEditorStateChange={onChange}
-        />
-    </RichTextEditorWrapper>
-);
+const RichTextEditor = ({ id, value, validation, onChange }) => {
+    const handleChange = (updatedValue) => {
+        onChange({
+            id,
+            value: updatedValue
+        });
+    };
+
+    return (
+        <RichTextEditorWrapper validation={validation}>
+            <Editor
+                editorState={value}
+                onEditorStateChange={handleChange}
+            />
+        </RichTextEditorWrapper>
+    );
+};
 
 export default RichTextEditor;
