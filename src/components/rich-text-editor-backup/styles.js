@@ -38,6 +38,36 @@ const RichTextEditorWrapper = styled.div`
     cursor: text;
     font-size: 13px;
     letter-spacing: 0.7px;
+    > header {
+        align-items: center;
+        background-color: #FFF;
+        display: flex;
+        order: 0;
+        padding: 0 1rem;
+        > div > div {
+            display: flex;
+            padding: 10px 0;
+        }
+    }
+    > div:first-of-type {
+        min-height: 500px;
+        order: 1;
+        padding: 2rem;
+        width: 40%;
+    }
+
+    [class^="draftJsToolbar__button"] {
+        
+    }
 `;
 
-export default RichTextEditorWrapper;
+const StyleButtonWrapper = styled.button`
+    padding: 15px;
+    outline: none;
+    color: ${getIconColor};
+`;
+
+export {
+    RichTextEditorWrapper,
+    StyleButtonWrapper
+};
