@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Actions
+import { getIndex } from '../../redux/actions/images/indexActions';
 import { postCreate } from '../../redux/actions/images/createActions';
 
 // Components
 import {
-    FilePicker
+    FilePicker,
+    Loader
 } from '../../components';
 
 // Feature Components
@@ -16,8 +18,11 @@ import ImagesEditModal from './ImagesEditModal';
 import useModal from '../../utils/useModal';
 
 const ImagesTab = () => {
+    // Application State
+    const { index } = useSelector(state => state.images);
+
     // State
-    const [data, setData] = useState('');
+    const [data, setData] = useState(index.data);
     const [editModalIsActive, editModalData, editModalOnOpen, editModalOnClose] = useModal({});
 
     // Dispatch
@@ -40,8 +45,13 @@ const ImagesTab = () => {
         }));
     };
 
+    // Effects
+    useEffect(() => {
+        dispatch(getIndex());
+    }, []);
+
     return (
-        <React.Fragment>
+        <Loader isLoading={index.loading} type={Loader.types.spinner}>
             <FilePicker
                 id="images"
                 isMultiple
@@ -49,7 +59,7 @@ const ImagesTab = () => {
                     fileSize: 5000
                 }}
                 spacing="0 40px"
-                values={data}
+                values={index.data.map(({ file }) => file)}
                 onChange={handleChange}
                 onEdit={value => editModalOnOpen(value)}
             />
@@ -60,7 +70,7 @@ const ImagesTab = () => {
                 onClose={editModalOnClose}
                 onSave={handleEdit}
             />
-        </React.Fragment>
+        </Loader>
     );
 };
 

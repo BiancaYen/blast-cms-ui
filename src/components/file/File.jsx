@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 // Components
 import Image from '../image/Image';
+import Loader from '../loader/Loader';
 
 // Styles
 import { FileWrapper, FileWrapperContent } from './styles';
@@ -24,9 +25,10 @@ const propTypes = {
 
 const File = ({ value, onClick }) => {
     // State
-    const [source, setSource] = useState('');
     const [imageDimensions, setImageDimensions] = useState({});
     const [isBroken, setIsBroken] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [source, setSource] = useState('');
 
     // Previous Props
     const previousValue = usePrevious(value) || {};
@@ -36,12 +38,13 @@ const File = ({ value, onClick }) => {
         setIsBroken(true);
     };
 
-    const handleImageLoading = ({ target }) => {
+    const handleImageLoaded = ({ target }) => {
         const { naturalHeight: height, naturalWidth: width } = target;
         setImageDimensions({
             height,
             width
         });
+        setIsLoading(false);
     };
 
     // Getters
@@ -68,13 +71,19 @@ const File = ({ value, onClick }) => {
             <Image
                 alternativeText=""
                 isBroken={isBroken}
+                isLoading={isLoading}
                 source={source}
                 onError={handleImageError}
-                onLoad={handleImageLoading}
+                onLoaded={handleImageLoaded}
             />
-            <FileWrapperContent>
-                {`Image Height: ${height}px | Image Width: ${width}px`}
-            </FileWrapperContent>
+            {
+                !isLoading
+                && (
+                    <FileWrapperContent>
+                        {`Image Height: ${height}px | Image Width: ${width}px`}
+                    </FileWrapperContent>
+                )
+            }
         </FileWrapper>
     );
 };

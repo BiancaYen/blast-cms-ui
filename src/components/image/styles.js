@@ -8,7 +8,7 @@ const getProperty = getTheme('image');
 const ImageWrapper = styled.div`
     background: ${getProperty('background')};
     img {
-        display: block;
+        display: ${({ isLoading }) => (isLoading ? 'none' : 'block')};
         width: 100%;
         height: auto;
     }

@@ -3,10 +3,13 @@
 import { createAction } from 'redux-actions';
 
 import actionTypes from '../actionTypes';
-import { entitiesIndex as reducerName } from '../../reducers/reducerNames';
+import { imagesIndex as reducerName } from '../../reducers/reducerNames';
 
 // Api
 import { ImagesApi } from '../../../api';
+
+// Utils
+import base64ToFile from '../../../utils/base64ToFile';
 
 // Action Types
 const types = actionTypes(reducerName);
@@ -28,27 +31,16 @@ const getIndex = () => (dispatch) => {
             data: data.map(({
                 id,
                 attributes: {
-                    model_name: modelName,
-                    table_name: tableName = ''
-                } = {},
-                data_types: dataTypes
+                    alternative_name: alternativeName = '',
+                    file = '',
+                    file_extension: fileExtension = '',
+                    name = ''
+                }
             }) => ({
                 id,
-                modelName,
-                tableName,
-                dataTypes: dataTypes.map(({
-                    attributes: {
-                        component = 'Input'
-                    },
-                    pivot_attributes: {
-                        column_name: columnName,
-                        label
-                    }
-                }) => ({
-                    component,
-                    columnName,
-                    label
-                }))
+                name,
+                alternativeName,
+                file: base64ToFile(file, name, fileExtension)
             }))
         })
     });

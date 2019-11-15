@@ -11,19 +11,21 @@ import ImageWrapper from './styles';
 const propTypes = {
     alternativeText: PropTypes.string.isRequired,
     isBroken: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired,
     source: PropTypes.string.isRequired,
     onError: PropTypes.func.isRequired,
-    onLoad: PropTypes.func.isRequired
+    onLoaded: PropTypes.func.isRequired
 };
 
 const Image = ({
     alternativeText,
     isBroken,
+    isLoading,
     source,
     onError,
-    onLoad
+    onLoaded
 }) => (
-    <ImageWrapper>
+    <ImageWrapper isLoading={isLoading}>
         {/* Image */}
         {
             source && !isBroken
@@ -32,7 +34,7 @@ const Image = ({
                     src={source}
                     alt={alternativeText}
                     onError={onError}
-                    onLoad={onLoad}
+                    onLoad={onLoaded}
                 />
             )
         }
