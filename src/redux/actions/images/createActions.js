@@ -9,8 +9,7 @@ import { imagesCreate as reducerName } from '../../reducers/reducerNames';
 import { ImagesApi } from '../../../api';
 
 // Action Creators
-import { getIndex } from '../../actions/images/indexActions';
-import { get } from 'http';
+import { getIndex } from './indexActions';
 
 // Action Types
 const types = actionTypes(reducerName);
