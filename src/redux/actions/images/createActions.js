@@ -8,6 +8,10 @@ import { imagesCreate as reducerName } from '../../reducers/reducerNames';
 // Api
 import { ImagesApi } from '../../../api';
 
+// Action Creators
+import { getIndex } from '../../actions/images/indexActions';
+import { get } from 'http';
+
 // Action Types
 const types = actionTypes(reducerName);
 
@@ -30,6 +34,7 @@ const postCreate = ({ data, setFormErrors }) => (dispatch) => {
         setFormErrors,
         dispatchFromPayload: () => {
             // @Todo on success we need to update the index data array and not refresh the call as per usual
+            dispatch(getIndex());
 
             return {
                 notificationDetail: `The "${data.tableName || 'Image'}"`

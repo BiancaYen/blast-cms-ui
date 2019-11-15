@@ -138,7 +138,7 @@ const FilePicker = ({
                         { values.map(value => (
                             <File
                                 key={uniqueKey({})}
-                                value={value}
+                                {...value}
                                 onClick={() => onEdit(value)}
                             />
                         ))}

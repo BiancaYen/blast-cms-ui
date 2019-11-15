@@ -1,9 +1,8 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 // Components
 import Image from '../image/Image';
-import Loader from '../loader/Loader';
 
 // Styles
 import { FileWrapper, FileWrapperContent } from './styles';
@@ -19,19 +18,26 @@ const defaultProps = {
 
 // Prop Types
 const propTypes = {
-    value: PropTypes.instanceOf(Object).isRequired,
+    alternativeName: PropTypes.string.isRequired,
+    file: PropTypes.instanceOf(Object).isRequired,
     onClick: PropTypes.func
 };
 
-const File = ({ value, onClick }) => {
-    // State
+const File = ({
+    alternativeName,
+    file,
+    name,
+    onClick
+}) => {
+    // Data & State
     const [imageDimensions, setImageDimensions] = useState({});
+    const { height, width } = imageDimensions;
     const [isBroken, setIsBroken] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [source, setSource] = useState('');
 
     // Previous Props
-    const previousValue = usePrevious(value) || {};
+    const previousFile = usePrevious(file) || {};
 
     // Event Handlers
     const handleImageError = () => {
@@ -39,10 +45,10 @@ const File = ({ value, onClick }) => {
     };
 
     const handleImageLoaded = ({ target }) => {
-        const { naturalHeight: height, naturalWidth: width } = target;
+        const { naturalHeight, naturalWidth } = target;
         setImageDimensions({
-            height,
-            width
+            height: naturalHeight,
+            width: naturalWidth
         });
         setIsLoading(false);
     };
@@ -54,22 +60,20 @@ const File = ({ value, onClick }) => {
         reader.onloadend = () => {
             setSource(reader.result);
         };
-        reader.readAsDataURL(value);
+        reader.readAsDataURL(file);
     };
 
     // Effects
     useEffect(() => {
-        if (!objectDeepMatches(value.name, previousValue.name)) {
+        if (!objectDeepMatches(file.name, previousFile.name)) {
             getImage();
         }
-    }, [value]);
-
-    const { height, width } = imageDimensions;
+    }, [file]);
 
     return (
         <FileWrapper onClick={onClick}>
             <Image
-                alternativeText=""
+                alternativeName={alternativeName}
                 isBroken={isBroken}
                 isLoading={isLoading}
                 source={source}

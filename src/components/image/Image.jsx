@@ -9,7 +9,7 @@ import ImageWrapper from './styles';
 
 // Prop Types
 const propTypes = {
-    alternativeText: PropTypes.string.isRequired,
+    alternativeName: PropTypes.string.isRequired,
     isBroken: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
     source: PropTypes.string.isRequired,
@@ -18,7 +18,7 @@ const propTypes = {
 };
 
 const Image = ({
-    alternativeText,
+    alternativeName,
     isBroken,
     isLoading,
     source,
@@ -32,7 +32,7 @@ const Image = ({
             && (
                 <img
                     src={source}
-                    alt={alternativeText}
+                    alt={alternativeName}
                     onError={onError}
                     onLoad={onLoaded}
                 />

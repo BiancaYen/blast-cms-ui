@@ -19,11 +19,16 @@ import usePrevious from '../../utils/usePrevious';
 
 // Prop Types
 const propTypes = {
-    value: PropTypes.instanceOf(Object).isRequired,
+    file: PropTypes.instanceOf(Object).isRequired,
     onChange: PropTypes.func.isRequired
 };
 
-const ImageCropper = ({ value, onChange }) => {
+const ImageCropper = ({
+    alternativeName,
+    file,
+    name,
+    onChange
+}) => {
     // Data
     const aspectRatiosData = [
         { id: 1, name: '1 / 1', value: 1 / 1 },
@@ -43,7 +48,7 @@ const ImageCropper = ({ value, onChange }) => {
     });
 
     // Previous Props
-    const previousValue = usePrevious(value) || {};
+    const previousFile = usePrevious(file) || {};
 
     // Helpers
     const getCroppedImage = () => {
@@ -83,7 +88,7 @@ const ImageCropper = ({ value, onChange }) => {
     const getCroppedFile = async () => {
         if (crop.width && crop.height) {
             const croppedImageBlob = await getCroppedImage();
-            return new File([croppedImageBlob], value.name);
+            return new File([croppedImageBlob], file.name);
         }
         return originalImage;
     };
@@ -93,7 +98,7 @@ const ImageCropper = ({ value, onChange }) => {
         getCroppedFile().then((croppedFile) => {
             onChange(croppedFile);
         }).catch(() => {
-            onChange(value);
+            onChange(file);
         });
     };
 
@@ -109,19 +114,19 @@ const ImageCropper = ({ value, onChange }) => {
 
     // Getters
     const getImage = () => {
-        if (value.name) {
+        if (file.name) {
             const reader = new FileReader();
 
             reader.onloadend = () => {
                 setSource(reader.result);
             };
-            reader.readAsDataURL(value);
+            reader.readAsDataURL(file);
         }
     };
 
     // Effects
     useEffect(() => {
-        if (!objectDeepMatches(value.name, previousValue.name)) {
+        if (!objectDeepMatches(file.name, previousFile.name)) {
             getImage();
         }
     });

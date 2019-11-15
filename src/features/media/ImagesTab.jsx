@@ -23,7 +23,11 @@ const ImagesTab = () => {
 
     // State
     const [data, setData] = useState(index.data);
-    const [editModalIsActive, editModalData, editModalOnOpen, editModalOnClose] = useModal({});
+    const [editModalIsActive, editModalData, editModalOnOpen, editModalOnClose] = useModal({
+        alternativeName: '',
+        file: {},
+        name: ''
+    });
 
     // Dispatch
     const dispatch = useDispatch();
@@ -59,7 +63,7 @@ const ImagesTab = () => {
                     fileSize: 5000
                 }}
                 spacing="0 40px"
-                values={index.data.map(({ file }) => file)}
+                values={index.data}
                 onChange={handleChange}
                 onEdit={value => editModalOnOpen(value)}
             />

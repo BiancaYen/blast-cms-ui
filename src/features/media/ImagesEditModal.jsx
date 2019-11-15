@@ -15,11 +15,16 @@ import EditIcon from '../../components/icons/EditIcon';
 
 // Default props
 const defaultProps = {
+    data: {
+        alternativeName: '',
+        file: {},
+        name: ''
+    }
 };
 
 // Prop types
 const propTypes = {
-    data: PropTypes.instanceOf(Object).isRequired,
+    data: PropTypes.instanceOf(Object),
     isActive: PropTypes.bool.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
@@ -27,12 +32,13 @@ const propTypes = {
 };
 
 const ImagesEditModal = ({
-    data, // File Object
+    data,
     isActive,
     isSubmitting,
     onClose,
     onSave
 }) => {
+    console.log(data);
     const [editedFile, setEditedFile] = useState('');
 
     const handleSave = () => {
@@ -44,7 +50,7 @@ const ImagesEditModal = ({
         <Modal isActive={isActive} size={Modal.sizes.large} onClose={onClose}>
             <ModalContent title="Edit" icon={<EditIcon width="27" height="27" />}>
                 <ImageCropper
-                    value={data}
+                    {...data}
                     onChange={updatedFile => setEditedFile(updatedFile)}
                 />
             </ModalContent>
