@@ -27,6 +27,7 @@ import HiddenContent from './hidden-content/HiddenContent';
 import Hint from './hint/Hint';
 import ImageCropper from './image-cropper/ImageCropper';
 import ImagePicker from './image-picker/ImagePicker';
+import ImagePlaceholder from './image-placeholder/ImagePlaceholder';
 import Input from './input/Input';
 import IconAction from './icon-action/IconAction';
 import Label from './label/Label';
@@ -135,6 +136,7 @@ export {
     IconAction,
     ImageCropper,
     ImagePicker,
+    ImagePlaceholder,
     Input,
     Label,
     Loader,

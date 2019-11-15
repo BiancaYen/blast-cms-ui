@@ -44,7 +44,7 @@ const ImagesTab = () => {
 
     const handleEdit = (value) => {
         dispatch(postCreate({
-            data: { file: value },
+            data: { file: value.file },
             setFormErrors: false
         }));
     };

@@ -1,30 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 // Components
 import {
     Button,
-    ImageCropper,
     Modal,
     ModalActions,
     ModalContent
 } from '../../components';
 
+// Feature Components
+import ImagesEditForm from './ImagesEditForm';
+
 // Icons
 import EditIcon from '../../components/icons/EditIcon';
 
-// Default props
-const defaultProps = {
-    data: {
-        alternativeName: '',
-        file: {},
-        name: ''
-    }
-};
+// Utils
+import useForm from '../../utils/useForm';
 
-// Prop types
+// Prop Types
 const propTypes = {
-    data: PropTypes.instanceOf(Object),
+    data: PropTypes.instanceOf(Object).isRequired,
     isActive: PropTypes.bool.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
@@ -38,20 +34,25 @@ const ImagesEditModal = ({
     onClose,
     onSave
 }) => {
-    console.log(data);
-    const [editedFile, setEditedFile] = useState('');
-
-    const handleSave = () => {
-        onSave(editedFile);
-        onClose();
-    };
+    const {
+        touched,
+        isValid,
+        validation,
+        values,
+        onBlur,
+        onChange,
+        onSubmit
+    } = useForm(data, {});
 
     return (
         <Modal isActive={isActive} size={Modal.sizes.large} onClose={onClose}>
             <ModalContent title="Edit" icon={<EditIcon width="27" height="27" />}>
-                <ImageCropper
-                    {...data}
-                    onChange={updatedFile => setEditedFile(updatedFile)}
+                <ImagesEditForm
+                    touched={touched}
+                    validation={validation}
+                    values={values}
+                    onBlur={onBlur}
+                    onChange={onChange}
                 />
             </ModalContent>
             <ModalActions>
@@ -63,18 +64,18 @@ const ImagesEditModal = ({
                     onClick={onClose}
                 />
                 <Button
+                    isDisabled={!isValid}
                     isLoading={isSubmitting}
                     size={Button.sizes.small}
                     spacing="0"
                     title="Save"
-                    onClick={handleSave}
+                    onClick={onSubmit(onSave)}
                 />
             </ModalActions>
         </Modal>
     );
 };
 
-ImagesEditModal.defaultProps = defaultProps;
 ImagesEditModal.propTypes = propTypes;
 
 export default ImagesEditModal;

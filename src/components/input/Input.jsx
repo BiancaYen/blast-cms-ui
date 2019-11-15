@@ -35,7 +35,6 @@ const defaultProps = {
     placeholder: '',
     spacing: '',
     type: 'text',
-    value: '',
     validation: {
         status: '',
         errors: ''
