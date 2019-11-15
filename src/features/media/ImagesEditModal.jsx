@@ -1,5 +1,9 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+
+// Action Creators
+import { postEdit } from '../../redux/actions/images/editActions';
 
 // Components
 import {
@@ -22,18 +26,20 @@ import useForm from '../../utils/useForm';
 const propTypes = {
     data: PropTypes.instanceOf(Object).isRequired,
     isActive: PropTypes.bool.isRequired,
-    isSubmitting: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired,
-    onSave: PropTypes.func.isRequired
+    onClose: PropTypes.func.isRequired
 };
 
 const ImagesEditModal = ({
     data,
     isActive,
-    isSubmitting,
-    onClose,
-    onSave
+    onClose
 }) => {
+    // Application State
+    const { edit: { submit } } = useSelector(state => state.images);
+
+    // Dispatch
+    const dispatch = useDispatch();
+
     const {
         touched,
         isValid,
@@ -43,6 +49,15 @@ const ImagesEditModal = ({
         onChange,
         onSubmit
     } = useForm(data, {});
+
+    const handleSubmit = (formValues, setFormErrors) => {
+        dispatch(postEdit({
+            data: formValues,
+            id: data.id,
+            setFormErrors
+        }));
+        onClose();
+    };
 
     return (
         <Modal isActive={isActive} size={Modal.sizes.large} onClose={onClose}>
@@ -65,11 +80,11 @@ const ImagesEditModal = ({
                 />
                 <Button
                     isDisabled={!isValid}
-                    isLoading={isSubmitting}
+                    isLoading={submit}
                     size={Button.sizes.small}
                     spacing="0"
                     title="Save"
-                    onClick={onSubmit(onSave)}
+                    onClick={onSubmit(handleSubmit)}
                 />
             </ModalActions>
         </Modal>

@@ -11,6 +11,7 @@ const entitiesCreate = 'entities.create';
 const entitiesEdit = 'entities.edit';
 const imagesIndex = 'images.index';
 const imagesCreate = 'images.create';
+const imagesEdit = 'images.edit';
 const relationshipTypesIndex = 'relationshipTypes.index';
 
 // Dynamic
@@ -35,6 +36,7 @@ export {
     entitiesEdit,
     imagesIndex,
     imagesCreate,
+    imagesEdit,
     relationshipTypesIndex,
     // Dynamic
     dynamicIndex,

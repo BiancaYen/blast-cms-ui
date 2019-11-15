@@ -1,17 +1,14 @@
-// Dynamic Edit Reducer
+// Images Edit Reducer
 
-// State used by: DynamicEdit
+// State used by: ImagesEditModal
 
 import { handleActions } from 'redux-actions';
 
 // Actions
-import * as actions from '../../actions/dynamic/editActions';
+import * as actions from '../../actions/images/editActions';
 
 // State update
 import {
-    loadingToggleFalse,
-    loadingToggleTrue,
-    singleResourceUpdate,
     submitToggleFalse,
     submitToggleTrue
 } from '../../utils/stateUpdate';
@@ -26,9 +23,6 @@ const initialState = {
 
 const editReducer = handleActions(
     {
-        [actions.getFailed]: loadingToggleFalse,
-        [actions.getLoading]: loadingToggleTrue,
-        [actions.getSuccess]: singleResourceUpdate,
         [actions.postSubmitting]: submitToggleTrue,
         [actions.postFailed]: submitToggleFalse,
         [actions.postSuccess]: submitToggleFalse

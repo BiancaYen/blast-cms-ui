@@ -42,13 +42,6 @@ const ImagesTab = () => {
         })));
     };
 
-    const handleEdit = (value) => {
-        dispatch(postCreate({
-            data: { file: value.file },
-            setFormErrors: false
-        }));
-    };
-
     // Effects
     useEffect(() => {
         dispatch(getIndex());
@@ -59,9 +52,6 @@ const ImagesTab = () => {
             <FilePicker
                 id="images"
                 isMultiple
-                requirements={{
-                    fileSize: 5000
-                }}
                 spacing="0 40px"
                 values={index.data}
                 onChange={handleChange}
@@ -72,7 +62,6 @@ const ImagesTab = () => {
                 isSubmitting={false}
                 data={editModalData}
                 onClose={editModalOnClose}
-                onSave={handleEdit}
             />
         </Loader>
     );
