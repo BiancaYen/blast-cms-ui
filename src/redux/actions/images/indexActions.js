@@ -9,7 +9,7 @@ import { imagesIndex as reducerName } from '../../reducers/reducerNames';
 import { ImagesApi } from '../../../api';
 
 // Utils
-import base64ToFile from '../../../utils/base64ToFile';
+import convertBase64ToFile from '../../../utils/convertBase64ToFile';
 
 // Action Types
 const types = actionTypes(reducerName);
@@ -32,7 +32,7 @@ const getIndex = () => (dispatch) => {
                 id,
                 attributes: {
                     alternative_name: alternativeName = '',
-                    file = '',
+                    file_base_64_encoded: fileBase64Encoded = '',
                     file_extension: fileExtension = '',
                     name = ''
                 }
@@ -40,7 +40,7 @@ const getIndex = () => (dispatch) => {
                 id,
                 name,
                 alternativeName,
-                file: base64ToFile(file, name, fileExtension)
+                file: convertBase64ToFile(fileBase64Encoded, name, fileExtension)
             }))
         })
     });

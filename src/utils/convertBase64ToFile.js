@@ -1,4 +1,4 @@
-const base64ToFile = (base64, fileName, fileType) => {
+const convertBase64ToFile = (base64, fileName, fileType) => {
     const byteString = atob(base64);
     const arrayBuffer = new ArrayBuffer(byteString.length);
     const uint8Array = new Uint8Array(arrayBuffer);
@@ -13,4 +13,4 @@ const base64ToFile = (base64, fileName, fileType) => {
     return newBlob;
 };
 
-export default base64ToFile;
+export default convertBase64ToFile;
