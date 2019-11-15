@@ -23,8 +23,16 @@ const postEdit = ({
     id,
     setFormErrors
 }) => (dispatch) => {
+    const { alternativeName, file } = data;
+
+    const formData = new FormData();
+    formData.append('alternative_name', alternativeName);
+    formData.append('file', file);
+
     dispatch({
-        callApiClient: () => ImagesApi.postEdit(id, data),
+        callApiClient: () => ImagesApi.postEdit(id, formData, {
+            'Content-Type': 'multipart/form-data'
+        }),
         reducerName,
         requestType: 'edit',
         setFormErrors,
