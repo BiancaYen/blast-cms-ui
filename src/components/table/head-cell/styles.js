@@ -10,6 +10,7 @@ const HeadCell = styled.th`
     font-weight: normal;
     letter-spacing: 0.8px; 
     text-transform: uppercase;
+    vertical-align: middle;
     
     color: ${getProperty('headCellColor')};
     margin: ${({ spacing }) => spacing || '0'};
