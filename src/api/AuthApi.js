@@ -3,7 +3,7 @@ import ApiClient from './ApiClient';
 class AuthApi {
     login = ({ email, password }) => ApiClient.post('auth/login', { email, password });
 
-    logout = () => ApiClient.post('auth/logout');
+    logout = data => ApiClient.post('auth/logout', data);
 
     acceptInvitation = ({
         token,

@@ -32,7 +32,9 @@ const postLogin = ({ email, password }, { setErrors: setFormErrors }) => (dispat
 
 const postLogout = () => (dispatch) => {
     dispatch({
-        callApiClient: () => AuthApi.logout(),
+        callApiClient: () => AuthApi.logout({
+            token: localStorage.getItem('token')
+        }),
         reducerName,
         requestType: 'post',
         dispatchFromPayload: () => {

@@ -24,7 +24,7 @@ const postSuccess = createAction(types.postSuccess);
 const postCreate = ({ data, setFormErrors }) => (dispatch) => {
     const {
         fields,
-        tableName
+        name
     } = data;
 
     const formattedFields = fields.filter(field => field.name).map(({ name: fieldName, dataTypeId, isNullable }) => {
@@ -49,7 +49,7 @@ const postCreate = ({ data, setFormErrors }) => (dispatch) => {
         callApiClient: () => EntitiesApi.postCreate({
             fields: formattedFields,
             relationships: formattedRelationships,
-            table_name: tableName
+            table_name: name
         }),
         reducerName,
         requestType: 'create',
@@ -59,7 +59,7 @@ const postCreate = ({ data, setFormErrors }) => (dispatch) => {
 
             browserHistory.push('/entities');
             return {
-                notificationDetail: `The "${data.tableName || 'Entity'}"`
+                notificationDetail: `The "${data.name || 'Entity'}"`
             };
         }
     });

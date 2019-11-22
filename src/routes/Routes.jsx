@@ -104,38 +104,38 @@ const Routes = ({ location }) => {
             {/* Dynamic */}
             {/* Need to map out each CRUD route separately, since placing routes within the <Fragment /> component causes problematic remount */}
             {
-                entitiesIndex.data.map(({ id, tableName, dataTypes }) => (
+                entitiesIndex.data.map(({ id, name, dataTypes }) => (
                     <CustomRoute
                         dataTypes={dataTypes}
                         exact
                         key={id}
-                        path={`/${tableName}`}
+                        path={`/${name}`}
                         component={AppLayout(DynamicIndex)}
-                        title={tableName}
+                        title={name}
                     />
                 ))
             }
             {
-                entitiesIndex.data.map(({ id, tableName, dataTypes }) => (
+                entitiesIndex.data.map(({ id, name, dataTypes }) => (
                     <CustomRoute
                         dataTypes={dataTypes}
                         exact
                         key={id}
-                        path={`/${tableName}/create`}
+                        path={`/${name}/create`}
                         component={AppLayout(DynamicCreate)}
-                        title={tableName}
+                        title={name}
                     />
                 ))
             }
             {
-                entitiesIndex.data.map(({ id, tableName, dataTypes }) => (
+                entitiesIndex.data.map(({ id, name, dataTypes }) => (
                     <CustomRoute
                         dataTypes={dataTypes}
                         exact
                         key={id}
-                        path={`/${tableName}/:id`}
+                        path={`/${name}/:id`}
                         component={AppLayout(DynamicEdit)}
-                        title={tableName}
+                        title={name}
                     />
                 ))
             }

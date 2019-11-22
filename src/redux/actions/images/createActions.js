@@ -36,7 +36,7 @@ const postCreate = ({ data, setFormErrors }) => (dispatch) => {
             dispatch(getIndex());
 
             return {
-                notificationDetail: `The "${data.tableName || 'Image'}"`
+                notificationDetail: `The "${data.name || 'Image'}"`
             };
         }
     });

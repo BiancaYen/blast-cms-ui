@@ -28,14 +28,14 @@ const getIndex = () => (dispatch) => {
             data: data.map(({
                 id,
                 attributes: {
-                    model_name: modelName,
-                    table_name: tableName = ''
+                    display_name: displayName,
+                    name
                 } = {},
                 data_types: dataTypes
             }) => ({
                 id,
-                modelName,
-                tableName,
+                displayName,
+                name,
                 dataTypes: dataTypes.map(({
                     attributes: {
                         component = 'Input'
@@ -54,7 +54,7 @@ const getIndex = () => (dispatch) => {
     });
 };
 
-const postDelete = ({ id, modelName }) => (dispatch) => {
+const postDelete = ({ id, displayName }) => (dispatch) => {
     dispatch({
         callApiClient: () => EntitiesApi.postDelete(id),
         reducerName,
@@ -63,13 +63,13 @@ const postDelete = ({ id, modelName }) => (dispatch) => {
             dispatch(getIndex());
 
             return {
-                notificationDetail: `"${modelName || 'The Entity'}"`
+                notificationDetail: `"${displayName || 'The Entity'}"`
             };
         }
     });
 };
 
-const postDeactivate = ({ id, modelName }) => (dispatch) => {
+const postDeactivate = ({ id, displayName }) => (dispatch) => {
     dispatch({
         callApiClient: () => EntitiesApi.postDeactivate(id),
         reducerName,
@@ -78,7 +78,7 @@ const postDeactivate = ({ id, modelName }) => (dispatch) => {
             dispatch(getIndex());
 
             return {
-                notificationDetail: `"${modelName || 'The Entity'}"`
+                notificationDetail: `"${displayName || 'The Entity'}"`
             };
         }
     });

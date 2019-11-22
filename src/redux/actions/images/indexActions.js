@@ -46,7 +46,7 @@ const getIndex = () => (dispatch) => {
     });
 };
 
-const postDelete = ({ id, modelName }) => (dispatch) => {
+const postDelete = ({ id, displayName }) => (dispatch) => {
     dispatch({
         callApiClient: () => ImagesApi.postDelete(id),
         reducerName,
@@ -55,13 +55,13 @@ const postDelete = ({ id, modelName }) => (dispatch) => {
             dispatch(getIndex());
 
             return {
-                notificationDetail: `"${modelName || 'The Entity'}"`
+                notificationDetail: `"${displayName || 'The Entity'}"`
             };
         }
     });
 };
 
-const postDeactivate = ({ id, modelName }) => (dispatch) => {
+const postDeactivate = ({ id, displayName }) => (dispatch) => {
     dispatch({
         callApiClient: () => ImagesApi.postDeactivate(id),
         reducerName,
@@ -70,7 +70,7 @@ const postDeactivate = ({ id, modelName }) => (dispatch) => {
             dispatch(getIndex());
 
             return {
-                notificationDetail: `"${modelName || 'The Entity'}"`
+                notificationDetail: `"${displayName || 'The Entity'}"`
             };
         }
     });

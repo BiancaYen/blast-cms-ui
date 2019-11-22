@@ -51,7 +51,7 @@ const EntitiesDeleteModal = ({
                 <p>
                     {
                         isSingle
-                            ? `Are you sure you want to delete the "${data.modelName}" entity?`
+                            ? `Are you sure you want to delete the "${data.displayName}" entity?`
                             : `Are you sure you want to delete ${data.count} entities permanently?`
                     }
                 </p>

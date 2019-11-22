@@ -100,8 +100,8 @@ const CreateEditForm = ({
         if (name) {
             return name;
         }
-        const { tableName = '' } = meta.entitiesIndex.data.find(entity => entity.id === relationshipEntityId);
-        return `${pluralize.singular(tableName)}_id`;
+        const { name: entityName = '' } = meta.entitiesIndex.data.find(entity => entity.id === relationshipEntityId);
+        return `${pluralize.singular(entityName)}_id`;
     };
 
     const getTableDataTypeName = (dataTypeId, relationshipTypeId) => {
@@ -119,14 +119,14 @@ const CreateEditForm = ({
             <FormSection title="General" withoutBorder>
                 <Grid alignItems="start" grid={Grid.grid.twoColumns}>
                     <Input
-                        id="tableName"
-                        label="Table"
+                        id="name"
+                        label="Table / Collection"
                         labelNote="(Best practice recommends plural)"
-                        placeholder="Type Table Name"
+                        placeholder="Type Table / Collection Name"
                         onBlur={onBlur}
                         onChange={onChange}
-                        validation={touched.tableName && validation.tableName}
-                        value={values.tableName}
+                        validation={touched.name && validation.name}
+                        value={values.name}
                     />
                 </Grid>
             </FormSection>

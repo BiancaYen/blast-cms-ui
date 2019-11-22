@@ -17,7 +17,7 @@ import {
 // Initial Data
 const initialData = {
     fields: [],
-    tableName: ''
+    name: ''
 };
 
 // Initial State

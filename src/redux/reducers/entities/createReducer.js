@@ -17,7 +17,7 @@ import {
 // Initial Data
 const initialData = {
     fields: [],
-    tableName: ''
+    name: ''
 };
 
 // Initial State
@@ -26,7 +26,7 @@ const initialState = {
     submit: false,
     validationSchema: {
         fields: Joi.array().min(1).label('Fields'),
-        tableName: Joi.string().required().label('Table Name')
+        name: Joi.string().required().label('Table Name')
     }
 };
 

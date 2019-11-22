@@ -55,16 +55,16 @@ const EntitiesIndex = ({
     const [modalIsActiveActivate, modalDataActivate, openModalActivate, closeModalActivate] = useModal([]);
     const [modalIsActiveDeactivate, modalDataDeactivate, openModalDeactivate, closeModalDeactivate] = useModal([]);
 
-    const getActiveTableActions = ({ id, modelName }) => ([
+    const getActiveTableActions = ({ id, displayName }) => ([
         ['Edit', () => history.push(`/entities/${id}`), <EditIcon />],
-        ['Deactivate', () => dispatch(postDeactivate({ id, modelName })), <DeactivateIcon />],
-        ['Delete', () => openModalDelete({ id, modelName }), <DeleteIcon />]
+        ['Deactivate', () => dispatch(postDeactivate({ id, displayName })), <DeactivateIcon />],
+        ['Delete', () => openModalDelete({ id, displayName }), <DeleteIcon />]
     ]);
 
-    const getInactiveTableActions = ({ id, modelName }) => ([
+    const getInactiveTableActions = ({ id, displayName }) => ([
         ['Edit', () => history.push(`/entities/${id}`), <EditIcon />],
-        ['Activate', () => dispatch(postActivate({ id, modelName })), <ActivateIcon />],
-        ['Delete', () => openModalDelete({ id, modelName }), <DeleteIcon />]
+        ['Activate', () => dispatch(postActivate({ id, displayName })), <ActivateIcon />],
+        ['Delete', () => openModalDelete({ id, displayName }), <DeleteIcon />]
     ]);
 
     const handleDeleteBulk = (ids) => {

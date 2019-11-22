@@ -136,8 +136,8 @@ class EntitiesTable extends Component {
                             />
                         </TableHeadCell>
                         <TableHeadCellSort sortKey="id" isIdCell>Id</TableHeadCellSort>
-                        <TableHeadCellSort sortKey="name">Model Name</TableHeadCellSort>
-                        <TableHeadCellSort sortKey="name">Table Name</TableHeadCellSort>
+                        <TableHeadCellSort sortKey="name">Display Name</TableHeadCellSort>
+                        <TableHeadCellSort sortKey="name">Table / Collection Name</TableHeadCellSort>
                         <TableHeadCell isActionCell>Actions</TableHeadCell>
                     </TableHead>
                     <TableBody>
@@ -145,8 +145,8 @@ class EntitiesTable extends Component {
                             rowData => rowData.map((row) => {
                                 const {
                                     id,
-                                    modelName,
-                                    tableName
+                                    displayName,
+                                    name
                                 } = row;
 
                                 this.list.add(id);
@@ -161,8 +161,8 @@ class EntitiesTable extends Component {
                                             />
                                         </TableCell>
                                         <TableCell isIdCell>{id}</TableCell>
-                                        <TableCell>{modelName}</TableCell>
-                                        <TableCell>{tableName}</TableCell>
+                                        <TableCell>{displayName}</TableCell>
+                                        <TableCell>{name}</TableCell>
                                         <TableAction actions={rowActions(row) || []} />
                                     </TableRow>
                                 );
