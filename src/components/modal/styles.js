@@ -53,7 +53,6 @@ const InnerWrapper = styled.div`
     box-sizing: border-box;
     position: relative;
     border-radius: 5px;
-    overflow: hidden;
     box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.1);
     
     border: solid 1px ${getProperty('border')};
