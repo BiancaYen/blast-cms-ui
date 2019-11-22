@@ -24,8 +24,12 @@ const getIndex = () => (dispatch) => {
             data: data.map(({
                 id,
                 attributes: {
-                    name = '',
-                    component = ''
+                    name = ''
+                } = {},
+                component: {
+                    attributes: {
+                        name: component = ''
+                    } = {}
                 } = {}
             }) => ({
                 id,
