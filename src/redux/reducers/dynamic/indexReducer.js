@@ -11,20 +11,26 @@ import * as actions from '../../actions/dynamic/indexActions';
 import {
     loadingToggleFalse,
     loadingToggleTrue,
-    collectionUpdate
+    collectionUpdate,
+    submitToggleFalse,
+    submitToggleTrue
 } from '../../utils/stateUpdate';
 
 // Initial State
 const initialState = {
     loading: true,
-    data: []
+    data: [],
+    submit: false
 };
 
 const indexReducer = handleActions(
     {
         [actions.getFailed]: loadingToggleFalse,
         [actions.getLoading]: loadingToggleTrue,
-        [actions.getSuccess]: collectionUpdate
+        [actions.getSuccess]: collectionUpdate,
+        [actions.postFailed]: submitToggleFalse,
+        [actions.postSubmitting]: submitToggleTrue,
+        [actions.postSuccess]: submitToggleFalse
     },
     initialState
 );

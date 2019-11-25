@@ -11,7 +11,7 @@ const useModal = (initialData = {}) => {
 
     const closeModal = () => {
         setTimeout(() => setModalData(initialData), 300);
-        setActive(false);
+        setTimeout(() => setActive(false), 300);
     };
 
     return [active, modalData, openModal, closeModal];

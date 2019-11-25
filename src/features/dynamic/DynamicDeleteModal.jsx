@@ -21,6 +21,7 @@ const defaultProps = {
 const propTypes = {
     isActive: PropTypes.bool.isRequired,
     isSingle: PropTypes.bool,
+    isSubmitting: PropTypes.bool.isRequired,
     data: PropTypes.instanceOf(Object).isRequired,
     onClose: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired
@@ -29,6 +30,7 @@ const propTypes = {
 const DynamicDeleteModal = ({
     isActive,
     isSingle,
+    isSubmitting,
     data,
     onClose,
     onDelete
@@ -55,8 +57,20 @@ const DynamicDeleteModal = ({
                 </p>
             </ModalContent>
             <ModalActions>
-                <Button size={Button.sizes.small} isOutlined spacing="0" onClick={onClose} title="Cancel" />
-                <Button size={Button.sizes.small} spacing="0" onClick={handleDelete} title="Delete" />
+                <Button
+                    isOutlined
+                    size={Button.sizes.small}
+                    spacing="0"
+                    title="Cancel"
+                    onClick={onClose}
+                />
+                <Button
+                    isLoading={isSubmitting}
+                    title="Delete"
+                    size={Button.sizes.small}
+                    spacing="0"
+                    onClick={handleDelete}
+                />
             </ModalActions>
         </Modal>
     );

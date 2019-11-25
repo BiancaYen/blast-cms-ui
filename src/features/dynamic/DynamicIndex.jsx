@@ -88,6 +88,7 @@ const DynamicIndex = ({
             />
             <DynamicDeleteModal
                 isSingle
+                isSubmitting={index.submit}
                 isActive={modalIsActiveDelete}
                 onDelete={handleDelete}
                 onClose={closeModalDelete}
@@ -95,6 +96,7 @@ const DynamicIndex = ({
             />
             <DynamicDeleteModal
                 isActive={modalIsActiveDeleteBulk}
+                isSubmitting={index.submit}
                 onDelete={handleDeleteBulk}
                 onClose={closeModalDeleteBulk}
                 data={modalDataDeleteBulk}

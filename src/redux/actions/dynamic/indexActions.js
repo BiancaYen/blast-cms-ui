@@ -18,6 +18,10 @@ const getFailed = createAction(types.getFailed);
 const getLoading = createAction(types.getLoading);
 const getSuccess = createAction(types.getSuccess);
 
+const postFailed = createAction(types.postFailed);
+const postSubmitting = createAction(types.postSubmitting);
+const postSuccess = createAction(types.postSuccess);
+
 const getIndex = url => (dispatch) => {
     dispatch({
         callApiClient: () => DynamicApi.getIndex(url),
@@ -74,6 +78,9 @@ export {
     getFailed,
     getLoading,
     getSuccess,
+    postFailed,
+    postSubmitting,
+    postSuccess,
     // Actions
     getIndex,
     postDelete,
