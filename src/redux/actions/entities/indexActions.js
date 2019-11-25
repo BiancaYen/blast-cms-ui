@@ -37,13 +37,15 @@ const getIndex = () => (dispatch) => {
                 displayName,
                 name,
                 dataTypes: dataTypes.map(({
-                    attributes: {
-                        component = 'Input'
-                    },
                     pivot_attributes: {
                         column_name: columnName,
                         label
-                    }
+                    },
+                    component: {
+                        attributes: {
+                            name: component = ''
+                        } = {}
+                    } = {}
                 }) => ({
                     component,
                     columnName,

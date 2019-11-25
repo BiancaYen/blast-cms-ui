@@ -22,7 +22,7 @@ import TableWrapper from './styles';
 // Default props
 const defaultProps = {
     data: [],
-    loading: true,
+    isLoading: true,
     onActivate: undefined,
     onDeactivate: undefined
 };
@@ -31,7 +31,7 @@ const defaultProps = {
 const propTypes = {
     data: PropTypes.instanceOf(Array),
     id: PropTypes.string.isRequired,
-    loading: PropTypes.bool,
+    isLoading: PropTypes.bool,
     rowActions: PropTypes.func.isRequired,
     onActivate: PropTypes.func,
     onDeactivate: PropTypes.func,
@@ -102,7 +102,7 @@ class EntitiesTable extends Component {
     render() {
         const {
             id: tableId,
-            loading,
+            isLoading,
             data,
             rowActions
         } = this.props;
@@ -115,7 +115,7 @@ class EntitiesTable extends Component {
                 <Table
                     data={data}
                     id={tableId}
-                    loading={loading}
+                    isLoading={isLoading}
                     limit={10}
                     sortableColumns={['id', 'name']}
                     spacing="40px 40px 0"

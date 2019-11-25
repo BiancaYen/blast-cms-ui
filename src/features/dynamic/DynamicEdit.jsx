@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -11,60 +11,49 @@ import { getEdit, postEdit } from '../../redux/actions/dynamic/editActions';
 import {
     Breadcrumb,
     Button,
-    FormWrapperSubmit
+    FormWrapperSubmit,
+    Loader
 } from '../../components';
 import CreateEditForm from './CreateEditForm';
 
 // HOC
-import withForm from '../../utils/withForm';
-
-// Aplication State
-const mapStateToProps = ({ dynamic: { edit } }) => {
-    const { data, submit, validationSchema } = edit;
-
-    return {
-        data,
-        submit,
-        validationSchema
-    };
-};
-
-// Default props
-const defaultProps = {
-    submit: false,
-    isValid: false
-};
+import useForm from '../../utils/useForm';
 
 // Prop types
 const propTypes = {
     dataTypes: PropTypes.instanceOf(Object).isRequired,
     match: PropTypes.instanceOf(Object).isRequired,
-    history: PropTypes.instanceOf(Object).isRequired,
-    submit: PropTypes.bool,
-    touched: PropTypes.instanceOf(Object).isRequired,
-    isValid: PropTypes.bool,
-    validation: PropTypes.instanceOf(Object).isRequired,
-    values: PropTypes.instanceOf(Object).isRequired,
-    onBlur: PropTypes.func.isRequired,
-    onChange: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired
+    history: PropTypes.instanceOf(Object).isRequired
 };
-
 
 const DynamicEdit = ({
     dataTypes,
     history,
-    isValid,
-    match,
-    submit,
-    touched,
-    validation,
-    values,
-    onBlur,
-    onChange,
-    onSubmit
+    match
 }) => {
+    // Application State
+    const {
+        dynamic: {
+            edit: {
+                data,
+                loading,
+                submit,
+                validationSchema
+            }
+        }
+    } = useSelector(state => state);
+
     const dispatch = useDispatch();
+
+    const {
+        touched,
+        isValid,
+        validation,
+        values,
+        onBlur,
+        onChange,
+        onSubmit
+    } = useForm(data, validationSchema);
 
     // Url
     const { path, params: { id } } = match;
@@ -91,7 +80,7 @@ const DynamicEdit = ({
     }, []);
 
     return (
-        <React.Fragment>
+        <Loader isLoading={loading}>
             <Breadcrumb
                 links={[<Link to={`/${url}`}>Index</Link>]}
                 spacing="0"
@@ -113,17 +102,16 @@ const DynamicEdit = ({
                     onClick={handleCancel}
                 />
                 <Button
-                    disabled={!isValid}
-                    loading={submit}
+                    isDisabled={!isValid}
+                    isLoading={submit}
                     title="Save"
                     onClick={onSubmit(handleEditSubmit)}
                 />
             </FormWrapperSubmit>
-        </React.Fragment>
+        </Loader>
     );
 };
 
-DynamicEdit.defaultProps = defaultProps;
 DynamicEdit.propTypes = propTypes;
 
-export default connect(mapStateToProps, null)(withRouter(withForm(DynamicEdit)));
+export default withRouter(DynamicEdit);

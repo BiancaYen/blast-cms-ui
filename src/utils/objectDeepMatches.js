@@ -8,9 +8,14 @@ const objectDeepMatches = (obj, source) => {
     }
 
     if (typeof obj === 'object' && typeof source === 'object') {
-        return Object.keys(source).every((key) => {
-            return objectDeepMatches(obj[key], source[key]);
-        });
+        if (Object.keys(source).length) {
+            return Object.keys(source).every((key) => {
+                return objectDeepMatches(obj[key], source[key]);
+            });
+        }
+        if (Object.keys(obj).length) {
+            return false;
+        }
     }
 
     return obj === source;

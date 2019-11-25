@@ -1,5 +1,5 @@
-import React from 'react';
-import { useDispatch, connect } from 'react-redux';
+import React, { Fragment } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -16,55 +16,42 @@ import {
 import CreateEditForm from './CreateEditForm';
 
 // HOC
-import withForm from '../../utils/withForm';
-
-// Aplication State
-const mapStateToProps = ({ dynamic: { create }, entities }) => {
-    const { data, submit, validationSchema } = create;
-
-    return {
-        entitiesIndexData: entities.index.data,
-        data,
-        submit,
-        validationSchema
-    };
-};
-
-// Default props
-const defaultProps = {
-    submit: false,
-    isValid: false
-};
+import useForm from '../../utils/useForm';
 
 // Prop types
 const propTypes = {
     dataTypes: PropTypes.instanceOf(Object).isRequired,
     match: PropTypes.instanceOf(Object).isRequired,
-    history: PropTypes.instanceOf(Object).isRequired,
-    submit: PropTypes.bool,
-    touched: PropTypes.instanceOf(Object).isRequired,
-    isValid: PropTypes.bool,
-    validation: PropTypes.instanceOf(Object).isRequired,
-    values: PropTypes.instanceOf(Object).isRequired,
-    onBlur: PropTypes.func.isRequired,
-    onChange: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired
+    history: PropTypes.instanceOf(Object).isRequired
 };
 
 const DynamicCreate = ({
     dataTypes,
     history,
-    match,
-    submit,
-    touched,
-    isValid,
-    validation,
-    values,
-    onBlur,
-    onChange,
-    onSubmit
+    match
 }) => {
+    // Application State
+    const {
+        dynamic: {
+            create: {
+                data,
+                submit,
+                validationSchema
+            }
+        }
+    } = useSelector(state => state);
+
     const dispatch = useDispatch();
+
+    const {
+        touched,
+        isValid,
+        validation,
+        values,
+        onBlur,
+        onChange,
+        onSubmit
+    } = useForm(data, validationSchema);
 
     // Url
     const { path } = match;
@@ -83,7 +70,7 @@ const DynamicCreate = ({
     };
 
     return (
-        <React.Fragment>
+        <Fragment>
             <Breadcrumb
                 links={[<Link to={`/${url}`}>Index</Link>]}
                 spacing="0"
@@ -105,17 +92,16 @@ const DynamicCreate = ({
                     onClick={handleCancel}
                 />
                 <Button
-                    disabled={!isValid}
-                    loading={submit}
+                    isDisabled={!isValid}
+                    isLoading={submit}
                     title="Create"
                     onClick={onSubmit(handleSubmit)}
                 />
             </FormWrapperSubmit>
-        </React.Fragment>
+        </Fragment>
     );
 };
 
-DynamicCreate.defaultProps = defaultProps;
 DynamicCreate.propTypes = propTypes;
 
-export default connect(mapStateToProps, null)(withRouter(withForm(DynamicCreate)));
+export default withRouter(DynamicCreate);

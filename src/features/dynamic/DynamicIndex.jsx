@@ -79,9 +79,9 @@ const DynamicIndex = ({
             ]}
             />
             <Table
-                id="active"
                 key="active"
-                loading={index.loading}
+                id="active"
+                isLoading={index.loading}
                 data={index.data}
                 rowActions={getTableActions}
                 onDelete={openModalDeleteBulk}

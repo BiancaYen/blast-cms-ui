@@ -71,6 +71,20 @@ const CreateEditForm = ({
         return values[columnName];
     };
 
+    const getDefaultValue = (component) => {
+        switch (component) {
+            case INPUT:
+                return '';
+            case MULTI_SELECT:
+                return [];
+            case SELECT:
+                return '';
+            case RICH_TEXT_INPUT:
+                return '';
+            default: return Input;
+        }
+    };
+
     const getInput = (component) => {
         switch (component) {
             case INPUT:
@@ -130,7 +144,7 @@ const CreateEditForm = ({
                                     placeholder={getPlaceholder(component, label)}
                                     touched={touched[columnName] && validation[columnName]}
                                     validation={validation}
-                                    value={formatValue(columnName, component)}
+                                    value={formatValue(columnName, component) || getDefaultValue(component)}
                                     onBlur={onBlur}
                                     onChange={onChange}
                                 />

@@ -14,6 +14,7 @@ import { getIndex as getMetaIndex } from './metaActions';
 
 // Utils
 import browserHistory from '../../../utils/browserHistory';
+import formatPostData from './formatPostData';
 
 // Action Types
 const types = actionTypes(reducerName);
@@ -50,7 +51,7 @@ const postEdit = ({
     url
 }) => (dispatch) => {
     dispatch({
-        callApiClient: () => DynamicApi.postEdit(url, id, data),
+        callApiClient: () => DynamicApi.postEdit(url, id, formatPostData(data)),
         reducerName,
         requestType: 'edit',
         setFormErrors,

@@ -1,15 +1,15 @@
 import ApiClient from './ApiClient';
 
 class DynamicApi {
-    getIndex = url => ApiClient.get(url);
+    getIndex = url => ApiClient.get(`cms/${url}`);
 
-    getSingle = (url, id) => ApiClient.get(`${url}/${id}`);
+    getSingle = (url, id) => ApiClient.get(`cms/${url}/${id}`);
 
-    postCreate = (url, data) => ApiClient.post(`${url}/`, data);
+    postCreate = (url, data) => ApiClient.post(`cms/${url}/`, data);
 
-    postDelete = (url, id) => ApiClient.post(`${url}/${id}/delete`);
+    postDelete = (url, id) => ApiClient.post(`cms/${url}/${id}/delete`);
 
-    postEdit = (url, id, data) => ApiClient.post(`${url}/${id}`, data);
+    postEdit = (url, id, data) => ApiClient.post(`cms/${url}/${id}`, data);
 }
 
 export default new DynamicApi();
