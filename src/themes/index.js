@@ -336,6 +336,13 @@ const theme = {
         totalPagesColor: variables.primaryGreyDark,
         totalPagesColorDisabled: variables.primaryGreyTint4
     },
+    tag: {
+        background: variables.white,
+        border: variables.primaryGreyTint6,
+        color: variables.primaryGreyDark,
+        colorDisabled: variables.primaryGreyTint3,
+        iconColor: variables.primaryColor
+    },
     textArea: {
         border: variables.primaryGreyTint7,
         borderFocused: variables.primaryColorTint2,

@@ -62,6 +62,7 @@ import StatusAction from './status-action/StatusAction';
 import SubTabs from './tabs/SubTabs';
 import TabItem from './tabs/TabItem';
 import Tabs from './tabs/Tabs';
+import TagInput from './tag-input/TagInput';
 import TextArea from './text-area/TextArea';
 import TextButton from './buttons/text/TextButton';
 import TextToggle from './text-toggle/TextToggle';
@@ -169,6 +170,7 @@ export {
     StatusAction,
     SubTabs,
     TabItem,
+    TagInput,
     TextArea,
     TextButton,
     Tabs,

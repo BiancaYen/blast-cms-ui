@@ -15,7 +15,8 @@ import {
     Input,
     MultiSelect,
     RichTextEditor,
-    Select
+    Select,
+    TagInput
 } from '../../components';
 
 // Utils
@@ -24,8 +25,9 @@ import isJson from '../../utils/isJson';
 // Constants
 const INPUT = 'Input';
 const RICH_TEXT_INPUT = 'RichTextEditor';
-const SELECT = 'Select';
 const MULTI_SELECT = 'MultiSelect';
+const SELECT = 'Select';
+const TAG_INPUT = 'TagInput';
 
 // Default Props
 const defaultProps = {
@@ -77,11 +79,13 @@ const CreateEditForm = ({
                 return '';
             case MULTI_SELECT:
                 return [];
-            case SELECT:
-                return '';
             case RICH_TEXT_INPUT:
                 return '';
-            default: return Input;
+            case SELECT:
+                return '';
+            case TAG_INPUT:
+                return [];
+            default: return '';
         }
     };
 
@@ -89,12 +93,14 @@ const CreateEditForm = ({
         switch (component) {
             case INPUT:
                 return Input;
+            case RICH_TEXT_INPUT:
+                return RichTextEditor;
             case MULTI_SELECT:
                 return MultiSelect;
             case SELECT:
                 return Select;
-            case RICH_TEXT_INPUT:
-                return RichTextEditor;
+            case TAG_INPUT:
+                return TagInput;
             default: return Input;
         }
     };
@@ -103,6 +109,8 @@ const CreateEditForm = ({
         switch (component) {
             case SELECT:
                 return `Select ${label}`;
+            case TAG_INPUT:
+                return `Type ${label} here and press enter to add tag`;
             default: return `Type ${label} here`;
         }
     };

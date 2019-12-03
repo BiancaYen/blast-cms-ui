@@ -30,15 +30,19 @@ const InputWrapper = styled.div`
 `;
 
 const InputInnerWrapper = styled.div`
+    background-color: ${getBackgroundProperty};
+    border: 2px solid ${getBorderProperty};
     position: relative;
     display: flex;
     align-items: center;
     border-radius: 5px;
     height: 45px;
     transition: border .2s ease;
+    width: auto;
     
-    background-color: ${getBackgroundProperty};
-    border: 2px solid ${getBorderProperty};
+    &:focus-within {
+        border: 2px solid ${getProperty('borderFocused')};
+    }
     
     input {
         display: block;
@@ -46,7 +50,7 @@ const InputInnerWrapper = styled.div`
         font-size: 11px;
         letter-spacing: 0.7px;
         outline: none;
-        padding: 0 0 0 19px;
+        padding: ${({ spacingContent }) => spacingContent || '0 19px'};
         resize: none;
         height: 100%;
         border-radius: 5px;
@@ -81,10 +85,6 @@ const InputInnerWrapper = styled.div`
         &:-ms-input-placeholder {
             color: ${getPlaceholderColor};
         }
-    }
-    
-    &:focus-within {
-        border: 2px solid ${getProperty('borderFocused')};
     }
 `;
 

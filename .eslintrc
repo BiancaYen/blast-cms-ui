@@ -1,5 +1,3 @@
-# See https://eslint.org/docs/rules/<rule-name> for more info on each rule.
-# jsx-a11y: https://github.com/evcohen/eslint-plugin-jsx-a11y/tree/master/docs/rules
 {
     "env": {
         "browser": true,
@@ -18,60 +16,19 @@
         }
     },
     "parser": "babel-eslint",
-    "plugins": ["jsx-a11y", "babel", "react"], // Adding jsx-a11y (Matt)
+    "plugins": ["jsx-a11y", "babel", "react"],
     "rules": {
         "arrow-body-style": 0,
-        // # Bianca -
-        // # Allow for a comma on the last item of an object or array
         "comma-dangle": ["error", "never"],
-
-        // # Bianca -
-        // # Global indentation set to 4 spaces
-        // # Switch statement cases set to 1 indentation level.
         "indent": ["error", 4, { "SwitchCase": 1 }],
-
-        // # Matt -
-        // # Breaking change that hasn't been merged into jsx-a11y to date (5 Sep 2017)
-        // # Read more: https://github.com/airbnb/javascript/issues/1474
-        // # Read more: https://github.com/facebookincubator/create-react-app/issues/2631
         "jsx-a11y/href-no-hash": "off",
-
-        // # Nic -
-        // # Removing unix/window linebreak styles from consideration
         "linebreak-style": 0,
-
-        // # Nic -
-        // # Sean - Setting max length to 1000 for SVGs.
-        // # Setting max line length to 200 character
-        // # Setting tab character width to 2
         "max-len": [2, 5000],
-
-        // # Nic -
-        // # Removes unary ++ and -- operators
-        // # Exception to the rule: Incrementer of a FOR loop
         "no-plusplus": [2, { "allowForLoopAfterthoughts": true }],
-
-        // # Nic -
-        // # Removes nonspecific prop types any, array and object.
-        // # More details: https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/forbid-prop-types.md
-        // "react/forbid-prop-types": 0,
-
-        // # Matt -
-        // # Allows jsx in both .js files and .jsx files
+        "react/forbid-prop-types": 0,
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-
-        // # Bianca -
-        // # JSX indentation set to 4 spaces
         "react/jsx-indent": ["error", 4],
-
-        // # Bianca -
-        // # JSX prop indentation set to 4 spaces
-        // # eg:
-        // # <Hello
-        // #     firstName="John"
-        // # />
         "react/jsx-indent-props": ["error", 4],
-
         "react/sort-comp": [2, {
             "order": [
               "constructor",
@@ -79,7 +36,7 @@
               "static-methods",
               "everything-else",
               "lifecycle",
-              "rendering",
+              "rendering"
             ],
             "groups": {
               "static-methods": [
@@ -91,17 +48,9 @@
               ]
             }
         }],
-        
-        //Allowing function parameter updates for event.currentTarget
-        // "no-param-reassign": ["error",
-        //     { "props": true, "ignorePropertyModificationsFor": ["event"] }]
         "no-param-reassign": 0,
-        
-        // Allow underscore
         "no-underscore-dangle": 0,
-         // #https://eslint.org/docs/rules/prefer-template
         "prefer-destructuring": 0,
-
         "import/no-cycle": 0
 
     }
